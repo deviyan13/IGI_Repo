@@ -1,10 +1,13 @@
-import math
+from decorators import timing_decorator
+
 from inputs import input_int, input_int_list, get_valid_input_float
 from list_processing import product_of_even_elements, get_last_null_element_index, get_first_null_element_index, sum_of_elements
 from string_processing import get_lower_letters_count, first_word_contains_letter, string_without_words_starts_with
 from math_functions import custom_arcsin, isBinaryNumber
 
 
+
+@timing_decorator
 def task1():
     """
     Function runs the solution of the 1st task
