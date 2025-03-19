@@ -6,9 +6,6 @@ Author: Dzianis Anufryieu
 Date: 18.03.2025
 """
 
-import task1
-import task2
-import task3
+import tasks_realizations
 
-task1()
-task2()
+tasks_realizations.task1()
