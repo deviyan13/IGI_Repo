@@ -1,9 +1,10 @@
 from decorators import timing_decorator
 
-from inputs import input_int, input_int_list, get_valid_input_float
+from inputs import input_int, input_int_list, get_valid_input_float, get_valid_input_int
 from list_processing import product_of_even_elements, get_last_null_element_index, get_first_null_element_index, sum_of_elements
 from string_processing import get_lower_letters_count, first_word_contains_letter, string_without_words_starts_with
 from math_functions import custom_arcsin, isBinaryNumber
+from sequence_initializers import generate_int_sequence, user_input_init_sequence
 
 
 
@@ -99,11 +100,11 @@ def task4():
             б) найти первое слово, содержащее букву 'v' и его номер;
             в) вывести строку, исключив из нее слова, начинающиеся с 's'\n''')
 
-    print('Строка: ', text)
+    print('\033[1mСтрока: \033[31;0m', text)
 
-    print('Количество строчных букв в строке:', get_lower_letters_count(text))
-    print("Первое слово с буквой 'v' и его номер:", first_word_contains_letter(text, 'v'))
-    print("Строка без слов, начинающихся с 's' =", string_without_words_starts_with(text, 's'))
+    print('\033[1mКоличество строчных букв в строке:\033[31;0m', get_lower_letters_count(text))
+    print("\033[1mПервое слово с буквой 'v' и его номер:\033[31;0m", first_word_contains_letter(text, 'v'))
+    print("\033[1mСтрока без слов, начинающихся с 's' =\033[31;0m", string_without_words_starts_with(text, 's'))
 
     print('\n')
 
@@ -121,13 +122,32 @@ def task5():
     """
 
     size = input_int('Введите размер списка: ')
-    list = input_int_list(size)
+    list = []
+
+    print('''Каким образом проинициализируете список?
+    1. Генерация списка случайными числами
+    2. Поэлементный ввод списка''')
+    choice = get_valid_input_int('Введите ваш выбор: ',
+                          lambda val: val in [1,2],
+                          'Нет такого пункта! Всего в вашем выборе 2 пункта!')
+    match(choice):
+        case 1:
+            min_value = input_int('Введите минимальное значение чисел в сгенерированном списке: ')
+            max_value = get_valid_input_int('Введите максимальное значение чисел в сгенерированном списке: ',
+                                            lambda val: val > min_value,
+                                            'Максимальное значение должно быть больше минимального!')
+            generate_int_sequence(list, size, min_value, max_value)
+        case 2:
+            user_input_init_sequence(list, size)
 
     print('Произведение четных элементов:', product_of_even_elements(list))
     start = get_first_null_element_index(list)
     end = get_last_null_element_index(list)
     if start != -1 and end != -1:
-        print('Сумма элементов между первым и последним нулевым элементом', sum_of_elements(list, start, end))
+        print('Сумма элементов между первым и последним нулевым элементом:', sum_of_elements(list, start, end))
     else:
         print('Ни одного нулевого элемента!')
 
+    print('Сам список:', list)
+
+    print('\n')
