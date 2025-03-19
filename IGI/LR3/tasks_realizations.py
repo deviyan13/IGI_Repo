@@ -7,6 +7,7 @@ from math_functions import custom_arcsin, isBinaryNumber
 
 def task1():
     """
+    Function runs the solution of the 1st task
     Task 1: Calculate arcsin(x) using Taylor series expansion
     """
 
@@ -27,17 +28,23 @@ def task1():
     n, sum, f_x = custom_arcsin(x, eps)
 
     # print title
-    print(f"{'x':<18} {'n':<3} {'F(x)':<18} {'Math F(x)':<18} {'eps':<10}")
+    print(f"{'x':<18} {'n':<3} {'F(x)':<18} {'Math F(x)':<18} {'eps':<20}")
     # print result
-    print(f"{x:<18.12f} {n:<3} {sum:<18.16f} {f_x:<18.16f} {eps:<10.7f}\n\n")
+    print(f"{x:<18.12f} {n:<3} {sum:<18.16f} {f_x:<18.16f} {eps:<20.16f}\n\n")
 
 
 
 def task2():
+    """
+        Function runs the solution of the 2nd task
+        Task 2: Organize a loop that accepts integers from the keyboard and counts the number of negative numbers.
+        The end of the loop is entering a number greater than 100
+    """
+
     is_end = False
     result = 0
 
-    print('Задание 2. Организация икла, принимающего целые числа с клавиатуры\n'
+    print('Задание 2. Организация цикла, принимающего целые числа с клавиатуры\n'
           'и подсчитывающего количество отрицательных чисел.\n'
           'Окончание цикла – ввод числа, большего 100\n')
 
@@ -53,6 +60,10 @@ def task2():
 
 
 def task3():
+    """
+        Function runs the solution of the 3rd task
+        Task 3: Determine whether a string entered from the keyboard is a binary number.
+    """
 
     print('Задание 3. Определить, является ли введенная с клавиатуры строка двоичным числом\n')
 
@@ -66,6 +77,14 @@ def task3():
 
 
 def task4():
+    """
+        Function runs the solution of the 4th task
+        Task 4: A line of text is given in which the words are separated by spaces and commas.
+        a) determine the number of lowercase letters;
+        b) find the first word containing the letter 'v' and its number;
+        c) output the string by excluding the words starting with 's' from it
+    """
+
     text = ('So she was considering in her own mind, '
             'as well as she could, '
             'for the hot day made her feel very sleepy and stupid, '
@@ -87,6 +106,17 @@ def task4():
 
 
 def task5():
+    """
+        Function runs the solution of the 5th task
+        Task 5: The program contains the following basic functions:
+        1) user input of list items;
+        2) checking the correctness of the input data;
+        3) implementation of the main task with the output of the results;
+        4) Display the list on the screen.
+        Find the product of the elements with even numbers and
+        the sum of the elements located between the first and last zero elements
+    """
+
     size = input_int('Введите размер списка: ')
     list = input_int_list(size)
 
@@ -98,12 +128,3 @@ def task5():
     else:
         print('Ни одного нулевого элемента!')
 
-
-
-
-
-task1()
-task2()
-task3()
-task4()
-task5()

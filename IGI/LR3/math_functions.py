@@ -23,6 +23,14 @@ def custom_arcsin(x, eps):
 
 
 def isBinaryNumber(string):
+    """
+    Checks if a given string represents a binary number.
+    Args:
+        string (str): The input string.
+    Returns:
+        bool: True if the string consists only of '0' and '1', False otherwise.
+    """
+
     for c in string:
         if c != '0' and c != '1':
             return False

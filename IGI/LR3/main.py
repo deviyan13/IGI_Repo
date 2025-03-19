@@ -6,6 +6,10 @@ Author: Dzianis Anufryieu
 Date: 18.03.2025
 """
 
-import tasks_realizations
+from tasks_realizations import task1, task2, task3, task4, task5
 
-tasks_realizations.task1()
+task1()
+task2()
+task3()
+task4()
+task5()
