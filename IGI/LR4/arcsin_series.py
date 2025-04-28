@@ -6,6 +6,7 @@ approximation for arcsin(x).
 """
 
 import math
+from typing import Any, Generator
 
 
 class ArcsinSeries:
@@ -62,3 +63,8 @@ class ArcsinSeries:
             if n >= 500:
                 break
         return n, series_sum
+
+
+    def get_n_members(self, n: int) -> Generator[float | Any, Any, None]:
+        for i in range (0, n):
+            yield math.factorial(2 * i) / ((4 ** i) * (math.factorial(i) ** 2) * (2 * i + 1)) * self.x ** (2 * i + 1)

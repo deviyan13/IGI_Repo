@@ -6,7 +6,6 @@ Provides functions to compute arithmetic mean, median, mode, variance, and stand
 
 import statistics
 
-
 def arithmetic_mean(data: list) -> float:
     """
     Computes the arithmetic mean of the data.

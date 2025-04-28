@@ -15,21 +15,47 @@ coordinate system (with different colors), adds axis labels, a legend, and an
 annotation, and finally saves the plot to a file.
 """
 
-import math
 import numpy as np
 import matplotlib.pyplot as plt
 from arcsin_series import ArcsinSeries  # using your provided ArcsinSeries class
 from inputs_check import input_float_with_condition
+from statistics_utils import *
 
 
 def task3():
     eps = input_float_with_condition("Введите значение точности eps (дробное от 0 до 1): ", lambda x: 0 < x < 1)
 
+    x_inputed = input_float_with_condition('Введите аргумент x: ', lambda x: -1 <= x <= 1)
+    series_1 = ArcsinSeries(x_inputed)
+    n = series_1.series_sum(eps)[0]
+    members = list(series_1.get_n_members(n))
+
+
+    mean_val = arithmetic_mean(members)
+    median_val = median(members)
+    mode_val = mode(members)
+    variance_val = variance(members)
+    stdev_val = stdev(members)
+
+
+    print("\nСтатистические параметры последовательности:")
+    print("-" * 50)
+    print(f"{'Параметр':<30}{'Значение':>20}")
+    print("-" * 50)
+    print(f"{'Среднее арифметическое:':<30}{mean_val:>20.6f}")
+    print(f"{'Медиана:':<30}{median_val:>20.6f}")
+    print(f"{'Мода:':<30}{mode_val:>20.6f}")
+    print(f"{'Дисперсия:':<30}{variance_val:>20.6f}")
+    print(f"{'Стандартное отклонение:':<30}{stdev_val:>20.6f}")
+    print("-" * 50)
+
+
+
     x_values = np.linspace(-0.99, 0.99, 300)
     series_values = []
     math_values = []
 
-    # For each x value, compute the series approximation and exact value
+
     for x in x_values:
         try:
             series_obj = ArcsinSeries(x)
@@ -53,7 +79,7 @@ def task3():
     plt.legend()
     plt.grid(True)
 
-    x_annot = 0.77
+    x_annot = x_inputed
     try:
         series_obj_annot = ArcsinSeries(x_annot)
         n_annot, approx_annot = series_obj_annot.series_sum(eps)
