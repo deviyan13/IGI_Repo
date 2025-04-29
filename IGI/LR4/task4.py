@@ -37,7 +37,7 @@ def draw_rhombus(rhombus: Rhombus, label_text: str, save_filename: str) -> None:
     y_coords = [v[1] for v in vertices]
 
     plt.figure(figsize=(6, 6))
-    plt.fill(x_coords, y_coords, color=rhombus.color, alpha=0.5, label='Ромб')
+    plt.fill(x_coords, y_coords, color=rhombus.figure_color, alpha=0.5, label='Ромб')
     plt.plot(x_coords, y_coords, color='black')
     plt.title("Геометрическая фигура: Ромб")
     plt.xlabel("X")

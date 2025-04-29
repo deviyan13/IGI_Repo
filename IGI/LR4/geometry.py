@@ -6,23 +6,6 @@ This module defines the abstract GeometricFigure class, the FigureColor class, a
 from abc import ABC, abstractmethod
 
 
-class GeometricFigure(ABC):
-    """
-    Abstract base class for geometric figures.
-    Requires implementation of the area method.
-    """
-
-    @abstractmethod
-    def area(self) -> float:
-        """
-        Computes and returns the area of the figure.
-
-        Returns:
-            float: Figure area.
-        """
-        pass
-
-
 class FigureColor:
     """
     FigureColor class encapsulates the color property for a geometric figure.
@@ -50,6 +33,46 @@ class FigureColor:
             value (str): New color.
         """
         self._color = value
+
+
+class GeometricFigure(ABC):
+    """
+    Abstract base class for geometric figures.
+    Requires implementation of the area method.
+    """
+
+    def __init__(self, color: str):
+        self._figure_color = FigureColor(color)
+
+    @abstractmethod
+    def area(self) -> float:
+        """
+        Computes and returns the area of the figure.
+
+        Returns:
+            float: Figure area.
+        """
+        pass
+
+    @property
+    def figure_color(self) -> str:
+        """
+        Returns the color of the rhombus.
+
+        Returns:
+            str: Color.
+        """
+        return self._figure_color.color
+
+    @figure_color.setter
+    def figure_color(self, value: str) -> None:
+        """
+        Sets the color of the rhombus.
+
+        Args:
+            value (str): New color.
+        """
+        self._figure_color.color = value
 
 
 class Rhombus(GeometricFigure):
@@ -82,29 +105,9 @@ class Rhombus(GeometricFigure):
             b (float): Length of the vertical diagonal.
             color (str): Figure color.
         """
+        super().__init__(color)
         self.a = a
         self.b = b
-        self._figure_color = FigureColor(color)
-
-    @property
-    def color(self) -> str:
-        """
-        Returns the color of the rhombus.
-
-        Returns:
-            str: Color.
-        """
-        return self._figure_color.color
-
-    @color.setter
-    def color(self, value: str) -> None:
-        """
-        Sets the color of the rhombus.
-
-        Args:
-            value (str): New color.
-        """
-        self._figure_color.color = value
 
     def area(self) -> float:
         """
@@ -123,4 +126,4 @@ class Rhombus(GeometricFigure):
             str: Details including figure type, diagonals, color, and area.
         """
         return ("Фигура: {name}\nДиагонали: a = {a:.2f}, b = {b:.2f}\nЦвет: {color}\nПлощадь: {area:.2f}"
-                .format(name=self.figure_name, a=self.a, b=self.b, color=self.color, area=self.area()))
+                .format(name=self.figure_name, a=self.a, b=self.b, color=super().figure_color, area=self.area()))
