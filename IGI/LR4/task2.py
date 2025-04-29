@@ -187,11 +187,12 @@ def task2():
         "4. Найти самое короткое слово, заканчивающееся на букву 'a'\n"
         "5. Вывести все слова в порядке убывания их длин\n"
         "6. Общее задание - определить и сохранить файл с результатами\n"
-        "7. Выход в главное меню\n")
+        "7. Архивировать файл task2.txt и вывести информацию о нем из архива\n"
+        "8. Выход в главное меню\n")
 
 
     while True:
-        item = input_int_with_condition('Введите пункт меню: ', lambda x: 0 < x < 8)
+        item = input_int_with_condition('Введите пункт меню: ', lambda x: 0 < x < 9)
 
         text_analyzer = TextAnalyzer(read_text_file('files/task2.txt'))
 
@@ -221,4 +222,6 @@ def task2():
                 write_text_file('files/task2_report.txt', text_analyzer.generate_report())
                 print('Отчет общего задания сохранен в files/task2_report.txt')
             case 7:
+                archive_file('files/task2.txt', 'files/task2_archive.zip')
+            case 8:
                 break
