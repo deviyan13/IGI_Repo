@@ -1,10 +1,5 @@
-#!/usr/bin/env python3
-"""
-Task 3: Arcsin Taylor Series Analysis and Graph Plotting
-Program Name: ArcsinSeriesPlotter
-Version: 1.0
-Developer: Anufryieu Dzianis
-Date: 2025-04-27
+""""
+Task 3
 
 Description:
 This program computes the Taylor series approximation for arcsin(x)

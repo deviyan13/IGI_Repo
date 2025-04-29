@@ -1,12 +1,12 @@
-from file_io import *
-from inputs_check import input_int_with_condition
-
 """
+Task2
 Text Analysis Module
 This module contains the TextAnalyzer class that performs analysis of text.
 """
 
 import re
+from file_io import *
+from inputs_check import input_int_with_condition
 
 
 class TextAnalyzer:

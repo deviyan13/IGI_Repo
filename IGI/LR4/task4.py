@@ -1,10 +1,5 @@
 """
-Main module for Task 4: Geometric Figure - Rhombus
-Program Name: GeometricFigureTester
-Version: 1.0
-Developer: Anufryieu Dzianis
-Date: 2025-04-27
-
+Task4
 Description:
 This program tests geometric classes. It prompts the user to input parameters for a Rhombus,
 creates the object, prints its details, draws the figure (fills it in the chosen color and annotates it

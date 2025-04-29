@@ -1,9 +1,5 @@
 """
-Task 1: Phone Book Serialization Application
-Program Name: PhoneBook Manager
-Version: 1.0
-Developer: Anufryieu Dzianis
-Date: 2025-04-27
+Task 1
 
 Description:
 This program implements a phone book application that stores data using a dictionary and 
