@@ -1,8 +1,8 @@
 import pandas as pd
 
-def main():
+def task6():
     # Load dataset from CSV
-    file_path = "Global_Cybersecurity_Threats_2015-2024.csv"
+    file_path = "files/Global_Cybersecurity_Threats_2015-2024.csv"
     try:
         df = pd.read_csv(file_path)
     except Exception as e:
@@ -48,4 +48,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    task6()

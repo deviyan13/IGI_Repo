@@ -1,3 +1,5 @@
+import matplotlib.colors
+
 
 def input_int(prompt: str) -> int:
     while True:
@@ -53,3 +55,11 @@ def input_int_with_condition(prompt: str, validator) -> int:
             print('Некорректный ввод')
 
     return num
+
+def input_color_matplotlib(promt: str) -> str:
+    while True:
+        color = input(promt).strip()
+        if color.lower() in matplotlib.colors.CSS4_COLORS:
+            return color
+        else:
+            print('Такого цвета не существует!')

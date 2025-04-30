@@ -5,10 +5,10 @@ This program tests geometric classes. It prompts the user to input parameters fo
 creates the object, prints its details, draws the figure (fills it in the chosen color and annotates it
 with user-entered text), and saves the drawing to a file.
 """
-
+import matplotlib
 import matplotlib.pyplot as plt
 from geometry import Rhombus
-from inputs_check import input_float_with_condition
+from inputs_check import input_float_with_condition, input_color_matplotlib
 
 
 def draw_rhombus(rhombus: Rhombus, label_text: str, save_filename: str) -> None:
@@ -51,11 +51,12 @@ def draw_rhombus(rhombus: Rhombus, label_text: str, save_filename: str) -> None:
     plt.show()
 
 
-def main():
+def task4():
     print("Построение ромба с заданными диагоналями.")
     a = input_float_with_condition("Введите значение диагонали a (горизонтальная): ", lambda x: x > 0)
     b = input_float_with_condition("Введите значение диагонали b (вертикальная): ", lambda x: x > 0)
-    color = input("Введите цвет фигуры (например, blue, red, green): ").strip()
+    color = input_color_matplotlib('Введите цвет фигуры (например, blue, red, green): ')
+
     label_text = input("Введите текст для подписи фигуры: ").strip()
 
     rhombus = Rhombus(a, b, color)
@@ -68,4 +69,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    task4()

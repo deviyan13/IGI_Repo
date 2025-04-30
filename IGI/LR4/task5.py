@@ -172,7 +172,7 @@ class MatrixAnalysis(StatisticsMixin):
     def get_info(self):
         return self.get_formatted_statistics(self.matrix)
 
-def main():
+def task5():
     """
     Main function for Task 5.
 
@@ -200,4 +200,4 @@ def main():
     print(analysis.get_info())
 
 if __name__ == '__main__':
-    main()
+    task5()
