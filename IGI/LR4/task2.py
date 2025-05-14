@@ -123,7 +123,7 @@ class TextAnalyzer:
         return sum(1 for word in words if len(word) < length)
 
 
-    def shortest_word_ending_with(self, letter: str = 'a') -> str:
+    def shortest_word_ending_with(self) -> str:
         """
         Finds the shortest word ending with the specified letter.
 
@@ -133,8 +133,9 @@ class TextAnalyzer:
         Returns:
             str: The shortest word ending with the given letter, or an empty string if none found.
         """
-        words = self.get_all_words()
-        filtered = [word for word in words if word.endswith(letter)]
+        #words = self.get_all_words()
+        #filtered = [word for word in words if word.endswith(letter)]
+        filtered = re.findall(r"\b\w*а\b", self.text)
         if not filtered:
             return ''
         return min(filtered, key=len)
@@ -199,7 +200,7 @@ def task2():
         all_words = text_analyzer.get_all_words()
         highlighted_text = text_analyzer.highlight_letter_pairs()
         words_less_than = text_analyzer.count_words_shorter_than(7)
-        shortest_word = text_analyzer.shortest_word_ending_with('a')
+        shortest_word = text_analyzer.shortest_word_ending_with()
         sorted_words = text_analyzer.sorted_words_by_length()
 
         match item:
