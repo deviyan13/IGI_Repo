@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Часто задаваемые вопросы — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="faq-section">
+    <h1>Словарь терминов и понятий</h1>
+    {% if faqs %}
+      <div class="faq-container">
+        {% for item in faqs %}
+          <div class="faq-item">
+            <h2 class="faq-question">{{ item.question }}</h2>
+            <p class="faq-answer">{{ item.answer }}</p>
+            <p class="faq-date">Добавлено: {{ item.added_at|date:"d.m.Y H:i" }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Пока нет терминов.</p>
+    {% endif %}
+  </section>
+{% endblock %}

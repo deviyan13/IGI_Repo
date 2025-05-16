@@ -1,0 +1,37 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hotel Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'core:home' %}">Главная</a></li>
+                <li><a href="{% url 'core:about' %}">О гостинице</a></li>
+                <li><a href="{% url 'core:news' %}">Новости</a></li>
+                <li><a href="{% url 'core:faq' %}">FAQ</a></li>
+                <li><a href="{% url 'core:contacts' %}">Контакты</a></li>
+                <li><a href="{% url 'core:privacy' %}">Политика конфиденциальности</a></li>
+                <li><a href="{% url 'core:jobs' %}">Вакансии</a></li>
+                <li><a href="{% url 'core:reviews' %}">Отзывы</a></li>
+                <li><a href="{% url 'core:promotions' %}">Промокоды</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content area -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; {{ current_year }} Hotel Project. <b>Dzianis Anufryieu</b>. Все права защищены.</p>
+    </footer>
+</body>
+</html>
