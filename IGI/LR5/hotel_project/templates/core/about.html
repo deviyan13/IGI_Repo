@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}О нашем отеле — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="company-info">
+    <h1>{{ company_info.title }}</h1>
+    <p>{{ company_info.content }}</p>
+    <small>Добавлено: {{ company_info.added_at|date:"d.m.Y" }}</small>
+  </section>
+{% endblock %}

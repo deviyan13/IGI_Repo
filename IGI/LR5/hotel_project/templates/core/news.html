@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Новости — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="news-grid">
+    <h1>Новости</h1>
+    {% if news_articles %}
+      <div class="grid-container">
+        {% for article in news_articles %}
+          <div class="grid-item">
+            {% if article.image %}
+              <div class="news-image">
+                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="image-item" width="150" height="150">
+              </div>
+            {% endif %}
+            <h2 class="news-title">{{ article.title }}</h2>
+            <p class="news_content">{{ article.content }}</p>
+            <p class="news-date">Дата публикации: {{ article.published_at|date:"d.m.Y H:i" }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Пока нет опубликованных новостей.</p>
+    {% endif %}
+  </section>
+{% endblock %}
