@@ -13,5 +13,9 @@ urlpatterns = [
     path('reviews/',    views.reviews_list, name='reviews'),
     path('reviews/add/',views.add_review,   name='add_review'),
     path('promo/',      views.promotions,   name='promotions'),
-
+    path('rooms/',      views.room_catalog, name='room_catalog'),
+    path('rooms/<int:room_id>/book/', views.book_room, name='book_room'),
+    # Панель сотрудника
+    path('staff/',      views.staff_dashboard, name='staff_dashboard'),
+    path('profile/',    views.profile,      name='profile')
 ]

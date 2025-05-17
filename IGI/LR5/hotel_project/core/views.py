@@ -1,8 +1,10 @@
 import datetime
+from datetime import timedelta
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 
+from .forms import ClientForm, BookingForm
 from .models import CompanyInfo, NewsArticle, FAQuestion, EmployeeContact, Vacancy, PromoCode, Review, Category, \
     Amenity, Room, Client, Booking
 
@@ -83,6 +85,15 @@ def room_catalog(request):
 
     # Base queryset
     rooms = Room.objects.select_related('category').prefetch_related('amenities').all()
+
+    check_in = request.GET.get('check_in')
+    check_out = request.GET.get('check_out')
+    if check_in and check_out:
+        rooms = rooms.exclude(
+            bookings__check_in__lt=check_out,
+            bookings__check_out__gt=check_in
+        )
+
     # Filtering
     category_id = request.GET.get('category')
     amenity_id = request.GET.get('amenity')
@@ -103,50 +114,10 @@ def room_catalog(request):
         'amenities': amenities,
         'promo_codes': promo_codes,
         'rooms': rooms,
+        'default_check_in': datetime.date.today().isoformat(),
+        'default_check_out': (datetime.date.today() + timedelta(days=1)).isoformat(),
     }
     return render(request, 'core/room_catalog.html', context)
-
-@login_required
-def book_room(request, room_id):
-    room = get_object_or_404(Room, id=room_id)
-    client = get_object_or_404(Client, user=request.user)
-    available_rooms = []
-    error = None
-
-    if request.method == 'POST':
-        check_in = request.POST.get('check_in')
-        check_out = request.POST.get('check_out')
-        guests_count = int(request.POST.get('guests_count', 1))
-        include_children = 'include_children' in request.POST
-
-        # validate date logic
-        if check_in >= check_out:
-            error = 'Дата выезда должна быть позже даты заезда.'
-        elif guests_count > room.capacity:
-            error = 'Превышена вместимость номера.'
-        else:
-            # Here you would check for overlapping bookings in real logic
-            total_days = (
-                    datetime.timezone.datetime.fromisoformat(check_out) - datetime.timezone.datetime.fromisoformat(check_in)).days
-            total_price = total_days * room.price_per_night
-            booking = Booking.objects.create(
-                client=client,
-                room=room,
-                check_in=check_in,
-                check_out=check_out,
-                guests_count=guests_count,
-                include_children=include_children,
-                total_price=total_price
-            )
-            return redirect('core:staff_dashboard')
-
-    # On GET or error, list this room only
-    available_rooms = [room]
-    context = {
-        'available_rooms': available_rooms,
-        'error': error,
-    }
-    return render(request, 'core/booking.html', context)
 
 @user_passes_test(is_staff_user)
 def staff_dashboard(request):
@@ -157,3 +128,55 @@ def staff_dashboard(request):
         'clients': clients,
     })
 
+@login_required
+def book_room(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+    client, _ = Client.objects.get_or_create(user=request.user)
+
+    # даты из GET или из POST (при сабмите)
+    if request.method == 'GET':
+        check_in = request.GET.get('check_in')
+        check_out = request.GET.get('check_out')
+    else:
+        check_in = None
+        check_out = None
+
+    client_form = ClientForm(request.POST or None, instance=client)
+    booking_form = BookingForm(
+        request.POST or None,
+        room=room,
+        initial={'check_in': check_in, 'check_out': check_out})
+
+    if request.method == 'POST':
+        if client_form.is_valid() and booking_form.is_valid():
+            client_form.save()
+            booking = booking_form.save(commit=False)
+            booking.client = client
+            booking.room = room
+            days = (booking.check_out - booking.check_in).days
+            booking.total_price = days * room.price_per_night
+            booking.save()
+            return redirect('core:profile')
+
+    return render(request, 'core/booking.html', {
+        'client_form': client_form,
+        'booking_form': booking_form,
+        'room': room,
+    })
+
+@login_required
+def profile(request):
+    # получаем или создаём профиль клиента
+    client, created = Client.objects.get_or_create(user=request.user)
+    bookings = client.bookings.select_related('room').order_by('check_in')
+
+    # форма для редактирования профиля
+    client_form = ClientForm(request.POST or None, instance=client)
+    if request.method == 'POST' and client_form.is_valid():
+        client_form.save()
+        return redirect('core:profile')
+
+    return render(request, 'core/profile.html', {
+        'client_form': client_form,
+        'bookings': bookings,
+    })

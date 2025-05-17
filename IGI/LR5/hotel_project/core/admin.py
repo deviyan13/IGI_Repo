@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CompanyInfo, NewsArticle, FAQuestion, EmployeeContact, Vacancy, Review, PromoCode
+from .models import *
 
 
 # Register your models here.
@@ -32,3 +32,27 @@ class ReviewAdmin(admin.ModelAdmin):
 @admin.register(PromoCode)
 class PromoCodeAdmin(admin.ModelAdmin):
     list_display = ('code', 'discount_percent', 'valid_from', 'valid_to', 'is_active')
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+
+@admin.register(Amenity)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ('number', 'category', 'price_per_night', 'description', 'photo')
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'middle_name', 'ages')
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('client', 'room', 'check_in', 'check_out', 'guests_count', 'include_children', 'total_price')
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('booking', 'amount', 'paid_at')

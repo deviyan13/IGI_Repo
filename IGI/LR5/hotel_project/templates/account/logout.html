@@ -5,10 +5,10 @@
 {% block content %}
   <section class="auth-section">
     <h1>Выход из системы</h1>
-    <p>Нажмите кнопку, чтобы выйти:</p>
+    <p>Вы уверены, что хотите выйти?</p>
     <form method="post" action="{% url 'account_logout' %}">
       {% csrf_token %}
-      <button type="submit" class="btn">Выйти</button>
+      <button type="submit" class="btn">Подтвердить</button>
     </form>
     <p><a href="{% url 'core:home' %}">Отмена — вернуться на главную</a></p>
   </section>

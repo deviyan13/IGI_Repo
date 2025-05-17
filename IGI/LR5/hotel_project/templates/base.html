@@ -12,6 +12,8 @@
         <nav>
             <ul>
                 <li><a href="{% url 'core:home' %}">Главная</a></li>
+                <li><a href="{% url 'core:room_catalog' %}">Наши номера</a></li>
+
                 <li><a href="{% url 'core:about' %}">О гостинице</a></li>
                 <li><a href="{% url 'core:news' %}">Новости</a></li>
                 <li><a href="{% url 'core:faq' %}">FAQ</a></li>
@@ -21,6 +23,7 @@
                 <li><a href="{% url 'core:reviews' %}">Отзывы</a></li>
                 <li><a href="{% url 'core:promotions' %}">Промокоды</a></li>
                 {% if user.is_authenticated %}
+                  <li><a href="{% url 'core:profile' %}">Профиль</a></li>
                   <li><a href="{% url 'account_logout' %}">Выйти</a></li>
                 {% else %}
                   <li><a href="{% url 'account_login' %}">Войти</a></li>

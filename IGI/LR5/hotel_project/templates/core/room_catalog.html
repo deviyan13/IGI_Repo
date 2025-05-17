@@ -8,16 +8,18 @@
 
     <!-- Фильтр -->
     <form method="get" class="filter-form">
+      <label>С:<input type="date" name="check_in" required value="{{ request.GET.check_in|default:default_check_in }}"></label>
+      <label>По:<input type="date" name="check_out" required value="{{ request.GET.check_out}}"></label>
       <select name="category">
         <option value="">Все категории</option>
         {% for cat in categories %}
-          <option value="{{ cat.id }}" {% if request.GET.category == {% cat.id|stringformat:"s" %} %}selected{% endif %}>{{ cat }}</option>
+          <option value="{{ cat.id }}" {% if request.GET.category == cat.id %}selected{% endif %}>{{ cat }}</option>
         {% endfor %}
       </select>
       <select name="amenity">
         <option value="">Все удобства</option>
         {% for am in amenities %}
-          <option value="{{ am.id }}" {% if request.GET.amenity == am.id|stringformat:"s" %}selected{% endif %}>{{ am.name }}</option>
+          <option value="{{ am.id }}" {% if request.GET.amenity == am.id %}selected{% endif %}>{{ am.name }}</option>
         {% endfor %}
       </select>
       <input type="number" name="min_price" placeholder="Мин. цена" value="{{ request.GET.min_price }}">
@@ -38,7 +40,7 @@
             <p><strong>Вместимость:</strong> {{ room.capacity }} чел.</p>
             <p><strong>Цена за ночь:</strong> {{ room.price_per_night }} руб.</p>
             <p><strong>Удобства:</strong> {% for am in room.amenities.all %}{{ am.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-            <a href="{% url 'core:book_room' room.id %}" class="btn">Забронировать</a>
+            <a href="{% url 'core:book_room' room.id %}?check_in={{ request.GET.check_in }}&check_out={{ request.GET.check_out }}" class="btn">Забронировать</a>
           </div>
         {% endfor %}
       </div>
