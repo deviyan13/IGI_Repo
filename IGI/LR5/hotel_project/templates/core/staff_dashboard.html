@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Панель сотрудника — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="staff-dashboard">
+    <h1>Панель сотрудника</h1>
+    <h2>Активные брони</h2>
+    <table class="staff-table">
+      <thead>
+        <tr>
+          <th>Номер</th>
+          <th>Клиент</th>
+          <th>С заезда</th>
+          <th>По</th>
+          <th>Гостей</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.room.number }}</td>
+            <td>{{ booking.client }}</td>
+            <td>{{ booking.check_in|date:"d.m.Y" }}</td>
+            <td>{{ booking.check_out|date:"d.m.Y" }}</td>
+            <td>{{ booking.guests_count }}</td>
+            <td>{{ booking.total_price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Все клиенты</h2>
+    <ul class="clients-list">
+      {% for client in clients %}
+        <li>{{ client }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Выход — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="auth-section">
+    <h1>Выход из системы</h1>
+    <p>Нажмите кнопку, чтобы выйти:</p>
+    <form method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn">Выйти</button>
+    </form>
+    <p><a href="{% url 'core:home' %}">Отмена — вернуться на главную</a></p>
+  </section>
+{% endblock %}

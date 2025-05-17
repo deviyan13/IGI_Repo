@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+<h2>Вход</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Войти</button>
+</form>
+<a href="{% provider_login_url 'google' %}">Войти через Google</a>
+<p>Ещё нет аккаунта? <a href="{% url 'account_signup' %}">Регистрация</a></p>
+{% endblock %}

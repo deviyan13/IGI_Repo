@@ -20,6 +20,13 @@
                 <li><a href="{% url 'core:jobs' %}">Вакансии</a></li>
                 <li><a href="{% url 'core:reviews' %}">Отзывы</a></li>
                 <li><a href="{% url 'core:promotions' %}">Промокоды</a></li>
+                {% if user.is_authenticated %}
+                  <li><a href="{% url 'account_logout' %}">Выйти</a></li>
+                {% else %}
+                  <li><a href="{% url 'account_login' %}">Войти</a></li>
+                  <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
+                {% endif %}
+
             </ul>
         </nav>
     </header>

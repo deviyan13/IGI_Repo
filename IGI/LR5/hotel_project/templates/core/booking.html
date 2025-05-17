@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Бронирование — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="booking-section">
+    <h1>Бронирование номера</h1>
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label>Номер:
+        <select name="room_id">
+          {% for room in available_rooms %}
+            <option value="{{ room.id }}">{{ room.number }} — {{ room.category }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Дата заезда: <input type="date" name="check_in" required></label>
+      <label>Дата выезда: <input type="date" name="check_out" required></label>
+      <label>Количество гостей: <input type="number" name="guests_count" min="1" required></label>
+      <label><input type="checkbox" name="include_children"> С детьми</label>
+      <button type="submit">Забронировать</button>
+    </form>
+    {% if not available_rooms %}
+      <p>К сожалению, нет свободных номеров по заданным параметрам.</p>
+    {% endif %}
+  </section>
+{% endblock %}

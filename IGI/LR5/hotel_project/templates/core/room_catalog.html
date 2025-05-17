@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Каталог номеров — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="room-catalog">
+    <h1>Каталог номеров</h1>
+
+    <!-- Фильтр -->
+    <form method="get" class="filter-form">
+      <select name="category">
+        <option value="">Все категории</option>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}" {% if request.GET.category == {% cat.id|stringformat:"s" %} %}selected{% endif %}>{{ cat }}</option>
+        {% endfor %}
+      </select>
+      <select name="amenity">
+        <option value="">Все удобства</option>
+        {% for am in amenities %}
+          <option value="{{ am.id }}" {% if request.GET.amenity == am.id|stringformat:"s" %}selected{% endif %}>{{ am.name }}</option>
+        {% endfor %}
+      </select>
+      <input type="number" name="min_price" placeholder="Мин. цена" value="{{ request.GET.min_price }}">
+      <input type="number" name="max_price" placeholder="Макс. цена" value="{{ request.GET.max_price }}">
+      <button type="submit">Применить</button>
+    </form>
+
+    <!-- Сетка номеров -->
+    {% if rooms %}
+      <div class="rooms-grid">
+        {% for room in rooms %}
+          <div class="room-card">
+            {% if room.photo %}
+              <img src="{{ room.photo.url }}" alt="Номер {{ room.number }}" class="room-photo">
+            {% endif %}
+            <h2>Номер {{ room.number }}</h2>
+            <p><strong>Категория:</strong> {{ room.category }}</p>
+            <p><strong>Вместимость:</strong> {{ room.capacity }} чел.</p>
+            <p><strong>Цена за ночь:</strong> {{ room.price_per_night }} руб.</p>
+            <p><strong>Удобства:</strong> {% for am in room.amenities.all %}{{ am.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <a href="{% url 'core:book_room' room.id %}" class="btn">Забронировать</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Ничего не найдено по заданным фильтрам.</p>
+    {% endif %}
+
+    <!-- Промокоды -->
+    <section class="promo-codes">
+      <h2>Действующие промокоды</h2>
+      <ul>
+        {% for promo in promo_codes %}
+          {% if promo.is_active %}
+            <li>{{ promo.code }} — {{ promo.discount_percent }}% (до {{ promo.valid_to|date:"d.m.Y" }})</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+
+  </section>
+{% endblock %}
