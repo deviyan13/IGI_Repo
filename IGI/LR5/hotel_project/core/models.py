@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, RegexValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
 
@@ -148,7 +148,15 @@ class Client(models.Model):
     first_name = models.CharField(max_length=30, verbose_name='Имя')
     last_name = models.CharField(max_length=30, verbose_name='Фамилия')
     middle_name = models.CharField(max_length=30, blank=True, verbose_name='Отчество')
-    ages = models.PositiveSmallIntegerField(verbose_name='Возраст', default=18, validators=[MinValueValidator(18)])
+    age = models.SmallIntegerField(verbose_name='Возраст', validators=[
+        MinValueValidator(18),
+        MaxValueValidator(120),
+    ])
+    phone_number = models.CharField(max_length=19, verbose_name='Номер телефона', validators=[
+        RegexValidator(
+            regex=r'\s*\+375\s*\(\d{2}\)\s*\d{3}-\d{2}-\d{2}\s*$',
+            message='формат белорусского номера: +375 (XX) XXX-XX-XX')
+    ])
 
     def __str__(self):
         return f"{self.last_name} {self.first_name} {self.middle_name}".strip()
@@ -169,7 +177,7 @@ class Booking(models.Model):
     )
     check_in = models.DateField(verbose_name='Дата заезда')
     check_out = models.DateField(verbose_name='Дата выезда')
-    guests_count = models.PositiveIntegerField(verbose_name='Кол-во гостей')
+    guests_count = models.IntegerField(verbose_name='Кол-во гостей')
     include_children = models.BooleanField(default=False, verbose_name='С детьми')
     total_price = models.DecimalField(
         max_digits=10,

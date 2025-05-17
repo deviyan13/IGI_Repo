@@ -93,6 +93,14 @@ def room_catalog(request):
             bookings__check_in__lt=check_out,
             bookings__check_out__gt=check_in
         )
+        try:
+            if check_out <= check_in:
+                date_error = "Дата выезда должна быть после даты заезда"
+                rooms = None  # Очищаем результаты
+        except ValueError:
+            date_error = "Некорректный формат даты"
+    else:
+        rooms = None
 
     # Filtering
     category_id = request.GET.get('category')

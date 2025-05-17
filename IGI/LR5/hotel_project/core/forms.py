@@ -5,14 +5,36 @@ from django.core.exceptions import ValidationError
 from .models import Client, Booking
 
 class ClientForm(forms.ModelForm):
+
     class Meta:
         model = Client
-        fields = ['first_name', 'last_name', 'middle_name', 'ages']
+        fields = ['first_name', 'last_name', 'middle_name', 'phone_number', 'age']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'required': True}),
+            'last_name': forms.TextInput(attrs={'required': True}),
+            'middle_name': forms.TextInput(),
+            'has_child': forms.CheckboxInput(),
+            'phone_number': forms.TextInput(attrs={
+                'required': True,
+                'placeholder': '+375 (12) 345-67-89',
+                'pattern': r'\+375\s*\(\d{2}\)\s*\d{3}-\d{2}-\d{2}',
+                'title': '+375 (XX) XXX-XX-XX',
+            }),
+            'age': forms.NumberInput(attrs={
+                'required': True,
+                'type': 'number',
+                'min': '18',
+                'max': '120',
+                'step': '1',
+                'title': 'Только целые числа от 1 до 120',
+            }),
+        }
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
             'middle_name': 'Отчество',
-            'ages': 'Возраст',
+            'age': 'Возраст',
+            'phone_number': 'Номер телефона'
         }
 
 class BookingForm(forms.ModelForm):
@@ -22,6 +44,12 @@ class BookingForm(forms.ModelForm):
         widgets = {
             'check_in': forms.DateInput(attrs={'type': 'date'}),
             'check_out': forms.DateInput(attrs={'type': 'date'}),
+            'guests_count': forms.NumberInput(
+                attrs={
+                    'type': 'number',
+                    'min': '1',
+                }
+            )
         }
         labels = {
             'check_in': 'Дата заезда',
@@ -33,6 +61,10 @@ class BookingForm(forms.ModelForm):
     def __init__(self, *args, room=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.room = room
+
+        if self.room:
+            self.fields['guests_count'].widget.attrs['max'] = self.room.capacity
+            self.fields['guests_count'].help_text = f"Максимальное количество гостей: {self.room.capacity}"
 
     def clean_guests_count(self):
         guests = self.cleaned_data.get('guests_count')
