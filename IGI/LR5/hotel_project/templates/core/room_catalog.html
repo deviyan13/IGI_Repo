@@ -38,7 +38,7 @@
         {% for room in rooms %}
           <div class="card">
             {% if room.photo %}
-              <img src="{{ room.photo.url }}" alt="Номер {{ room.number }}" class="room-photo">
+              <img src="{{ room.photo.url }}" alt="Номер {{ room.number }}" class="room-photo" height="250">
             {% endif %}
             <h2>Номер {{ room.number }}</h2>
             <p><strong>Категория:</strong> {{ room.category }}</p>

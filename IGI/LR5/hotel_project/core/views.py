@@ -13,7 +13,9 @@ from .models import CompanyInfo, NewsArticle, FAQuestion, EmployeeContact, Vacan
 # Create your views here.
 
 def home_view(request):
-    return render(request, 'core/home.html', {'current_year': datetime.date.today().year})
+    return render(request, 'core/home.html', {
+        'current_year': datetime.date.today().year,
+        'news_article': NewsArticle.objects.latest('published_at')})
 
 def about_view(request):
     company_info = CompanyInfo.objects.order_by('-added_at').first()

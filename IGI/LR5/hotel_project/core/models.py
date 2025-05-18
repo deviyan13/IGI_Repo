@@ -130,7 +130,7 @@ class Room(models.Model):
         upload_to='media/rooms/',
         blank=True,
         null=True,
-        default='/rooms/default.jpeg',
+        default='media/rooms/default.jpeg',
         verbose_name='Фото номера',
     )
 

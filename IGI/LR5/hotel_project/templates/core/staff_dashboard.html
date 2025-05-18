@@ -11,10 +11,11 @@
         <tr>
           <th>Номер</th>
           <th>Клиент</th>
-          <th>С заезда</th>
+          <th>С</th>
           <th>По</th>
           <th>Гостей</th>
           <th>Цена</th>
+          <th>С детьми</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
             <td>{{ booking.check_out|date:"d.m.Y" }}</td>
             <td>{{ booking.guests_count }}</td>
             <td>{{ booking.total_price }}</td>
+            <td>{{ booking.include_children|yesno:"Да,Нет" }}</td>
             <td>
               <form method="post" action="{% url 'core:delete_booking' booking.id %}" class="delete-form">
                 {% csrf_token %}

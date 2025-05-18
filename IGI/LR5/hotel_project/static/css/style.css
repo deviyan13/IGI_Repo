@@ -39,6 +39,7 @@ header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    row-gap: 15px;
 }
 
 .nav-menu li {
@@ -94,6 +95,10 @@ header {
     color: #8786AB;
     margin: 5px 0;
 }
+
+.room-photo {
+        height: 200px; /* Фиксированная высота для всех фото */
+    }
 
 /* Формы */
 form {
@@ -212,4 +217,8 @@ footer {
   .google-icon {
     width: 20px;
     height: 20px;
+  }
+
+  .contact-photo{
+    width:
   }

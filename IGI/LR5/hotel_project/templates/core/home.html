@@ -3,5 +3,14 @@
 
 {% block content %}
   <h1>Добро пожаловать в наш отель!</h1>
-  <p>Здесь в будущем будет краткая информация о последней статье.</p>
+  <p>Последняя новость:</p>
+  {% if news_article.image %}
+    <div class="news-image">
+      <img src="{{ news_article.image.url }}" alt="{{ news_article.title }}" class="image-item" width="150" height="150">
+    </div>
+  {% endif %}
+  <h2 class="news-title">{{ news_article.title }}</h2>
+  <p class="news_content">{{ news_article.content }}</p>
+  <p class="news-date">Дата публикации: {{ news_article.published_at|date:"d.m.Y H:i" }}</p>
+
 {% endblock %}
