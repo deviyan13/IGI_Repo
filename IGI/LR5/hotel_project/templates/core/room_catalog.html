@@ -16,12 +16,17 @@
           <option value="{{ cat.id }}" {% if request.GET.category == cat.id %}selected{% endif %}>{{ cat }}</option>
         {% endfor %}
       </select>
-      <select name="amenity">
-        <option value="">Все удобства</option>
+
+      <fieldset class="amenities-filter">
+        <legend>Удобства</legend>
         {% for am in amenities %}
-          <option value="{{ am.id }}" {% if request.GET.amenity == am.id %}selected{% endif %}>{{ am.name }}</option>
+          <label>
+            <input type="checkbox" name="amenities" value="{{ am.id }}"
+              {% if am.id in selected_amenities %}checked{% endif %}>
+            {{ am.name }}
+          </label>
         {% endfor %}
-      </select>
+      </fieldset>
       <input type="number" name="min_price" placeholder="Мин. цена" value="{{ request.GET.min_price }}">
       <input type="number" name="max_price" placeholder="Макс. цена" value="{{ request.GET.max_price }}">
       <button type="submit">Применить</button>

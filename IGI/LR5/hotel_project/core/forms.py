@@ -1,11 +1,11 @@
 # core/forms.py
+from allauth.account.forms import SignupForm
 from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Client, Booking
 
 class ClientForm(forms.ModelForm):
-
     class Meta:
         model = Client
         fields = ['first_name', 'last_name', 'middle_name', 'phone_number', 'age']
@@ -13,7 +13,6 @@ class ClientForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'required': True}),
             'last_name': forms.TextInput(attrs={'required': True}),
             'middle_name': forms.TextInput(),
-            'has_child': forms.CheckboxInput(),
             'phone_number': forms.TextInput(attrs={
                 'required': True,
                 'placeholder': '+375 (12) 345-67-89',
@@ -36,6 +35,51 @@ class ClientForm(forms.ModelForm):
             'age': 'Возраст',
             'phone_number': 'Номер телефона'
         }
+
+class CustomSignupForm(SignupForm):
+    first_name = forms.CharField(max_length=30, label="Имя", required=True)
+    last_name = forms.CharField(max_length=30, label="Фамилия", required=True)
+    middle_name = forms.CharField(max_length=30, label="Отчество", required=False)
+    age = forms.NumberInput()
+
+    class Meta(ClientForm.Meta):
+        pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for name, field in ClientForm().fields.items():
+            self.fields[name] = field
+
+        pwd1 = self.fields.get('password1')
+        if pwd1:
+            pwd1.widget.attrs.update({
+                'required': 'required',
+                'minlength': '8',
+                'oninvalid': "this.setCustomValidity('Пароль должен содержать минимум 8 символов и не быть слишком простым')",
+                'oninput': "this.setCustomValidity('')"
+            })
+        pwd2 = self.fields.get('password2')
+        if pwd2:
+            pwd2.widget.attrs.update({
+                'required': 'required',
+                'oninvalid': "this.setCustomValidity('Пожалуйста, введите пароль ещё раз для подтверждения')",
+                'oninput': "this.setCustomValidity('')"
+            })
+
+    def save(self, request):
+        user = super().save(request)
+        Client.objects.get_or_create(
+            user=user,
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+            middle_name=self.cleaned_data['middle_name'],
+            phone_number=self.cleaned_data['phone_number'],
+            age=self.cleaned_data['age'],
+        )
+        return user
+
+
 
 class BookingForm(forms.ModelForm):
     class Meta:

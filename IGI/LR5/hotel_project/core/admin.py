@@ -44,6 +44,12 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = ('number', 'category', 'price_per_night', 'description', 'photo')
+    list_filter = ('category',)
+    search_fields = ('number',)
+
+    # Показываем удобства отдельным «горизонтальным» виджетом,
+    # чтобы можно было быстро выбирать и убирать их
+    filter_horizontal = ('amenities',)
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):

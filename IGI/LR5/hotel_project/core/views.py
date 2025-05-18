@@ -104,14 +104,17 @@ def room_catalog(request):
 
     # Filtering
     category_id = request.GET.get('category')
-    amenity_id = request.GET.get('amenity')
+    amenity_ids = request.GET.getlist('amenities')
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
 
     if category_id:
         rooms = rooms.filter(category_id=category_id)
-    if amenity_id:
-        rooms = rooms.filter(amenities__id=amenity_id)
+    amenity_ids = request.GET.getlist('amenities')
+    if amenity_ids:
+        for aid in amenity_ids:
+            rooms = rooms.filter(amenities__id=aid)
+        rooms = rooms.distinct()
     if min_price:
         rooms = rooms.filter(price_per_night__gte=min_price)
     if max_price:
@@ -120,6 +123,7 @@ def room_catalog(request):
     context = {
         'categories': categories,
         'amenities': amenities,
+        'selected_amenities': amenity_ids,
         'promo_codes': promo_codes,
         'rooms': rooms,
         'default_check_in': datetime.date.today().isoformat(),

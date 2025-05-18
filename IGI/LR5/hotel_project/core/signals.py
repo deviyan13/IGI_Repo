@@ -12,17 +12,19 @@ def create_client_profile(request, user, **kwargs):
     social_accounts = user.socialaccount_set.all()
     if social_accounts:
         extra = social_accounts[0].extra_data
-        # В Google OAuth2 поля называются given_name, family_name
+
         first = extra.get('given_name') or ''
         last = extra.get('family_name') or ''
-    else:
-        first = last = ''
 
-    # Создаём профиль
-    Client.objects.create(
-        user=user,
-        first_name=first,
-        last_name=last,
-        middle_name='',
-        has_child=False
-    )
+        Client.objects.get_or_create(
+            user=user,
+            defaults={
+                'first_name': first,
+                'last_name': last,
+                'middle_name': '',
+                'phone_number': '',
+                'age': 18,
+            }
+        )
+
+
