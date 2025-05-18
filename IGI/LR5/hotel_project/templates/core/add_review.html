@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4">Оставить отзыв</h2>
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    {{ form.rating.label_tag }}
+                    {{ form.rating }}
+                </div>
+
+                <div class="mb-4">
+                    {{ form.text.label_tag }}
+                    {{ form.text }}
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Отправить отзыв</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

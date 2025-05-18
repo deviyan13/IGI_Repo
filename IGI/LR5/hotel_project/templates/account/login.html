@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load socialaccount %}
 
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
 {% block content %}
 <h2>Вход</h2>
 <form method="post">
@@ -8,6 +10,15 @@
   {{ form.as_p }}
   <button type="submit">Войти</button>
 </form>
-<a href="{% provider_login_url 'google' %}">Войти через Google</a>
+
+<div class="social-auth">
+    <a href="{% provider_login_url 'google' process='login'%}" class="google-btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/1920px-Google_Favicon_2025.svg.png"
+           alt="Google logo"
+           class="google-icon">
+      <span>Войти через Google</span>
+    </a>
+  </div>
+
 <p>Ещё нет аккаунта? <a href="{% url 'account_signup' %}">Регистрация</a></p>
 {% endblock %}

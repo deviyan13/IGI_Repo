@@ -13,7 +13,7 @@
       <select name="category">
         <option value="">Все категории</option>
         {% for cat in categories %}
-          <option value="{{ cat.id }}" {% if request.GET.category == cat.id %}selected{% endif %}>{{ cat }}</option>
+          <option value="{{ cat.id }}" {% if selected_filters.category == cat.id %}selected{% endif %}>{{ cat }}</option>
         {% endfor %}
       </select>
 
@@ -36,7 +36,7 @@
     {% if rooms %}
       <div class="rooms-grid">
         {% for room in rooms %}
-          <div class="room-card">
+          <div class="card">
             {% if room.photo %}
               <img src="{{ room.photo.url }}" alt="Номер {{ room.number }}" class="room-photo">
             {% endif %}

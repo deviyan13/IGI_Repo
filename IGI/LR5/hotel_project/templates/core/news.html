@@ -8,7 +8,7 @@
     {% if news_articles %}
       <div class="grid-container">
         {% for article in news_articles %}
-          <div class="grid-item">
+          <div class="card">
             {% if article.image %}
               <div class="news-image">
                 <img src="{{ article.image.url }}" alt="{{ article.title }}" class="image-item" width="150" height="150">

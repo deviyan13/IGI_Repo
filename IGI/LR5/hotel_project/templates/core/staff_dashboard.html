@@ -26,6 +26,14 @@
             <td>{{ booking.check_out|date:"d.m.Y" }}</td>
             <td>{{ booking.guests_count }}</td>
             <td>{{ booking.total_price }}</td>
+            <td>
+              <form method="post" action="{% url 'core:delete_booking' booking.id %}" class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete" onclick="return confirmDelete(event)">
+                  Отменить
+                </button>
+              </form>
+            </td>
           </tr>
         {% endfor %}
       </tbody>
@@ -38,4 +46,15 @@
       {% endfor %}
     </ul>
   </section>
+
+  <script>
+    function confirmDelete(event) {
+      if (!confirm('Вы уверены, что хотите отменить бронирование?\nЭто действие нельзя будет отменить!')) {
+        event.preventDefault();
+        return false;
+      }
+      return true;
+    }
+  </script>
+
 {% endblock %}

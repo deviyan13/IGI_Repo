@@ -17,5 +17,6 @@ urlpatterns = [
     path('rooms/<int:room_id>/book/', views.book_room, name='book_room'),
     # Панель сотрудника
     path('staff/',      views.staff_dashboard, name='staff_dashboard'),
+    path('delete-booking/<int:booking_id>/', views.delete_booking, name='delete_booking'),
     path('profile/',    views.profile,      name='profile')
 ]

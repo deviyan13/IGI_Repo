@@ -10,7 +10,7 @@
     <!-- Header with navigation -->
     <header>
         <nav>
-            <ul>
+            <ul class="nav-menu">
                 <li><a href="{% url 'core:home' %}">Главная</a></li>
                 <li><a href="{% url 'core:room_catalog' %}">Наши номера</a></li>
 
@@ -29,15 +29,18 @@
                   <li><a href="{% url 'account_login' %}">Войти</a></li>
                   <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
                 {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                  <li><a href="{% url 'core:staff_dashboard' %}">Панель сотрудника</a></li>
+                {% endif %}
 
             </ul>
         </nav>
     </header>
 
     <!-- Main content area -->
-    <main>
+    <div class="content">
         {% block content %}{% endblock %}
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>

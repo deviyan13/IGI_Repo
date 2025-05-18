@@ -128,3 +128,22 @@ class BookingForm(forms.ModelForm):
                 raise ValidationError('В выбранном вами промежутке дат этот номер занят.')
 
         return cleaned
+
+from .models import Review
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['text', 'rating']
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Напишите ваш отзыв...'
+            }),
+            'rating': forms.Select(attrs={'class': 'form-select'})
+        }
+        labels = {
+            'text': 'Текст отзыва',
+            'rating': 'Ваша оценка'
+        }

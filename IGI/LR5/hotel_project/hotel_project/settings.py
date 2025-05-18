@@ -52,6 +52,21 @@ AUTHENTICATION_BACKENDS = [
   'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        # вот здесь говорим «показывать список аккаунтов»
+        'AUTH_PARAMS': {
+            'prompt': 'select_account',
+        },
+    }
+}
+
 ACCOUNT_FORMS = {
     'signup': 'core.forms.CustomSignupForm'
 }

@@ -15,7 +15,7 @@
     {% if reviews %}
       <div class="reviews-grid">
         {% for rev in reviews %}
-          <div class="review-card">
+          <div class="card">
             <p class="review-author">{{ rev.author.get_full_name|default:rev.author.username }}</p>
             <p class="review-rating">Оценка: {{ rev.rating }}/5</p>
             <p class="review-text">{{ rev.text }}</p>
