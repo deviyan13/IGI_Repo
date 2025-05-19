@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Статистика — Hotel Project{% endblock %}
+
+{% block content %}
+<section class="statistics">
+  <h1>Статистика сайта</h1>
+
+  <h2>Клиенты ({{ client_count }})</h2>
+  <ul>
+    {% for client in clients %}
+      <li>{{ client.last_name }} {{ client.first_name }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Продажи</h2>
+  <p>Общая сумма: <strong>{{ total_sales }} ₽</strong></p>
+  <p>Средняя сумма брони: {{ avg_sale }} ₽</p>
+  <p>Медиана суммы брони: {{ med_sale }} ₽</p>
+  <p>Мода суммы брони: {{ mode_sale|default:'—' }} ₽</p>
+
+  <h2>Возраст клиентов</h2>
+  <p>Средний возраст: {{ avg_age }} лет</p>
+  <p>Медианный возраст: {{ med_age }} лет</p>
+
+  <h2>Популярность категорий</h2>
+  <p>Самая популярная категория: {{ popular_category }}</p>
+
+  <h2>Прибыль по категориям</h2>
+  <p>Категория с наибольшей прибылью: {{ top_profit_category }}</p>
+
+  <hr>
+  <h2>Графики</h2>
+  <div>
+    <h3>Распределение сумм брони</h3>
+    <img src="{{ hist_url }}" alt="Гистограмма продаж">
+  </div>
+  <div>
+    <h3>Популярность категорий</h3>
+    <img src="{{ pop_url }}" alt="Популярность категорий">
+  </div>
+  <div>
+    <h3>Прибыль по категориям</h3>
+    <img src="{{ profit_url }}" alt="Прибыль по категориям">
+  </div>
+</section>
+{% endblock %}
+
+
+
+

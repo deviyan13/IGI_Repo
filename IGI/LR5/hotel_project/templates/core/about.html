@@ -6,5 +6,18 @@
     <h1>{{ company_info.title }}</h1>
     <p>{{ company_info.content }}</p>
     <small>Добавлено: {{ company_info.added_at|date:"d.m.Y" }}</small>
+
+   <h2>Ваш часовой пояс: {{ user_tz }}</h2>
+    <ul>
+      <li>Локальное время: <strong>{{ time_local }}</strong></li>
+      <li>Время UTC:       <strong>{{ time_utc }}</strong></li>
+    </ul>
+
+    <h2>Календарь {{ month_calendar.0 }}</h2>
+    <pre style="font-family: monospace; line-height:1.2;">
+      {% for line in month_calendar %}
+      {{ line }}
+      {% endfor %}
+    </pre>
   </section>
 {% endblock %}

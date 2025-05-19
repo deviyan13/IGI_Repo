@@ -1,8 +1,11 @@
 import datetime
+import io
 from datetime import timedelta
+from urllib.parse import unquote
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import Sum, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ClientForm, BookingForm, ReviewForm
@@ -11,18 +14,95 @@ from .models import CompanyInfo, NewsArticle, FAQuestion, EmployeeContact, Vacan
 
 
 # Create your views here.
+import requests
 
 def home_view(request):
+
+    FOURSQUARE_API_KEY = "fsq30d8PC89pkL4hAljxmMLwy50rypYy5erEfi3dieLC93M="
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": FOURSQUARE_API_KEY
+    }
+
+    params = {
+        "ll": "53.911919,27.594950",  # Координаты общежития или отеля
+        "radius": 1000,
+        "limit": 15,
+        "open_now": True,
+    }
+
+    try:
+        res = requests.get("https://api.foursquare.com/v3/places/search", headers=headers, params=params, timeout=5)
+        res.raise_for_status()
+        data = res.json()
+        places = []
+
+        for place in data.get("results", []):
+            name = place.get("name")
+            address = place.get("location", {}).get("formatted_address", "Без адреса")
+            category = place.get("categories", [{}])[0].get("name", "Без категории")
+            icon_info = place.get("categories", [{}])[0].get("icon", {})
+            icon = f"{icon_info.get('prefix')}64{icon_info.get('suffix')}" if icon_info else ""
+            distance = place.get("distance", "?")
+
+            places.append({
+                "name": name,
+                "address": address,
+                "category": category,
+                "icon": icon,
+                "distance": distance
+            })
+    except Exception as e:
+        print(f"Foursquare API error: {e}")
+        places = []
+
+
     return render(request, 'core/home.html', {
         'current_year': datetime.date.today().year,
-        'news_article': NewsArticle.objects.latest('published_at')})
+        'news_article': NewsArticle.objects.latest('published_at'),
+        'places': places,
+    })
+
+import calendar
+from zoneinfo import ZoneInfo
 
 def about_view(request):
     company_info = CompanyInfo.objects.order_by('-added_at').first()
 
+    raw_tz = request.COOKIES.get('user_tz')
+    if raw_tz:
+        tzname = unquote(raw_tz)
+        try:
+            local_tz = ZoneInfo(tzname)
+        except Exception:
+            local_tz = ZoneInfo('UTC')
+    else:
+        local_tz = ZoneInfo('UTC')
+
+    # Текущее время
+    now_local = datetime.datetime.now(local_tz)
+    now_utc = datetime.datetime.now(ZoneInfo('UTC'))
+
+    # Формат
+    def fmt(dt):
+        return dt.strftime('%d/%m/%Y %H:%M:%S')
+
+    time_local = fmt(now_local)
+    time_utc = fmt(now_utc)
+
+    # Текстовый календарь текущего месяца
+    year, month = now_local.year, now_local.month
+    cal = calendar.TextCalendar(firstweekday=0)
+    month_calendar = cal.formatmonth(year, month).splitlines()
+
     return render(request, 'core/about.html', {
+        'time_local': time_local,
+        'time_utc': time_utc,
+        'month_calendar': month_calendar,
         'current_year': datetime.date.today().year,
         'company_info': company_info,
+        'user_tz': local_tz.key,
     })
 
 def news_list(request):
@@ -50,7 +130,9 @@ def contacts(request):
     })
 
 def privacy(request):
-    return render(request, 'core/privacy.html', {'current_year': datetime.date.today().year})
+    return render(request, 'core/privacy.html', {
+        'current_year': datetime.date.today().year
+    })
 
 def jobs(request):
     vacancies = Vacancy.objects.all()
@@ -60,13 +142,12 @@ def jobs(request):
     })
 
 @login_required
-@login_required
 def add_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.author = request.user  # Используем правильное имя поля
+            review.author = request.user
             review.save()
             messages.success(request, 'Отзыв успешно добавлен!')
             return redirect('core:reviews')
@@ -81,6 +162,7 @@ def reviews_list(request):
     reviews = Review.objects.select_related('author').order_by('-created_at')
     return render(request, 'core/reviews.html', {
         'reviews': reviews,
+        'current_year': datetime.date.today().year,
     })
 
 def promotions(request):
@@ -115,8 +197,8 @@ def room_catalog(request):
             else:
                 # по датам только если они валидны
                 rooms = rooms.exclude(
-                    bookings__check_in__lt=check_out_date,
-                    bookings__check_out__gt=check_in_date
+                    bookings__check_in__lte=check_out_date,
+                    bookings__check_out__gte=check_in_date
                 )
         except (ValueError, TypeError):
             date_error = "Некорректный формат даты"
@@ -143,7 +225,17 @@ def room_catalog(request):
         if max_price:
             rooms = rooms.filter(price_per_night__lte=max_price)
 
+
+    sort = request.GET.get('sort')
+    if sort == 'price_asc':
+        rooms = rooms.order_by('price_per_night')
+    elif sort == 'price_desc':
+        rooms = rooms.order_by('-price_per_night')
+    elif sort == 'popularity':
+        rooms = rooms.annotate(bookings_count=Count('bookings')).order_by('-bookings_count')
+
     context = {
+        'current_year': datetime.date.today().year,
         'categories': categories,
         'amenities': amenities,
         'promo_codes': promo_codes,
@@ -156,6 +248,7 @@ def room_catalog(request):
             'amenities': request.GET.getlist('amenities'),
             'min_price': request.GET.get('min_price'),
             'max_price': request.GET.get('max_price'),
+            'sort': sort,
         }
     }
     return render(request, 'core/room_catalog.html', context)
@@ -167,6 +260,7 @@ def staff_dashboard(request):
     bookings = Booking.objects.select_related('room', 'client').filter(check_out__gte=datetime.datetime.today())
     clients = Client.objects.select_related('user').all()
     return render(request, 'core/staff_dashboard.html', {
+        'current_year': datetime.date.today().year,
         'bookings': bookings,
         'clients': clients,
     })
@@ -184,7 +278,7 @@ def book_room(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     client, _ = Client.objects.get_or_create(user=request.user)
 
-    # даты из GET или из POST (при сабмите)
+    # даты из GET или из POST
     if request.method == 'GET':
         check_in = request.GET.get('check_in')
         check_out = request.GET.get('check_out')
@@ -210,6 +304,7 @@ def book_room(request, room_id):
             return redirect('core:profile')
 
     return render(request, 'core/booking.html', {
+        'current_year': datetime.date.today().year,
         'client_form': client_form,
         'booking_form': booking_form,
         'room': room,
@@ -221,14 +316,193 @@ def profile(request):
     client, created = Client.objects.get_or_create(user=request.user)
     bookings = client.bookings.filter(check_out__gte=datetime.datetime.today()).select_related('room').order_by('check_in')
 
-
     # форма для редактирования профиля
     client_form = ClientForm(request.POST or None, instance=client)
     if request.method == 'POST' and client_form.is_valid():
         client_form.save()
         return redirect('core:profile')
 
+    cat_url = None
+    try:
+        cat_resp = requests.get('https://api.thecatapi.com/v1/images/search', timeout=3)
+        cat_resp.raise_for_status()
+        cat_data = cat_resp.json()
+        if cat_data:
+            cat_url = cat_data[0].get('url')
+    except Exception:
+        cat_url = None
+
+    quote_text = None
+    quote_author = 'Котик Пушок'
+    try:
+        params = {
+            'method': 'getQuote',
+            'format': 'json',
+            'lang': 'ru'
+        }
+        quote_resp = requests.post(
+            'http://api.forismatic.com/api/1.0/',
+            data=params,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'},
+            timeout=3
+        )
+        quote_resp.raise_for_status()
+        quote_json = quote_resp.json()
+        quote_text = quote_json.get('quoteText')
+        author = quote_json.get('quoteAuthor')
+        if author:
+            quote_text = f'“{quote_text}”'
+            quote_author = f'{'Котик ' +  author}'
+    except Exception:
+        quote_text = None
+
+
     return render(request, 'core/profile.html', {
+        'current_year': datetime.date.today().year,
         'client_form': client_form,
         'bookings': bookings,
+        'cat_url': cat_url,
+        'quote_text': quote_text,
+        'quote_author': quote_author,
     })
+
+@staff_member_required(login_url='account_login')
+def edit_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    room = booking.room
+
+    if request.method == 'POST':
+        # привязываем форму к существующему объекту и передаём room для валидации
+        form = BookingForm(request.POST or None, instance=booking, room=room)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Бронь успешно обновлена.')
+            return redirect('core:staff_dashboard')
+    else:
+        form = BookingForm(instance=booking, room=room,
+        initial={
+            'check_in': booking.check_in.strftime('%Y-%m-%d'),
+            'check_out': booking.check_out.strftime('%Y-%m-%d'),
+            'guests_count': booking.guests_count,
+            'include_children': booking.include_children,}
+        )
+
+    return render(request, 'core/edit_booking.html', {
+        'form': form,
+        'booking': booking,
+        'room': room,
+    })
+
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('Agg')
+from statistics import mean, median, mode
+
+@staff_member_required(login_url='account_login')
+def statistics(request):
+    import os
+    from django.conf import settings
+    # Обеспечим папку для сохранения графиков
+    stats_dir = os.path.join(settings.MEDIA_ROOT, 'media/statistics')
+    os.makedirs(stats_dir, exist_ok=True)
+
+    # 1) Клиенты в алфавитном порядке
+    clients = Client.objects.order_by('last_name', 'first_name')
+    client_count = clients.count()
+
+    # 2) Общая сумма продаж и статистика по сумме каждой брони
+    bookings = Booking.objects.all()
+    sales = [b.total_price for b in bookings]
+    total_sales = sum(sales)
+    avg_sale = mean(sales) if sales else 0
+    med_sale = median(sales) if sales else 0
+    try:
+        mode_sale = mode(sales) if sales else 0
+    except:
+        mode_sale = None
+
+    # 3) Статистика по возрасту клиентов
+    ages = []
+    for c in clients:
+        if c.birth_date:
+            bd = c.birth_date
+            today = datetime.date.today()
+            age = (today.year - bd.year - (today.month < bd.month or today.day < bd.day))
+            ages.append(age)
+    avg_age = mean(ages) if ages else 0
+    med_age = median(ages) if ages else 0
+
+    # 4) Популярность категорий номеров
+    category_stats = (
+        Room.objects.values('category__name')
+        .annotate(bookings_count=Count('bookings'))
+        .order_by('-bookings_count')
+    )
+    popular_category = category_stats[0]['category__name'] if category_stats else None
+
+    # 5) Прибыль по категориям
+    profit_stats = (
+        Booking.objects
+        .values('room__category__name')
+        .annotate(total_profit=Sum('total_price'))
+        .order_by('-total_profit')
+    )
+    top_profit_category = profit_stats[0]['room__category__name'] if profit_stats else None
+
+    # === Построение и сохранение графиков ===
+    # A) Гистограмма продаж по брони
+    plt.figure()
+    plt.hist(sales, bins=10)
+    plt.title('Распределение суммы брони')
+    plt.xlabel('Сумма брони, руб')
+    plt.ylabel('Число бронировавших')
+    hist_path = os.path.join(stats_dir, 'hist_sales.png')
+    plt.savefig(hist_path, bbox_inches='tight')
+    plt.close()
+
+    # B) Бары по популярности категории
+    labels = [c['category__name'] for c in category_stats]
+    counts = [c['bookings_count'] for c in category_stats]
+    plt.figure()
+    plt.bar(labels, counts)
+    plt.title('Популярность категорий номеров')
+    plt.xticks(rotation=45, ha='right')
+    pop_path = os.path.join(stats_dir, 'bar_popularity.png')
+    plt.savefig(pop_path, bbox_inches='tight')
+    plt.close()
+
+    # C) Линейный график прибыли по категориям
+    labels2 = [p['room__category__name'] for p in profit_stats]
+    profits = [p['total_profit'] for p in profit_stats]
+    plt.figure()
+    plt.plot(labels2, profits, marker='o')
+    plt.title('Прибыль по категориям номеров')
+    plt.xticks(rotation=45, ha='right')
+    plt.ylabel('Прибыль, руб')
+    profit_path = os.path.join(stats_dir, 'line_profit.png')
+    plt.savefig(profit_path, bbox_inches='tight')
+    plt.close()
+
+    # Ссылки для шаблона
+    hist_url = settings.MEDIA_URL + 'media/statistics/hist_sales.png'
+    pop_url = settings.MEDIA_URL + 'media/statistics/bar_popularity.png'
+    profit_url = settings.MEDIA_URL + 'media/statistics/line_profit.png'
+
+    return render(request, 'core/statistics.html', {
+        'clients': clients,
+        'client_count': client_count,
+        'total_sales': total_sales,
+        'avg_sale': avg_sale,
+        'med_sale': med_sale,
+        'mode_sale': mode_sale,
+        'avg_age': avg_age,
+        'med_age': med_age,
+        'popular_category': popular_category,
+        'top_profit_category': top_profit_category,
+        'hist_url': hist_url,
+        'pop_url': pop_url,
+        'profit_url': profit_url,
+    })
+
+
+

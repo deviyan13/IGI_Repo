@@ -53,7 +53,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'age', 'middle_name', )
+    list_display = ('first_name', 'last_name', 'birth_date', 'middle_name', )
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):

@@ -1,4 +1,6 @@
 # core/forms.py
+import datetime
+
 from allauth.account.forms import SignupForm
 from django import forms
 from django.core.exceptions import ValidationError
@@ -8,7 +10,7 @@ from .models import Client, Booking
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = ['first_name', 'last_name', 'middle_name', 'phone_number', 'age']
+        fields = ['first_name', 'last_name', 'middle_name', 'phone_number', 'birth_date']
         widgets = {
             'first_name': forms.TextInput(attrs={'required': True}),
             'last_name': forms.TextInput(attrs={'required': True}),
@@ -19,20 +21,22 @@ class ClientForm(forms.ModelForm):
                 'pattern': r'\+375\s*\(\d{2}\)\s*\d{3}-\d{2}-\d{2}',
                 'title': '+375 (XX) XXX-XX-XX',
             }),
-            'age': forms.NumberInput(attrs={
-                'required': True,
-                'type': 'number',
-                'min': '18',
-                'max': '120',
-                'step': '1',
-                'title': 'Только целые числа от 1 до 120',
-            }),
+            'birth_date': forms.DateInput(
+                format='%Y-%m-%d',
+                attrs={
+                    'type': 'date',
+                    'required': True,
+                    # указываем max = сегодня-18 лет
+                    'max': (datetime.date.today().replace(year=datetime.date.today().year - 18)).isoformat(),
+                    'title': 'Вам должно быть не менее 18 лет',
+                }
+            ),
         }
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
             'middle_name': 'Отчество',
-            'age': 'Возраст',
+            'birth_date': 'Дата рождения',
             'phone_number': 'Номер телефона'
         }
 
@@ -122,10 +126,22 @@ class BookingForm(forms.ModelForm):
         check_out = cleaned.get('check_out')
         if check_in and check_out and check_in >= check_out:
             raise ValidationError('Дата выезда должна быть позже даты заезда.')
-        for booking in Booking.objects.all():
-            if booking.room == self.room and (booking.check_in < check_out and booking.check_out > check_in):
-                print(booking.check_in, booking.check_out)
-                raise ValidationError('В выбранном вами промежутке дат этот номер занят.')
+
+        qs = Booking.objects.filter(
+            room=self.room,
+            check_in__lte=check_out,
+            check_out__gte=check_in
+        )
+        # если мы редактируем существующую бронь, исключаем её саму из queryset
+        if self.instance and self.instance.pk:
+            qs = qs.exclude(pk=self.instance.pk)
+
+        if qs.exists():
+            raise ValidationError('В выбранном вами промежутке дат этот номер занят.')
+
+        # for booking in Booking.objects.all():
+        #     if booking.room == self.room and (booking.check_in < check_out and booking.check_out > check_in):
+        #         raise ValidationError('В выбранном вами промежутке дат этот номер занят.')
 
         return cleaned
 

@@ -7,6 +7,28 @@
   <section class="profile-section">
     <h1>Профиль пользователя</h1>
 
+    <!-- Вдохновляющий кот и цитата -->
+  <section class="profile-motivation">
+    {% if cat_url %}
+      <div class="cat-picture">
+        <img class="cat-picture-image" src="{{ cat_url }}" alt="Котик для настроения">
+        {% if quote_text %}
+        <div>
+          <blockquote class="motivation-quote">
+            {{ quote_text }}
+          </blockquote>
+          <a class="quote-author"> <b> © {{ quote_author }} </b></a>
+        </div>
+
+        {% endif %}
+
+
+      </div>
+    {% endif %}
+
+  </section>
+
+
     <!-- Форма редактирования профиля -->
     <div class="profile-form">
       <h2>Ваши данные</h2>

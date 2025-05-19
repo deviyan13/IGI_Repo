@@ -16,6 +16,7 @@
           <th>Гостей</th>
           <th>Цена</th>
           <th>С детьми</th>
+          <th>Действия</th>
         </tr>
       </thead>
       <tbody>
@@ -29,12 +30,16 @@
             <td>{{ booking.total_price }}</td>
             <td>{{ booking.include_children|yesno:"Да,Нет" }}</td>
             <td>
-              <form method="post" action="{% url 'core:delete_booking' booking.id %}" class="delete-form">
-                {% csrf_token %}
-                <button type="submit" class="btn-delete" onclick="return confirmDelete(event)">
-                  Отменить
-                </button>
-              </form>
+              <div class="actions-row" style="display:flex; gap:8px;">
+                <form method="post" action="{% url 'core:delete_booking' booking.id %}" class="delete-form">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-action" onclick="return confirmDelete(event)">Отменить</button>
+                </form>
+                <form class="delete-form">
+                  <a href="{% url 'core:edit_booking' booking.id %}" class="btn-action">Изменить</a>
+                </form>
+
+              </div>
             </td>
           </tr>
         {% endfor %}
@@ -58,5 +63,4 @@
       return true;
     }
   </script>
-
 {% endblock %}

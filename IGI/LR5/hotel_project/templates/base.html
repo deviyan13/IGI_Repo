@@ -6,6 +6,13 @@
     <title>{% block title %}Hotel Project{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
+<script>
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  document.cookie = `user_tz=${encodeURIComponent(tz)};path=/`;
+</script>
+
+
 <body>
     <!-- Header with navigation -->
     <header>
@@ -31,6 +38,9 @@
                 {% endif %}
                 {% if user.is_authenticated and user.is_staff %}
                   <li><a href="{% url 'core:staff_dashboard' %}">Панель сотрудника</a></li>
+                {% endif %}
+                {% if user.is_authenticated and user.is_staff %}
+                  <li><a href="{% url 'core:statistics' %}">Статистика</a></li>
                 {% endif %}
 
             </ul>

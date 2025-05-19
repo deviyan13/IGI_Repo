@@ -25,6 +25,19 @@ a:hover {
     color: #8786AB;
 }
 
+a.button-like {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #373594;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+a.button-like:hover {
+    background-color: #8786AB;
+}
+
 /* Шапка и навигация */
 header {
     background-color: #FFFFFF;
@@ -222,3 +235,68 @@ footer {
   .contact-photo{
     width:
   }
+
+.btn-action {
+  background-color: #373594;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-action:hover {
+  background-color: #8786AB; /* Светлее при наведении */
+}
+
+.places-list {
+  list-style: none;
+  padding: 0;
+}
+
+.place-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  transition: 0.5s;
+}
+
+.place-item:hover {
+  transform: translateY(-5px);
+  border-radius: 24px;
+}
+
+.place-icon {
+  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  background-color: #373594;
+}
+.place-info h3 {
+  margin: 0 0 0.3rem;
+}
+
+.cat-picture{
+    display: flex;
+}
+
+
+.cat-picture-image {
+  max-width: 144px;
+  height: 144px;
+  border-radius: 12px;
+}
+
+.motivation-quote {
+  margin-top:1rem;
+  margin-left:1rem;
+  font-style:italic;
+}
+
+.quote-author{
+    margin-left:1rem;
+    color: #373594;
+}

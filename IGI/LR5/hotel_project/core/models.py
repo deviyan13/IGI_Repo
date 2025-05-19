@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.validators import MinValueValidator, RegexValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
@@ -148,9 +150,8 @@ class Client(models.Model):
     first_name = models.CharField(max_length=30, verbose_name='Имя')
     last_name = models.CharField(max_length=30, verbose_name='Фамилия')
     middle_name = models.CharField(max_length=30, blank=True, verbose_name='Отчество')
-    age = models.SmallIntegerField(verbose_name='Возраст', validators=[
-        MinValueValidator(18),
-        MaxValueValidator(120),
+    birth_date = models.DateField(verbose_name='Дата рождения', null=True, validators=[
+        MaxValueValidator(datetime.date.today().replace(year=datetime.date.today().year - 18)),
     ])
     phone_number = models.CharField(max_length=19, verbose_name='Номер телефона', validators=[
         RegexValidator(

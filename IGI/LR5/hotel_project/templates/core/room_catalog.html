@@ -17,6 +17,22 @@
         {% endfor %}
       </select>
 
+       <!-- Сортировка -->
+      <label>Сортировать:
+        <select name="sort">
+          <option value="">без сортировки</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>
+            Цена: по возрастанию
+          </option>
+          <option value="price_desc" {% if ort == 'price_desc' %}selected{% endif %}>
+            Цена: по убыванию
+          </option>
+          <option value="popularity" {% if sort == 'popularity' %}selected{% endif %}>
+            Популярность
+          </option>
+        </select>
+      </label>
+
       <fieldset class="amenities-filter">
         <legend>Удобства</legend>
         {% for am in amenities %}
