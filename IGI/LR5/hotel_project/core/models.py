@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, RegexValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
@@ -188,6 +189,26 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"Бронь {self.id}: {self.client} — {self.room}"
+
+    def clean(self):
+        super().clean()
+
+        # Валидация вместимости
+        if self.guests_count > self.room.capacity:
+            raise ValidationError({
+                'guests_count': f'Максимальное количество гостей для этого номера: {self.room.capacity}.'
+            })
+
+        #  проверка на пересечение броней
+        conflicts = Booking.objects.filter(
+            room=self.room,
+            check_in__lt=self.check_out,
+            check_out__gt=self.check_in
+        )
+        if self.pk:
+            conflicts = conflicts.exclude(pk=self.pk)
+        if conflicts.exists():
+            raise ValidationError('В выбранном вами промежутке дат этот номер занят.')
 
 
 class Payment(models.Model):
