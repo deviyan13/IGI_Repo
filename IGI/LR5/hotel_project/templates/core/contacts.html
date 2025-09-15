@@ -1,28 +1,67 @@
 {% extends 'base.html' %}
 
 {% block title %}Контакты — Hotel Project{% endblock %}
+{% block meta_description %}Контактная информация сотрудников нашего отеля. Свяжитесь с нами по телефону, email или посетите наш отель.{% endblock %}
 
 {% block content %}
-  <section class="contacts-section">
+<main>
+  <header>
     <h1>Контакты сотрудников</h1>
-    {% if contacts %}
-      <div class="contacts-grid">
-        {% for person in contacts %}
-          <div class="contact-card">
-            <div class="contact-photo">
-              <img src="{{ person.photo.url }}" alt="Фото {{ person.name }}" height="150">
-            </div>
-            <div class="contact-info">
-              <h2 class="contact-name">{{ person.name }}</h2>
-              <p class="contact-position">{{ person.position }}</p>
-              <p class="contact-phone">Телефон: <a href="tel:{{ person.phone }}">{{ person.phone }}</a></p>
-              <p class="contact-email">E-mail: <a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p>Пока нет информации о сотрудниках.</p>
-    {% endif %}
+    <p>Наша команда всегда готова помочь вам с бронированием и ответить на все вопросы</p>
+  </header>
+
+  {% if contacts %}
+  <section aria-labelledby="contacts-heading">
+    <h2 id="contacts-heading" class="visually-hidden">Список контактов</h2>
+
+    {% for person in contacts %}
+    <article>
+      <header>
+        <h3>{{ person.name }}</h3>
+        <p>{{ person.position }}</p>
+      </header>
+
+      <figure>
+        <img src="{{ person.photo.url }}" alt="Фотография {{ person.name }}" width="200" height="200">
+        <figcaption> {{ person.name }}</figcaption>
+      </figure>
+
+      <address>
+        <p>Телефон: <a href="tel:{{ person.phone }}">{{ person.phone }}</a></p>
+        <p>Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+      </address>
+    </article>
+    {% endfor %}
   </section>
+  {% else %}
+  <section aria-labelledby="no-contacts-heading">
+    <h2 id="no-contacts-heading">Информация о сотрудниках</h2>
+    <p>Пока нет информации о сотрудниках.</p>
+  </section>
+  {% endif %}
+
+  <section aria-labelledby="hotel-info-heading">
+    <h2 id="hotel-info-heading">Информация об отеле</h2>
+
+    <address>
+      <p>Hotel Project</p>
+      <p>Адрес: г. Минск, ул. Примерная, д. 123</p>
+      <p>Телефон: <a href="tel:+375123456789">+375 (12) 345-67-89</a></p>
+      <p>Email: <a href="mailto:info@hotelproject.by">info@hotelproject.by</a></p>
+    </address>
+
+    <figure>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1178.347888394038!2d27.561716316223!3d53.902455980997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDU0JzA4LjkiTiAyN8KwMzMnNDIuMiJF!5e0!3m2!1sru!2sby!4v1642345678901!5m2!1sru!2sby"
+        width="600"
+        height="450"
+        allowfullscreen=""
+        loading="lazy"
+        title="Карта с расположением отеля Hotel Project">
+      </iframe>
+      <figcaption>Расположение нашего отеля на карте</figcaption>
+    </figure>
+  </section>
+
+</main>
 {% endblock %}

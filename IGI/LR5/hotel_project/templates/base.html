@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Hotel Project{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
 </head>
 
 <script>
@@ -14,7 +14,6 @@
 
 
 <body>
-    <!-- Header with navigation -->
     <header>
         <nav>
             <ul class="nav-menu">
@@ -31,6 +30,7 @@
                 <li><a href="{% url 'core:promotions' %}">Промокоды</a></li>
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'core:profile' %}">Профиль</a></li>
+                  <li><a href="{% url 'core:bookings' %}">Бронирования</a></li>
                   <li><a href="{% url 'account_logout' %}">Выйти</a></li>
                 {% else %}
                   <li><a href="{% url 'account_login' %}">Войти</a></li>

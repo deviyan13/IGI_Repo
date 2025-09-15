@@ -8,17 +8,21 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Sum, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .forms import ClientForm, BookingForm, ReviewForm
+from .forms import ClientForm, BookingForm, ReviewForm, PaymentForm
 from .models import CompanyInfo, NewsArticle, FAQuestion, EmployeeContact, Vacancy, PromoCode, Review, Category, \
-    Amenity, Room, Client, Booking
+    Amenity, Room, Client, Booking, Partner, CompanyHistory, CompanyRequisite
 
+import logging
+
+logger = logging.getLogger(__name__)  # логгер с именем 'core.views' и пр.
 
 # Create your views here.
 import requests
 
 def home_view(request):
+    logger.debug("Запущен home_view с GET-параметрами: %s", request.GET.dict())
 
-    FOURSQUARE_API_KEY = "fsq30d8PC89pkL4hAljxmMLwy50rypYy5erEfi3dieLC93M="
+    FOURSQUARE_API_KEY = "fsq3qSWP4CUMB02vPmWZeJW7MMcC1jfQ4BWh/fXKIcxNzH0="
 
     headers = {
         "accept": "application/json",
@@ -26,7 +30,7 @@ def home_view(request):
     }
 
     params = {
-        "ll": "53.911919,27.594950",  # Координаты общежития или отеля
+        "ll": "53.911919,27.594950",
         "radius": 1000,
         "limit": 15,
         "open_now": True,
@@ -53,8 +57,9 @@ def home_view(request):
                 "icon": icon,
                 "distance": distance
             })
+        logger.info("Успешно обрабатываем запрос + api")
     except Exception as e:
-        print(f"Foursquare API error: {e}")
+        logger.error(f"Foursquare API error: {e}")
         places = []
 
 
@@ -62,6 +67,8 @@ def home_view(request):
         'current_year': datetime.date.today().year,
         'news_article': NewsArticle.objects.latest('published_at'),
         'places': places,
+        'partners': Partner.objects.all(),
+        'featured_rooms': Room.objects.all()[:3]
     })
 
 import calendar
@@ -69,6 +76,9 @@ from zoneinfo import ZoneInfo
 
 def about_view(request):
     company_info = CompanyInfo.objects.order_by('-added_at').first()
+    history = CompanyHistory.objects.filter(company=company_info).order_by('-year') if company_info else []
+    requisites = CompanyRequisite.objects.filter(company=company_info).order_by('order') if company_info else []
+
 
     raw_tz = request.COOKIES.get('user_tz')
     if raw_tz:
@@ -80,11 +90,11 @@ def about_view(request):
     else:
         local_tz = ZoneInfo('UTC')
 
-    # Текущее время
+    # текущее время
     now_local = datetime.datetime.now(local_tz)
     now_utc = datetime.datetime.now(ZoneInfo('UTC'))
 
-    # Формат
+    # формат
     def fmt(dt):
         return dt.strftime('%d/%m/%Y %H:%M:%S')
 
@@ -102,7 +112,20 @@ def about_view(request):
         'month_calendar': month_calendar,
         'current_year': datetime.date.today().year,
         'company_info': company_info,
+        'history': history,
+        'requisites': requisites,
         'user_tz': local_tz.key,
+    })
+
+
+def news_detail(request, article_id):
+    article = get_object_or_404(NewsArticle, id=article_id)
+    related_articles = NewsArticle.objects.exclude(id=article_id).order_by('-published_at')[:3]
+
+    return render(request, 'core/news_detail.html', {
+        'article': article,
+        'related_articles': related_articles,
+        'current_year': datetime.date.today().year,
     })
 
 def news_list(request):
@@ -156,7 +179,10 @@ def add_review(request):
     else:
         form = ReviewForm()
 
-    return render(request, 'core/add_review.html', {'form': form})
+    return render(request, 'core/add_review.html', {
+        'form': form,
+        'current_year': datetime.date.today().year,
+    })
 
 def reviews_list(request):
     reviews = Review.objects.select_related('author').order_by('-created_at')
@@ -206,7 +232,7 @@ def room_catalog(request):
     else:
         rooms = rooms.none()
 
-    # Фильтрация только если QuerySet не пустой
+    #  только если qs не пустой
     if rooms.exists():
         category_id = request.GET.get('category')
         amenity_ids = request.GET.getlist('amenities')
@@ -274,6 +300,16 @@ def delete_booking(request, booking_id):
     return redirect('core:staff_dashboard')
 
 @login_required
+def delete_unpaid_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.method == 'POST':
+        booking.delete()
+        messages.success(request, 'Бронь успешно удалена.')
+        return redirect('core:bookings')
+
+    return redirect('core:bookings')
+
+@login_required
 def book_room(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     client, _ = Client.objects.get_or_create(user=request.user)
@@ -301,13 +337,70 @@ def book_room(request, room_id):
             days = (booking.check_out - booking.check_in).days
             booking.total_price = days * room.price_per_night
             booking.save()
-            return redirect('core:profile')
+            messages.success(request, 'Номер добавлен в ваши брони!')
+            return redirect('core:bookings')
 
     return render(request, 'core/booking.html', {
         'current_year': datetime.date.today().year,
         'client_form': client_form,
         'booking_form': booking_form,
         'room': room,
+    })
+
+@login_required
+def bookings_view(request):
+    try:
+        client = Client.objects.get(user=request.user)
+        unpaid_bookings = Booking.objects.filter(client=client, status='booked')
+        paid_bookings = Booking.objects.filter(client=client, status='paid')
+        total_unpaid_amount = sum(booking.total_price for booking in unpaid_bookings)
+        total_paid_amount = sum(booking.total_price for booking in paid_bookings)
+
+    except Client.DoesNotExist:
+        unpaid_bookings = []
+        paid_bookings = []
+        total_paid_amount = 0
+        total_unpaid_amount = 0
+
+    return render(request, 'core/bookings.html', {
+        'unpaid_bookings': unpaid_bookings,
+        'paid_bookings': paid_bookings,
+        'total_paid_amount': total_paid_amount,
+        'total_unpaid_amount': total_unpaid_amount,
+        'current_year': datetime.date.today().year,
+    })
+
+
+@login_required
+def payment_view(request):
+    try:
+        client = Client.objects.get(user=request.user)
+        bookings = Booking.objects.filter(client=client, status='booked')
+        total_amount = sum(booking.total_price for booking in bookings)
+
+        if request.method == 'POST':
+            for booking in bookings:
+                booking.status = 'paid'
+                booking.save()
+
+            messages.success(request, 'Оплата прошла успешно!')
+            return redirect('core:profile')
+
+    except Client.DoesNotExist:
+        bookings = []
+        total_amount = 0
+
+    initial_data = {
+        'email': request.user.email,
+        'phone': client.phone_number
+    }
+    form = PaymentForm(initial=initial_data)
+
+    return render(request, 'core/payment.html', {
+        'bookings': bookings,
+        'total_amount': total_amount,
+        'current_year': datetime.date.today().year,
+        'form': form
     })
 
 @login_required
@@ -324,7 +417,7 @@ def profile(request):
 
     cat_url = None
     try:
-        cat_resp = requests.get('https://api.thecatapi.com/v1/images/search', timeout=3)
+        cat_resp = requests.get('https://api.thecatapi.com/v1/images/search', timeout=10)
         cat_resp.raise_for_status()
         cat_data = cat_resp.json()
         if cat_data:
@@ -346,14 +439,19 @@ def profile(request):
             headers={'Content-Type': 'application/x-www-form-urlencoded'},
             timeout=3
         )
+
         quote_resp.raise_for_status()
         quote_json = quote_resp.json()
         quote_text = quote_json.get('quoteText')
+
+        if quote_text is not None: logger.info("Успешно получили ответ  api")
+
         author = quote_json.get('quoteAuthor')
         if author:
             quote_text = f'“{quote_text}”'
             quote_author = f'{'Котик ' +  author}'
     except Exception:
+        logger
         quote_text = None
 
 

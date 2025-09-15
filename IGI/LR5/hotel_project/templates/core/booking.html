@@ -7,7 +7,7 @@
     <h1>Бронирование номера {{ room.number }}</h1>
     <div class="room-details">
       {% if room.photo %}
-        <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" class="room-photo">
+        <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" class="room-photo" height="200">
       {% endif %}
       <p><strong>Категория:</strong> {{ room.category }}</p>
       <p><strong>Вместимость:</strong> {{ room.capacity }} чел.</p>

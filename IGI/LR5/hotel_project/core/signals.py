@@ -23,7 +23,6 @@ def create_client_profile(request, user, **kwargs):
                 'last_name': last,
                 'middle_name': '',
                 'phone_number': '',
-                'age': 18,
             }
         )
 

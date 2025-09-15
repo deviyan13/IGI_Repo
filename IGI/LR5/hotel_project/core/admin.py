@@ -8,10 +8,23 @@ from .models import *
 @admin.register(CompanyInfo)
 class CompanyInfoAdmin(admin.ModelAdmin):
     list_display = ('title', 'content')
+    readonly_fields = ('added_at',)
+
+@admin.register(CompanyHistory)
+class CompanyHistoryAdmin(admin.ModelAdmin):
+    list_display = ('year', 'event', 'company', 'order')
+    list_filter = ('company', 'year')
+    ordering = ('-year', 'order')
+
+@admin.register(CompanyRequisite)
+class CompanyRequisiteAdmin(admin.ModelAdmin):
+    list_display = ('name', 'value', 'company', 'order')
+    list_filter = ('company',)
+    ordering = ('order',)
 
 @admin.register(NewsArticle)
 class NewsArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'content', 'image')
+    list_display = ('title', 'content', 'image', 'brief_content')
 
 @admin.register(FAQuestion)
 class FAQuestionAdmin(admin.ModelAdmin):
@@ -47,8 +60,6 @@ class RoomAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     search_fields = ('number',)
 
-    # Показываем удобства отдельным «горизонтальным» виджетом,
-    # чтобы можно было быстро выбирать и убирать их
     filter_horizontal = ('amenities',)
 
 @admin.register(Client)
@@ -57,8 +68,12 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('client', 'room', 'check_in', 'check_out', 'guests_count', 'include_children', 'total_price')
+    list_display = ('client', 'room', 'status', 'check_in', 'check_out', 'guests_count', 'include_children', 'total_price')
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('booking', 'amount', 'paid_at')
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'logo', 'website')

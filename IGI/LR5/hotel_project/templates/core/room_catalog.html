@@ -10,6 +10,7 @@
     <form method="get" class="filter-form">
       <label>С:<input type="date" name="check_in" required value="{{ request.GET.check_in|default:default_check_in }}" ></label>
       <label>По:<input type="date" name="check_out" required value="{{ request.GET.check_out}}"></label>
+
       <select name="category">
         <option value="">Все категории</option>
         {% for cat in categories %}

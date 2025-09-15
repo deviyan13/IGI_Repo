@@ -1,30 +1,58 @@
 {% extends 'base.html' %}
 
 {% block title %}Отзывы — Hotel Project{% endblock %}
+{% block meta_description %}Отзывы наших гостей о качестве обслуживания и проживания в отеле. Оставьте свой отзыв и поделитесь впечатлениями.{% endblock %}
 
 {% block content %}
-  <section class="reviews-section">
-    <h1>Отзывы</h1>
+<main>
+  <header>
+    <h1>Отзывы наших гостей</h1>
+    <p>Мы ценим мнение каждого гостя и постоянно работаем над улучшением нашего сервиса</p>
+  </header>
 
-    {% if user.is_authenticated %}
-      <a href="{% url 'core:add_review' %}" class="btn">Добавить отзыв</a>
-    {% else %}
-      <p><a href="{% url 'account_login' %}">Войдите</a>, чтобы оставить отзыв.</p>
-    {% endif %}
-
-    {% if reviews %}
-      <div class="reviews-grid">
-        {% for rev in reviews %}
-          <div class="card">
-            <p class="review-author"><b>{{ rev.author.get_full_name|default:rev.author.username }}</b></p>
-            <p class="review-rating">Оценка: {{ rev.rating }}/5</p>
-            <p class="review-text">{{ rev.text }}</p>
-            <p class="review-date">Добавлен: {{ rev.created_at|date:"d.m.Y H:i" }}</p>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p>Пока нет отзывов.</p>
-    {% endif %}
+  {% if user.is_authenticated %}
+  <section aria-labelledby="add-review-heading">
+    <h2 id="add-review-heading">Оставить отзыв</h2>
+    <a href="{% url 'core:add_review' %}" role="button">Добавить отзыв</a>
   </section>
+  {% else %}
+  <section aria-labelledby="login-required-heading">
+    <h2 id="login-required-heading">Хотите оставить отзыв?</h2>
+    <p>Пожалуйста, <a href="{% url 'account_login' %}">войдите</a> или <a href="{% url 'account_signup' %}">зарегистрируйтесь</a>, чтобы поделиться своими впечатлениями.</p>
+  </section>
+  {% endif %}
+
+  {% if reviews %}
+  <section aria-labelledby="reviews-list-heading">
+    <h2 id="reviews-list-heading">Отзывы гостей</h2>
+
+    {% for review in reviews %}
+    <article>
+      <header>
+        <h3>{{ review.author.get_full_name|default:review.author.username }}</h3>
+        <p>
+          <time datetime="{{ review.created_at|date:'Y-m-d' }}">
+            {{ review.created_at|date:"d.m.Y" }}
+          </time>
+        </p>
+      </header>
+
+      <div>
+        <p>Оценка:
+          {% with ''|center:review.rating as range %}
+          {% for _ in range %}★{% endfor %}
+          {% endwith %}
+        </p>
+        <p>{{ review.text }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  {% else %}
+  <section aria-labelledby="no-reviews-heading">
+    <h2 id="no-reviews-heading">Отзывы</h2>
+    <p>Пока нет отзывов. Будьте первым, кто поделится впечатлениями!</p>
+  </section>
+  {% endif %}
+</main>
 {% endblock %}

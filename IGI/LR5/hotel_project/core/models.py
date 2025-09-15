@@ -6,20 +6,51 @@ from django.db import models
 from django.conf import settings
 
 
-# Create your models here.
 
 class CompanyInfo(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок')
     content = models.TextField(verbose_name='Описание гостиницы')
+    logo = models.ImageField(upload_to='company/', blank=True, null=True, verbose_name='Логотип компании')
+    video_url = models.URLField(blank=True, verbose_name='Ссылка на видео')
+    certificate_text = models.TextField(blank=True, verbose_name='Текст сертификата')
     added_at = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено')
 
     def __str__(self):
         return f'{self.title} ({self.added_at})'
 
+class CompanyHistory(models.Model):
+    company = models.ForeignKey(CompanyInfo, on_delete=models.CASCADE, related_name='history_items')
+    year = models.PositiveIntegerField(verbose_name='Год')
+    event = models.TextField(verbose_name='Событие')
+    order = models.PositiveIntegerField(default=0, verbose_name='Порядок отображения')
+
+    class Meta:
+        ordering = ['-year']
+        verbose_name = 'Историческое событие'
+        verbose_name_plural = 'Исторические события'
+
+    def __str__(self):
+        return f'{self.year}: {self.event[:50]}...'
+
+class CompanyRequisite(models.Model):
+    company = models.ForeignKey(CompanyInfo, on_delete=models.CASCADE, related_name='requisites')
+    name = models.CharField(max_length=200, verbose_name='Наименование реквизита')
+    value = models.TextField(verbose_name='Значение реквизита')
+    order = models.PositiveIntegerField(default=0, verbose_name='Порядок отображения')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Реквизит компании'
+        verbose_name_plural = 'Реквизиты компании'
+
+    def __str__(self):
+        return self.name
+
 
 class NewsArticle(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок')
-    content = models.TextField(max_length=250, verbose_name='Новость')
+    content = models.TextField(max_length=1500, verbose_name='Новость')
+    brief_content = models.TextField(max_length=100, verbose_name='Краткое содержание')
     image = models.ImageField(upload_to='media/news/', blank=True, default='media/news/default_news.png', verbose_name='Картинка')
     published_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
 
@@ -177,6 +208,16 @@ class Booking(models.Model):
         related_name='bookings',
         verbose_name='Номер'
     )
+    STATUS_CHOICES = [
+        ('booked', 'Забронировано'),
+        ('paid', 'Оплачено'),
+    ]
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='booked',
+        verbose_name='Статус брони'
+    )
     check_in = models.DateField(verbose_name='Дата заезда')
     check_out = models.DateField(verbose_name='Дата выезда')
     guests_count = models.IntegerField(verbose_name='Кол-во гостей')
@@ -187,28 +228,11 @@ class Booking(models.Model):
         verbose_name='Итоговая цена'
     )
 
+
     def __str__(self):
         return f"Бронь {self.id}: {self.client} — {self.room}"
 
-    def clean(self):
-        super().clean()
 
-        # Валидация вместимости
-        if self.guests_count > self.room.capacity:
-            raise ValidationError({
-                'guests_count': f'Максимальное количество гостей для этого номера: {self.room.capacity}.'
-            })
-
-        #  проверка на пересечение броней
-        conflicts = Booking.objects.filter(
-            room=self.room,
-            check_in__lt=self.check_out,
-            check_out__gt=self.check_in
-        )
-        if self.pk:
-            conflicts = conflicts.exclude(pk=self.pk)
-        if conflicts.exists():
-            raise ValidationError('В выбранном вами промежутке дат этот номер занят.')
 
 
 class Payment(models.Model):
@@ -227,3 +251,12 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Платёж за бронь {self.booking.id}: {self.amount}"
+
+#STRWEB 2025
+class Partner(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Название компании')
+    logo = models.ImageField(upload_to='media/partners/', verbose_name='Логотип')
+    website = models.URLField(verbose_name='Сайт компании')
+
+    def __str__(self):
+        return self.name
