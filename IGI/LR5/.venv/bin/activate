@@ -68,3 +68,8 @@ fi
 # Call hash to forget past commands. Without forgetting
 # past commands the $PATH changes we made may not be respected
 hash -r 2> /dev/null
+
+
+export WEATHER_API_KEY=368af48493mshe6a8ae1e2d24d1dp105987jsn1d649e153263
+WEATHER_API_HOST     = "weather-api167.p.rapidapi.com"
+WEATHER_API_ENDPOINT = "https://weather-api167.p.rapidapi.com/api/weather/forecast"
