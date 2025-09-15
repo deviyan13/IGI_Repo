@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить отзыв — Hotel Project{% endblock %}
+{% block meta_description %}Поделитесь своими впечатлениями о пребывании в нашем отеле. Ваше мнение поможет нам стать лучше.{% endblock %}
+
+{% block content %}
+<main>
+  <header>
+    <h1>Добавить отзыв</h1>
+    <p>Поделитесь своими впечатлениями о нашем отеле</p>
+  </header>
+
+  <section aria-labelledby="review-form-heading">
+    <h2 id="review-form-heading">Форма отзыва</h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <fieldset>
+        <legend>Ваша оценка и впечатления</legend>
+
+        <div>
+          <label for="rating">Оценка:</label>
+          <select id="rating" name="rating" required>
+            <option value="">Выберите оценку</option>
+            <option value="1">1 звезда</option>
+            <option value="2">2 звезды</option>
+            <option value="3">3 звезды</option>
+            <option value="4">4 звезды</option>
+            <option value="5">5 звезд</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="text">Текст отзыва:</label>
+          <textarea id="text" name="text" rows="5" required placeholder="Поделитесь своими впечатлениями..."></textarea>
+        </div>
+
+        <button type="submit">Отправить отзыв</button>
+      </fieldset>
+    </form>
+  </section>
+
+  <nav aria-label="Навигация по отзывам">
+    <ul>
+      <li><a href="{% url 'core:reviews' %}">Вернуться к списку отзывов</a></li>
+    </ul>
+  </nav>
+</main>
+{% endblock %}

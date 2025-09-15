@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Новости — Hotel Project{% endblock %}
+{% block meta_description %}Последние новости и события нашего отеля. Узнайте о акциях, мероприятиях и изменениях в работе отеля.{% endblock %}
+
+{% block content %}
+<main>
+  <header>
+    <h1>Новости отеля</h1>
+    <p>Будьте в курсе последних событий и мероприятий в нашем отеле</p>
+  </header>
+
+  <section aria-labelledby="news-list-heading">
+    <h2 id="news-list-heading">Список новостей</h2>
+
+    {% if news_articles %}
+      {% for article in news_articles %}
+      <article>
+        <header>
+          <h3>{{ article.title }}</h3>
+          <p>
+            <time datetime="{{ article.published_at|date:'Y-m-d' }}">
+              Опубликовано: {{ article.published_at|date:"d.m.Y" }}
+            </time>
+          </p>
+        </header>
+
+        {% if article.image %}
+        <figure>
+          <img src="{{ article.image.url }}" alt="{{ article.title }}">
+          <figcaption>Иллюстрация к новости: {{ article.title }}</figcaption>
+        </figure>
+        {% endif %}
+
+        <p>{{ article.brief_content }}</p>
+
+        <footer>
+          <a href="{% url 'core:news_detail' article.id %}">Читать далее</a>
+        </footer>
+      </article>
+      {% endfor %}
+    {% else %}
+      <section aria-labelledby="no-news-heading">
+        <h3 id="no-news-heading">Новостей пока нет</h3>
+        <p>Следите за обновлениями, скоро здесь появятся интересные новости о нашем отеле.</p>
+      </section>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

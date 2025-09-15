@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Бронирование номера {{ room.number }} — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="booking-section">
+    <h1>Бронирование номера {{ room.number }}</h1>
+    <div class="room-details">
+      {% if room.photo %}
+        <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" class="room-photo" height="200">
+      {% endif %}
+      <p><strong>Категория:</strong> {{ room.category }}</p>
+      <p><strong>Вместимость:</strong> {{ room.capacity }} чел.</p>
+      <p><strong>Цена за ночь:</strong> {{ room.price_per_night }} руб.</p>
+      <p><strong>Удобства:</strong> {% for am in room.amenities.all %}{{ am.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    </div>
+
+    <form method="post" class="booking-form">
+      {% csrf_token %}
+      <h2>Ваши данные</h2>
+      {{ client_form.as_p }}
+
+      <h2>Параметры брони</h2>
+      {{ booking_form.as_p }}
+
+      <button type="submit" class="btn">Забронировать</button>
+    </form>
+  </section>
+{% endblock %}

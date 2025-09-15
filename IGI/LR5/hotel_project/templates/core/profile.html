@@ -1,0 +1,61 @@
+<!-- templates/core/profile.html -->
+{% extends 'base.html' %}
+
+{% block title %}Профиль — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="profile-section">
+    <h1>Профиль пользователя</h1>
+
+    <!-- Вдохновляющий кот и цитата -->
+  <section class="profile-motivation">
+    {% if cat_url %}
+      <div class="cat-picture">
+        <img class="cat-picture-image" src="{{ cat_url }}" height="300" alt="Котик для настроения">
+        {% if quote_text %}
+        <div>
+          <blockquote class="motivation-quote">
+            {{ quote_text }}
+          </blockquote>
+          <a class="quote-author"> <b> © {{ quote_author }} </b></a>
+        </div>
+
+        {% endif %}
+
+
+      </div>
+    {% endif %}
+
+  </section>
+
+
+    <!-- Форма редактирования профиля -->
+    <div class="profile-form">
+      <h2>Ваши данные</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ client_form.as_p }}
+        <button type="submit" class="btn">Сохранить</button>
+      </form>
+    </div>
+
+    <!-- Список броней -->
+    <div class="profile-bookings">
+      <h2>Ваши бронирования</h2>
+      {% if bookings %}
+        <ul class="bookings-list">
+          {% for booking in bookings %}
+            <li>
+              <strong>Номер:</strong> {{ booking.room.number }}<br>
+              <strong>Период:</strong> {{ booking.check_in|date:"d.m.Y" }} — {{ booking.check_out|date:"d.m.Y" }}<br>
+              <strong>Гостей:</strong> {{ booking.guests_count }}{% if booking.include_children %}, включая ребёнка{% endif %}<br>
+              <strong>Итоговая цена:</strong> {{ booking.total_price }} руб.
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>У вас пока нет броней.</p>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

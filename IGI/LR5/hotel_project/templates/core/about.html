@@ -1,0 +1,169 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О компании — Hotel Project{% endblock %}
+{% block meta_description %}Узнайте больше о нашем отеле: история, реквизиты, сертификаты и многое другое.{% endblock %}
+
+{% block extra_head %}
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+<meta property="og:title" content="О компании — Hotel Project">
+<meta property="og:description" content="Узнайте больше о нашем отеле: история, реквизиты, сертификаты">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "name": "Hotel Project",
+  "description": "{{ company_info.content|truncatewords:20 }}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "Беларусь",
+    "addressLocality": "Минск"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main>
+  <header>
+    <h1>О нашей компании</h1>
+    <p>Добро пожаловать в наш отель! Мы стремимся предоставить лучший сервис для наших гостей.</p>
+  </header>
+
+  <article>
+    <h2>Основная информация</h2>
+    <figure>
+      {% if company_info.logo %}
+      <img src="{{ company_info.logo.url }}" alt="Логотип Hotel Project" width="300" height="200" loading="lazy">
+      <figcaption>Логотип нашего отеля</figcaption>
+      {% endif %}
+    </figure>
+    <p>{{ company_info.content }}</p>
+  </article>
+
+  <section aria-labelledby="video-heading">
+    <h2 id="video-heading">Видео о нашем отеле</h2>
+    {% if company_info.video_url %}
+    <iframe width="560" height="315" src="{{ company_info.video_url }}" title="Видео о нашем отеле" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% else %}
+    <p>Видео пока недоступно.</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="history-heading">
+    <h2 id="history-heading">История компании</h2>
+    <table class="history-table">
+      <caption>Ключевые события в истории нашего отеля</caption>
+      <thead>
+        <tr>
+          <th id="year" scope="col">Год</th>
+          <th id="event" scope="col">Событие</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+        <tr>
+          <td headers="year">{{ item.year }}</td>
+          <td headers="event">{{ item.event }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2">История пока не добавлена.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="requisites-heading">
+    <h2 id="requisites-heading">Реквизиты компании</h2>
+    <table class="requisites-table">
+      <caption>Юридические реквизиты</caption>
+      <thead>
+        <tr>
+          <th id="req-name" scope="col">Наименование</th>
+          <th id="req-value" scope="col">Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for requisite in requisites %}
+        <tr>
+          <td headers="req-name">{{ requisite.name }}</td>
+          <td headers="req-value">{{ requisite.value }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2">Реквизиты пока не добавлены.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="certificate-heading">
+    <h2 id="certificate-heading">Сертификат</h2>
+    <blockquote>
+      <p>{{ company_info.certificate_text }}</p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="poem-heading">
+    <h2 id="poem-heading">Наш девиз</h2>
+    <pre>
+Гостеприимство — наш принцип,
+Комфорт — наш стандарт.
+    </pre>
+  </section>
+
+  <nav aria-label="Дополнительная навигация">
+    <h2>Дополнительная информация</h2>
+    <ul>
+      <li><a href="{% url 'core:privacy' %}">Политика конфиденциальности</a></li>
+      <li><a href="{% url 'core:jobs' %}">Вакансии</a></li>
+      <li><a href="{% url 'core:reviews' %}">Отзывы</a></li>
+    </ul>
+  </nav>
+</main>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Сертификат о членстве в РТА</title>
+</head>
+<body>
+    <article>
+        <header>
+            <h1>СЕРТИФИКАТ О ЧЛЕНСТВЕ В РТА (РЕЕСТР ТУРИСТИЧЕСКИХ АГЕНТСТВ) АССОЦИАЦИИ ТУРПОМОЩЬ</h1>
+        </header>
+
+        <section>
+            <h2>ЕДИНЫЙ РЕЕСТР ТУРАГЕНТОВ</h2>
+            <h3>СВИДЕТЕЛЬСТВО<br>о внесении сведений</h3>
+
+            <p><time datetime="2017-01-17">г. Москва<br>17 января 2017</time></p>
+
+            <address>
+                Общество с ограниченной ответственностью «Тревел Технологии»<br>
+                (ИНН 7731340252)<br>
+                Реестровый номер: 8241
+            </address>
+        </section>
+
+        <section>
+            <p>Осауденко А.П.<br>Директор Ассоциации "ТУРПОМОЩЬ"</p>
+        </section>
+
+        <footer>
+            <address>
+                Ассоциация "Объединение туроператоров в сфере выездного туризма "ТУРПОМОЩЬ"<br>
+                101000, г. Москва, ул. Мясницкая, дом 47<br>
+                Тел. <a href="tel:+74996781203">+7 (499) 678-12-03</a><br>
+                e-mail: <a href="mailto:office@tourponr.ru">office@tourponr.ru</a>
+            </address>
+        </footer>
+    </article>
+</body>
+
+{% endblock %}

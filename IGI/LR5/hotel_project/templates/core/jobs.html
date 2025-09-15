@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Вакансии — Hotel Project{% endblock %}
+{% block meta_description %}Актуальные вакансии в нашем отеле. Присоединяйтесь к команде Hotel Project и начните карьеру в гостиничном бизнесе.{% endblock %}
+
+{% block content %}
+<main>
+  <header>
+    <h1>Вакансии в нашем отеле</h1>
+    <p>Присоединяйтесь к нашей команде профессионалов в сфере гостеприимства</p>
+  </header>
+
+  {% if vacancies %}
+  <section aria-labelledby="vacancies-list-heading">
+    <h2 id="vacancies-list-heading" class="visually-hidden">Список вакансий</h2>
+
+    {% for vac in vacancies %}
+    <article>
+      <header>
+        <h2>{{ vac.title }}</h2>
+        <p>
+          <time datetime="{{ vac.posted_at|date:'Y-m-d' }}">
+            Размещено: {{ vac.posted_at|date:"d.m.Y" }}
+          </time>
+        </p>
+      </header>
+
+      <div>
+        {{ vac.description|linebreaks }}
+      </div>
+
+    </article>
+    {% endfor %}
+  </section>
+  {% else %}
+  <section aria-labelledby="no-vacancies-heading">
+    <h2 id="no-vacancies-heading">Актуальные вакансии</h2>
+    <p>В настоящее время у нас нет открытых вакансий.</p>
+    <p>Следите за обновлениями на этой странице или отправьте своё резюме на <a href="mailto:hr@hotelproject.by">hr@hotelproject.by</a></p>
+  </section>
+  {% endif %}
+</main>
+{% endblock %}

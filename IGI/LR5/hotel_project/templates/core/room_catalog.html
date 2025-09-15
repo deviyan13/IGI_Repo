@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Каталог номеров — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="room-catalog">
+    <h1>Каталог номеров</h1>
+
+    <!-- Фильтр -->
+    <form method="get" class="filter-form">
+      <label>С:<input type="date" name="check_in" required value="{{ request.GET.check_in|default:default_check_in }}" ></label>
+      <label>По:<input type="date" name="check_out" required value="{{ request.GET.check_out}}"></label>
+
+      <select name="category">
+        <option value="">Все категории</option>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}" {% if selected_filters.category == cat.id %}selected{% endif %}>{{ cat }}</option>
+        {% endfor %}
+      </select>
+
+       <!-- Сортировка -->
+      <label>Сортировать:
+        <select name="sort">
+          <option value="">без сортировки</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>
+            Цена: по возрастанию
+          </option>
+          <option value="price_desc" {% if ort == 'price_desc' %}selected{% endif %}>
+            Цена: по убыванию
+          </option>
+          <option value="popularity" {% if sort == 'popularity' %}selected{% endif %}>
+            Популярность
+          </option>
+        </select>
+      </label>
+
+      <fieldset class="amenities-filter">
+        <legend>Удобства</legend>
+        {% for am in amenities %}
+          <label>
+            <input type="checkbox" name="amenities" value="{{ am.id }}"
+              {% if am.id in selected_amenities %}checked{% endif %}>
+            {{ am.name }}
+          </label>
+        {% endfor %}
+      </fieldset>
+      <input type="number" name="min_price" placeholder="Мин. цена" value="{{ request.GET.min_price }}">
+      <input type="number" name="max_price" placeholder="Макс. цена" value="{{ request.GET.max_price }}">
+      <button type="submit">Применить</button>
+    </form>
+
+    <!-- Сетка номеров -->
+    {% if rooms %}
+      <div class="rooms-grid">
+        {% for room in rooms %}
+          <div class="card">
+            {% if room.photo %}
+              <img src="{{ room.photo.url }}" alt="Номер {{ room.number }}" class="room-photo" height="250">
+            {% endif %}
+            <h2>Номер {{ room.number }}</h2>
+            <p><strong>Категория:</strong> {{ room.category }}</p>
+            <p><strong>Вместимость:</strong> {{ room.capacity }} чел.</p>
+            <p><strong>Цена за ночь:</strong> {{ room.price_per_night }} руб.</p>
+            <p><strong>Удобства:</strong> {% for am in room.amenities.all %}{{ am.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <a href="{% url 'core:book_room' room.id %}?check_in={{ request.GET.check_in }}&check_out={{ request.GET.check_out }}" class="btn">Забронировать</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% elif request.GET.check_out <= request.GET.check_in %}
+      <p>Дата выезда должна быть после даты заезда.</p>
+    {% else %}
+      <p>Ничего не найдено по заданным фильтрам.</p>
+    {% endif %}
+
+    <!-- Промокоды -->
+    <section class="promo-codes">
+      <h2>Действующие промокоды</h2>
+      <ul>
+        {% for promo in promo_codes %}
+          {% if promo.is_active %}
+            <li>{{ promo.code }} — {{ promo.discount_percent }}% (до {{ promo.valid_to|date:"d.m.Y" }})</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+
+  </section>
+{% endblock %}

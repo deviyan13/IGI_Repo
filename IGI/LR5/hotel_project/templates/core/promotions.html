@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Промокоды — Hotel Project{% endblock %}
+
+{% block content %}
+  <section>
+    <h1>Промокоды и купоны</h1>
+    {% if promo_codes %}
+      <table>
+        <thead>
+          <tr>
+            <th>Код</th>
+            <th>Скидка</th>
+            <th>Период действия</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for promo in promo_codes %}
+            <tr>
+              <td>{{ promo.code }}</td>
+              <td>{{ promo.discount_percent }}%</td>
+              <td>{{ promo.valid_from|date:"d.m.Y" }} – {{ promo.valid_to|date:"d.m.Y" }}</td>
+              <td>{{ promo.is_active|yesno:"Активен,Архив" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Промокодов пока нет.</p>
+    {% endif %}
+  </section>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Панель сотрудника — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="staff-dashboard">
+    <h1>Панель сотрудника</h1>
+    <h2>Активные брони</h2>
+    <table class="staff-table">
+      <thead>
+        <tr>
+          <th>Номер</th>
+          <th>Клиент</th>
+          <th>С</th>
+          <th>По</th>
+          <th>Гостей</th>
+          <th>Цена</th>
+          <th>С детьми</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.room.number }}</td>
+            <td>{{ booking.client }}</td>
+            <td>{{ booking.check_in|date:"d.m.Y" }}</td>
+            <td>{{ booking.check_out|date:"d.m.Y" }}</td>
+            <td>{{ booking.guests_count }}</td>
+            <td>{{ booking.total_price }}</td>
+            <td>{{ booking.include_children|yesno:"Да,Нет" }}</td>
+            <td>
+              <div class="actions-row" style="display:flex; gap:8px;">
+                <form method="post" action="{% url 'core:delete_booking' booking.id %}" class="delete-form">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-action" onclick="return confirmDelete(event)">Отменить</button>
+                </form>
+                <form class="delete-form">
+                  <a href="{% url 'core:edit_booking' booking.id %}" class="btn-action">Изменить</a>
+                </form>
+
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Все клиенты</h2>
+    <ul class="clients-list">
+      {% for client in clients %}
+        <li>{{ client }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <script>
+    function confirmDelete(event) {
+      if (!confirm('Вы уверены, что хотите отменить бронирование?\nЭто действие нельзя будет отменить!')) {
+        event.preventDefault();
+        return false;
+      }
+      return true;
+    }
+  </script>
+{% endblock %}
+{% extends 'base.html' %}
+
+{% block title %}Панель сотрудника — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="staff-dashboard">
+    <h1>Панель сотрудника</h1>
+    <h2>Активные брони</h2>
+    <table class="staff-table">
+      <thead>
+        <tr>
+          <th>Номер</th>
+          <th>Клиент</th>
+          <th>С</th>
+          <th>По</th>
+          <th>Гостей</th>
+          <th>Цена</th>
+          <th>С детьми</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+          <tr>
+            <td>{{ booking.room.number }}</td>
+            <td>{{ booking.client }}</td>
+            <td>{{ booking.check_in|date:"d.m.Y" }}</td>
+            <td>{{ booking.check_out|date:"d.m.Y" }}</td>
+            <td>{{ booking.guests_count }}</td>
+            <td>{{ booking.total_price }}</td>
+            <td>{{ booking.include_children|yesno:"Да,Нет" }}</td>
+            <td>
+              <div class="actions-row" style="display:flex; gap:8px;">
+                <form method="post" action="{% url 'core:delete_booking' booking.id %}" class="delete-form">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-action" onclick="return confirmDelete(event)">Отменить</button>
+                </form>
+                <form class="delete-form">
+                  <a href="{% url 'core:edit_booking' booking.id %}" class="btn-action">Изменить</a>
+                </form>
+
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Все клиенты</h2>
+    <ul class="clients-list">
+      {% for client in clients %}
+        <li>{{ client }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <script>
+    function confirmDelete(event) {
+      if (!confirm('Вы уверены, что хотите отменить бронирование?\nЭто действие нельзя будет отменить!')) {
+        event.preventDefault();
+        return false;
+      }
+      return true;
+    }
+  </script>
+{% endblock %}

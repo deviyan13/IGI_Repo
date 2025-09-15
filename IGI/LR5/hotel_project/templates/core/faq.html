@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Словарь терминов и часто задаваемые вопросы — Hotel Project{% endblock %}
+{% block meta_description %}Пояснение терминов и ответы на часто задаваемые вопросы о нашем отеле, бронировании и услугах.{% endblock %}
+
+{% block content %}
+<main>
+  <header>
+    <h1>Словарь терминов и часто задаваемые вопросы</h1>
+    <p>Здесь вы найдете объяснение терминов, используемых в нашем отеле, и ответы на часто задаваемые вопросы.</p>
+  </header>
+
+  <section aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Часто задаваемые вопросы</h2>
+
+    {% if faqs %}
+    <dl>
+      {% for faq in faqs %}
+      <details>
+        <summary id="faq-{{ faq.id }}">
+          <h3>{{ faq.question }}</h3>
+          <p>
+            <time datetime="{{ faq.added_at|date:'Y-m-d' }}">
+              Добавлено: {{ faq.added_at|date:"d.m.Y" }}
+            </time>
+          </p>
+        </summary>
+        <div aria-labelledby="faq-{{ faq.id }}">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </details>
+      {% endfor %}
+    </dl>
+    {% else %}
+    <p>Вопросы пока не добавлены.</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="terms-heading">
+    <h2 id="terms-heading">Словарь терминов</h2>
+
+    <p>В нашем отеле мы используем следующие термины:</p>
+
+    <dl>
+      <details>
+        <summary id="term-checkin">Заезд (Check-in)</summary>
+        <div aria-labelledby="term-checkin">
+          <p>Процедура регистрации при прибытии в отель, обычно после 14:00.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary id="term-checkout">Выезд (Check-out)</summary>
+        <div aria-labelledby="term-checkout">
+          <p>Процедура освобождения номера при отъезде, обычно до 12:00.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary id="term-amenities">Удобства (Amenities)</summary>
+        <div aria-labelledby="term-amenities">
+          <p>Дополнительные услуги и оборудование, предоставляемые гостям.</p>
+        </div>
+      </details>
+    </dl>
+  </section>
+
+  <section aria-labelledby="how-to-use-heading">
+    <h2 id="how-to-use-heading">Как пользоваться этой страницей</h2>
+    <p>Нажмите на любой вопрос или термин, чтобы увидеть развернутый ответ или определение.</p>
+  </section>
+
+  <nav aria-label="Дополнительная навигация">
+    <h2>Дополнительная информация</h2>
+    <ul>
+      <li><a href="{% url 'core:contacts' %}">Свяжитесь с нами</a>, если не нашли ответ на свой вопрос</li>
+      <li><a href="{% url 'core:about' %}">Подробнее об отеле</a></li>
+      <li><a href="{% url 'core:privacy' %}">Политика конфиденциальности</a></li>
+    </ul>
+  </nav>
+</main>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} — Hotel Project{% endblock %}
+{% block meta_description %}{{ article.content|truncatewords:20 }}{% endblock %}
+
+{% block content %}
+<main>
+  <article>
+    <header>
+      <h1>{{ article.title }}</h1>
+      <p>
+        <time datetime="{{ article.published_at|date:'Y-m-d' }}">
+          Опубликовано: {{ article.published_at|date:"d.m.Y" }}
+        </time>
+      </p>
+    </header>
+
+    {% if article.image %}
+    <figure>
+      <img src="{{ article.image.url }}" alt="{{ article.title }}">
+      <figcaption>Иллюстрация к новости: {{ article.title }}</figcaption>
+    </figure>
+    {% endif %}
+
+    <div>
+      {{ article.content|linebreaks }}
+    </div>
+
+    <footer>
+      <nav aria-label="Навигация по новостям">
+        <ul>
+          <li><a href="{% url 'core:news' %}">← Вернуться к списку новостей</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </article>
+
+  <aside aria-labelledby="related-news-heading">
+    <h2 id="related-news-heading">Другие новости</h2>
+    <ul>
+      {% for related_article in related_articles %}
+      <li>
+        <a href="{% url 'core:news_detail' related_article.id %}">
+          {{ related_article.title }}
+        </a>
+        - <time datetime="{{ related_article.published_at|date:'Y-m-d' }}">
+          {{ related_article.published_at|date:"d.m.Y" }}
+        </time>
+      </li>
+      {% empty %}
+      <li>Других новостей пока нет</li>
+      {% endfor %}
+    </ul>
+  </aside>
+</main>
+{% endblock %}
