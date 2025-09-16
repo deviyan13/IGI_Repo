@@ -3,13 +3,23 @@
 {% block title %}Редактирование брони №{{ booking.id }}{% endblock %}
 
 {% block content %}
-  <h1>Редактирование брони №{{ booking.id }}</h1>
-  <h2>Номер {{ room.number }} ({{ room.category }})</h2>
+<main itemscope itemtype="https://schema.org/LodgingReservation">
+  <header>
+    <h1>Редактирование брони <span itemprop="reservationNumber">№{{ booking.id }}</span></h1>
+    <h2>
+      Номер
+      <span itemprop="reservationFor" itemscope itemtype="https://schema.org/Room">
+        <span itemprop="name">{{ room.number }}</span>
+        (<span itemprop="description">{{ room.category }}</span>)
+      </span>
+    </h2>
+  </header>
 
-  <form method="post">
+  <form method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/UpdateAction">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn">Сохранить изменения</button>
-    <a href="{% url 'core:staff_dashboard' %}" class="btn-secondary">Отмена</a>
+    <button type="submit" class="btn" itemprop="target">Сохранить изменения</button>
+    <a href="{% url 'core:staff_dashboard' %}" class="btn-secondary" rel="noopener noreferrer">Отмена</a>
   </form>
+</main>
 {% endblock %}

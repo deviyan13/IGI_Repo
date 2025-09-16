@@ -2,8 +2,8 @@
 {% block title %}Оплата — Hotel Project{% endblock %}
 
 {% block content %}
-<section class="payment-section">
-    <h1>Оплата бронирования</h1>
+<section class="payment-section" itemscope itemtype="https://schema.org/Order">
+    <h1 itemprop="name">Оплата бронирования</h1>
 
     {% if bookings %}
     <div class="order-summary">
@@ -18,23 +18,32 @@
             </thead>
             <tbody>
                 {% for booking in bookings %}
-                <tr>
-                    <td>{{ booking.room.number }}</td>
-                    <td>{{ booking.check_in|date:"d.m.Y" }} - {{ booking.check_out|date:"d.m.Y" }}</td>
-                    <td>{{ booking.total_price }} руб.</td>
+                <tr itemprop="orderedItem" itemscope itemtype="https://schema.org/HotelRoom">
+                    <td itemprop="name">{{ booking.room.number }}</td>
+                    <td>
+                        <time datetime="{{ booking.check_in|date:'Y-m-d' }}" itemprop="checkinTime">{{ booking.check_in|date:"d.m.Y" }}</time> -
+                        <time datetime="{{ booking.check_out|date:'Y-m-d' }}" itemprop="checkoutTime">{{ booking.check_out|date:"d.m.Y" }}</time>
+                    </td>
+                    <td itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+                        <span itemprop="price">{{ booking.total_price }}</span> руб.
+                        <meta itemprop="priceCurrency" content="RUB">
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="2">Общая сумма:</td>
-                    <td>{{ total_amount }} руб.</td>
+                    <td itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+                        <span itemprop="price">{{ total_amount }}</span> руб.
+                        <meta itemprop="priceCurrency" content="RUB">
+                    </td>
                 </tr>
             </tfoot>
         </table>
     </div>
 
-    <form method="post" class="payment-form">
+    <form method="post" class="payment-form" itemprop="potentialAction" itemscope itemtype="https://schema.org/PayAction">
         {% csrf_token %}
 
         {% if form.errors %}
@@ -56,7 +65,7 @@
         <h2>Данные для оплаты</h2>
         {{ form.as_p }}
 
-        <button type="submit" class="btn">Подтвердить оплату</button>
+        <button type="submit" class="btn" itemprop="target">Подтвердить оплату</button>
     </form>
 
     {% else %}

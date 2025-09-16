@@ -3,49 +3,47 @@
 {% block title %}Статистика — Hotel Project{% endblock %}
 
 {% block content %}
-<section class="statistics">
-  <h1>Статистика сайта</h1>
+<section class="statistics" itemscope itemtype="https://schema.org/Dataset">
+  <h1 itemprop="name">Статистика сайта</h1>
 
   <h2>Клиенты ({{ client_count }})</h2>
   <ul>
     {% for client in clients %}
-      <li>{{ client.last_name }} {{ client.first_name }}</li>
+      <li itemprop="recordedBy" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="familyName">{{ client.last_name }}</span> <span itemprop="givenName">{{ client.first_name }}</span>
+      </li>
     {% endfor %}
   </ul>
 
   <h2>Продажи</h2>
-  <p>Общая сумма: <strong>{{ total_sales }} ₽</strong></p>
-  <p>Средняя сумма брони: {{ avg_sale }} ₽</p>
-  <p>Медиана суммы брони: {{ med_sale }} ₽</p>
-  <p>Мода суммы брони: {{ mode_sale|default:'—' }} ₽</p>
+  <p>Общая сумма: <strong itemprop="value">{{ total_sales }}</strong> ₽</p>
+  <p>Средняя сумма брони: <span itemprop="variableMeasured">{{ avg_sale }}</span> ₽</p>
+  <p>Медиана суммы брони: <span itemprop="variableMeasured">{{ med_sale }}</span> ₽</p>
+  <p>Мода суммы брони: <span itemprop="variableMeasured">{{ mode_sale|default:'—' }}</span> ₽</p>
 
   <h2>Возраст клиентов</h2>
-  <p>Средний возраст: {{ avg_age }} лет</p>
-  <p>Медианный возраст: {{ med_age }} лет</p>
+  <p>Средний возраст: <span itemprop="variableMeasured">{{ avg_age }}</span> лет</p>
+  <p>Медианный возраст: <span itemprop="variableMeasured">{{ med_age }}</span> лет</p>
 
   <h2>Популярность категорий</h2>
-  <p>Самая популярная категория: {{ popular_category }}</p>
+  <p>Самая популярная категория: <span itemprop="variableMeasured">{{ popular_category }}</span></p>
 
   <h2>Прибыль по категориям</h2>
-  <p>Категория с наибольшей прибылью: {{ top_profit_category }}</p>
+  <p>Категория с наибольшей прибылью: <span itemprop="variableMeasured">{{ top_profit_category }}</span></p>
 
   <hr>
   <h2>Графики</h2>
-  <div>
+  <div itemprop="distribution" itemscope itemtype="https://schema.org/DataDownload">
     <h3>Распределение сумм брони</h3>
-    <img src="{{ hist_url }}" alt="Гистограмма продаж">
+    <img src="{{ hist_url }}" alt="Гистограмма продаж" itemprop="contentUrl">
   </div>
-  <div>
+  <div itemprop="distribution" itemscope itemtype="https://schema.org/DataDownload">
     <h3>Популярность категорий</h3>
-    <img src="{{ pop_url }}" alt="Популярность категорий">
+    <img src="{{ pop_url }}" alt="Популярность категорий" itemprop="contentUrl">
   </div>
-  <div>
+  <div itemprop="distribution" itemscope itemtype="https://schema.org/DataDownload">
     <h3>Прибыль по категориям</h3>
-    <img src="{{ profit_url }}" alt="Прибыль по категориям">
+    <img src="{{ profit_url }}" alt="Прибыль по категориям" itemprop="contentUrl">
   </div>
 </section>
 {% endblock %}
-
-
-
-

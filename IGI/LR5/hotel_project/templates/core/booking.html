@@ -3,20 +3,37 @@
 {% block title %}Бронирование номера {{ room.number }} — Hotel Project{% endblock %}
 
 {% block content %}
-  <section class="booking-section">
-    <h1>Бронирование номера {{ room.number }}</h1>
-    <div class="room-details">
+  <section class="booking-section" itemscope itemtype="https://schema.org/Offer">
+    <h1 itemprop="name">Бронирование номера {{ room.number }}</h1>
+
+    <div class="room-details" itemprop="itemOffered" itemscope itemtype="https://schema.org/Room">
       {% if room.photo %}
-        <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" class="room-photo" height="200">
+        <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" class="room-photo" height="200" itemprop="photo">
       {% endif %}
-      <p><strong>Категория:</strong> {{ room.category }}</p>
-      <p><strong>Вместимость:</strong> {{ room.capacity }} чел.</p>
-      <p><strong>Цена за ночь:</strong> {{ room.price_per_night }} руб.</p>
-      <p><strong>Удобства:</strong> {% for am in room.amenities.all %}{{ am.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+      <p><strong>Категория:</strong> <span itemprop="category">{{ room.category }}</span></p>
+      <p><strong>Вместимость:</strong>
+        <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
+          <span itemprop="maxValue">{{ room.capacity }}</span> чел.
+        </span>
+      </p>
+      <p><strong>Цена за ночь:</strong>
+        <span itemprop="price">{{ room.price_per_night }}</span>
+        <meta itemprop="priceCurrency" content="BYN"> руб.
+      </p>
+      <p><strong>Удобства:</strong>
+        <span itemprop="amenityFeature" itemscope itemtype="https://schema.org/LocationFeatureSpecification">
+          {% for am in room.amenities.all %}
+            <span itemprop="name">{{ am.name }}</span>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </span>
+      </p>
     </div>
 
-    <form method="post" class="booking-form">
+    <form method="post" class="booking-form" itemprop="potentialAction" itemscope itemtype="https://schema.org/ReserveAction">
       {% csrf_token %}
+      <meta itemprop="target" content="{{ request.build_absolute_uri }}">
+
       <h2>Ваши данные</h2>
       {{ client_form.as_p }}
 

@@ -1,64 +1,85 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Главная — Hotel Project{% endblock %}
 {% block description %}Лучший отель в городе. Забронируйте номер онлайн по выгодной цене.{% endblock %}
 
 {% block content %}
-<main>
+<main itemscope itemtype="https://schema.org/Hotel">
+    <meta itemprop="name" content="Hotel Project">
+    <meta itemprop="address" content="г. Минск, ул. Примерная, д. 123">
+    <meta itemprop="telephone" content="+375123456789">
 
-    <img src="{% static 'hotel_logo.jpg'%}" alt="Логотип гостиницы" width="300" height="300">
+    <img src="{% static 'hotel_logo.jpg'%}" alt="Логотип гостиницы" width="300" height="300" itemprop="logo">
 
-    <section aria-labelledby="main-banner-heading">
+    <section aria-labelledby="main-banner-heading" itemprop="description">
         <h1 id="main-banner-heading" class="visually-hidden">Специальные предложения</h1>
-        <figure>
-            <img src="{% static 'banner1.jpg' %}" alt="Скидка 20% на бронирование номера Люкс" width="1200" height="400">
-            <figcaption>
+        <figure itemscope itemtype="https://schema.org/Offer">
+            <img src="{% static 'banner1.jpg' %}" alt="Скидка 20% на бронирование номера Люкс" width="1200" height="400" itemprop="image">
+            <figcaption itemprop="description">
                 <b>Скидка 20% на бронирование номера Люкс.</b>
                 Ограниченное предложение. Только сегодня, только сейчас!!!
             </figcaption>
+            <meta itemprop="priceCurrency" content="BYN">
         </figure>
     </section>
 
-    <!-- Секция каталога номеров -->
-    <section aria-labelledby="featured-rooms-heading">
+    <!-- секция каталога номеров -->
+    <section aria-labelledby="featured-rooms-heading" itemprop="makesOffer" itemscope itemtype="https://schema.org/OfferCatalog">
         <h2 id="featured-rooms-heading">Наши номера</h2>
         <div class="rooms-grid">
             {% for room in featured_rooms %}
-            <article>
-                <h3><a href="{% url 'core:book_room' room.id %}">{{ room.number }} ({{ room.category }})</a></h3>
+            <article itemscope itemtype="https://schema.org/Offer" itemprop="itemListElement">
+                <h3>
+                  <a href="{% url 'core:book_room' room.id %}" itemprop="url">
+                    <span itemprop="name">Номер {{ room.number }} ({{ room.category }})</span>
+                  </a>
+                </h3>
                 {% if room.photo %}
-                <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" width="300" height="200" loading="lazy">
+                <img src="{{ room.photo.url }}" alt="Фото номера {{ room.number }}" width="300" height="200" loading="lazy" itemprop="image">
                 {% endif %}
-                <p>Цена за ночь: <strong>{{ room.price_per_night }} руб.</strong></p>
+                <p>Цена за ночь: 
+                  <strong>
+                    <span itemprop="price">{{ room.price_per_night }}</span> руб.
+                    <meta itemprop="priceCurrency" content="BYN">
+                  </strong>
+                </p>
+                <p itemprop="description">Категория: {{ room.category }}, Вместимость: {{ room.capacity }} чел.</p>
+                <meta itemprop="availability" content="https://schema.org/InStock">
                 <a href="{% url 'core:book_room' room.id %}" class="button">Подробнее</a>
             </article>
             {% endfor %}
         </div>
     </section>
 
-    <!-- Секция с последней новостью (уже есть) -->
+    <!-- Секция с последней новостью -->
     <section aria-labelledby="latest-news-heading">
         <h2 id="latest-news-heading">Последняя новость</h2>
-        <article>
-            <h3>{{ news_article.title }}</h3>
+        <article itemscope itemtype="https://schema.org/NewsArticle">
+            <h3 itemprop="headline">{{ news_article.title }}</h3>
             {% if news_article.image %}
-            <img src="{{ news_article.image.url }}" alt="{{ news_article.title }}" width="400" height="266" loading="lazy">
+            <img src="{{ news_article.image.url }}" alt="{{ news_article.title }}" width="400" height="266" loading="lazy" itemprop="image">
             {% endif %}
-            <p>{{ news_article.content }}</p>
-            <p><time datetime="{{ news_article.published_at|date:'Y-m-d' }}">Опубликовано: {{ news_article.published_at|date:"d.m.Y" }}</time></p>
-            <a href="{% url 'core:news' %}">Все новости</a>
+            <div itemprop="articleBody">
+              <p>{{ news_article.content }}</p>
+            </div>
+            <p>
+              <time datetime="{{ news_article.published_at|date:'Y-m-d' }}" itemprop="datePublished">
+                Опубликовано: {{ news_article.published_at|date:"d.m.Y" }}
+              </time>
+            </p>
+            <a href="{% url 'core:news' %}" itemprop="mainEntityOfPage">Все новости</a>
         </article>
     </section>
 
-    <!-- Секция партнеров (новый блок) -->
-    <section aria-labelledby="partners-heading">
+    <!-- Секция партнеров -->
+    <section aria-labelledby="partners-heading" itemscope itemtype="https://schema.org/Organization" itemprop="brand">
         <h2 id="partners-heading">Наши партнеры</h2>
         <ul>
             {% for partner in partners %}
-            <li>
-                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
-                    <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" width="150" height="150" loading="lazy">
+            <li itemprop="subOrganization" itemscope itemtype="https://schema.org/Organization">
+                <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer" itemprop="url">
+                    <img src="{{ partner.logo.url }}" alt="Логотип {{ partner.name }}" width="150" height="150" loading="lazy" itemprop="logo">
+                    <meta itemprop="name" content="{{ partner.name }}">
                 </a>
             </li>
             {% endfor %}

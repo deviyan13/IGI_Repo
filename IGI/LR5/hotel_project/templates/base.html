@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}Hotel Project{% endblock %}</title>
-<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
+    <meta name="description" content="{% block meta_description %}Лучший отель в городе. Забронируйте номер онлайн по выгодной цене.{% endblock %}">
+    <meta name="keywords" content="отель, бронирование, гостиница, номера, Минск, отдых">
+    <meta name="author" content="Dzianis Anufryieu">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block title %}Hotel Project{% endblock %}">
+    <meta property="og:description" content="{% block meta_description %}Лучший отель в городе. Забронируйте номер онлайн по выгодной цене.{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'images/og-image.jpg' %}">
+
+    <!-- JSON-LD Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Hotel",
+      "name": "{{ company_info.name|default:'Hotel Project'|escapejs }}",
+      "description": "{{ company_info.content|truncatewords:30|escapejs }}",
+      "telephone": "{{ company_info.phone|default:'+375123456789'|escapejs }}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ company_info.address.street|default:'ул. Примерная, д. 123'|escapejs }}",
+        "addressLocality": "{{ company_info.address.city|default:'Минск'|escapejs }}",
+        "addressCountry": "BY"
+      }
+    }
+    </script>
 </head>
 
 <script>
@@ -12,14 +39,12 @@
   document.cookie = `user_tz=${encodeURIComponent(tz)};path=/`;
 </script>
 
-
 <body>
     <header>
         <nav>
             <ul class="nav-menu">
                 <li><a href="{% url 'core:home' %}">Главная</a></li>
                 <li><a href="{% url 'core:room_catalog' %}">Наши номера</a></li>
-
                 <li><a href="{% url 'core:about' %}">О гостинице</a></li>
                 <li><a href="{% url 'core:news' %}">Новости</a></li>
                 <li><a href="{% url 'core:faq' %}">FAQ</a></li>
@@ -38,11 +63,8 @@
                 {% endif %}
                 {% if user.is_authenticated and user.is_staff %}
                   <li><a href="{% url 'core:staff_dashboard' %}">Панель сотрудника</a></li>
-                {% endif %}
-                {% if user.is_authenticated and user.is_staff %}
                   <li><a href="{% url 'core:statistics' %}">Статистика</a></li>
                 {% endif %}
-
             </ul>
         </nav>
     </header>

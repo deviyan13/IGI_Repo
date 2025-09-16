@@ -3,31 +3,39 @@
 {% block title %}Промокоды — Hotel Project{% endblock %}
 
 {% block content %}
-  <section>
-    <h1>Промокоды и купоны</h1>
-    {% if promo_codes %}
-      <table>
-        <thead>
-          <tr>
-            <th>Код</th>
-            <th>Скидка</th>
-            <th>Период действия</th>
-            <th>Статус</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for promo in promo_codes %}
-            <tr>
-              <td>{{ promo.code }}</td>
-              <td>{{ promo.discount_percent }}%</td>
-              <td>{{ promo.valid_from|date:"d.m.Y" }} – {{ promo.valid_to|date:"d.m.Y" }}</td>
-              <td>{{ promo.is_active|yesno:"Активен,Архив" }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% else %}
-      <p>Промокодов пока нет.</p>
-    {% endif %}
-  </section>
+<section itemscope itemtype="https://schema.org/WebPage">
+  <h1 itemprop="name">Промокоды и купоны</h1>
+
+  {% if promo_codes %}
+    <table border="3">
+      <thead>
+        <tr>
+          <th>Код</th>
+          <th>Скидка</th>
+          <th>Период действия</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for promo in promo_codes %}
+        <tr itemscope itemtype="https://schema.org/Offer">
+          <td itemprop="couponCode">{{ promo.code }}</td>
+          <td itemprop="discount" itemscope itemtype="https://schema.org/Discount">
+            <span itemprop="discountPercent">{{ promo.discount_percent }}</span>%
+          </td>
+          <td>
+            <time datetime="{{ promo.valid_from|date:'Y-m-d' }}" itemprop="validFrom">{{ promo.valid_from|date:"d.m.Y" }}</time> –
+            <time datetime="{{ promo.valid_to|date:'Y-m-d' }}" itemprop="validThrough">{{ promo.valid_to|date:"d.m.Y" }}</time>
+          </td>
+          <td itemprop="availability" itemscope itemtype="https://schema.org/ItemAvailability">
+            {% if promo.is_active %}InStock{% else %}OutOfStock{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Промокодов пока нет.</p>
+  {% endif %}
+</section>
 {% endblock %}
