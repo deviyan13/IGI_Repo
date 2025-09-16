@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %}Вакансии — Hotel Project{% endblock %}
 {% block meta_description %}Актуальные вакансии в нашем отеле. Присоединяйтесь к команде Hotel Project и начните карьеру в гостиничном бизнесе.{% endblock %}
@@ -11,39 +13,160 @@
   </header>
 
   {% if vacancies %}
-  <section aria-labelledby="vacancies-list-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList">
-    <h2 id="vacancies-list-heading" class="visually-hidden">Список вакансий</h2>
-
-    {% for vac in vacancies %}
-    <article itemscope itemtype="https://schema.org/JobPosting" itemprop="itemListElement">
-      <header>
+    <section aria-labelledby="vacancies-list-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList">
+      <h2 id="vacancies-list-heading">Список вакансий</h2>
+      {% for vac in vacancies %}
+      <article itemscope itemtype="https://schema.org/JobPosting" itemprop="itemListElement">
         <h2 itemprop="title">{{ vac.title }}</h2>
         <p>
           <time datetime="{{ vac.posted_at|date:'Y-m-d' }}" itemprop="datePosted">
             Размещено: {{ vac.posted_at|date:"d.m.Y" }}
           </time>
         </p>
-      </header>
-
-      <div itemprop="description">
-        {{ vac.description|linebreaks }}
-      </div>
-
-      <meta itemprop="employmentType" content="FULL_TIME">
-      <meta itemprop="hiringOrganization" content="Hotel Project">
-      <meta itemprop="applicantLocationRequirements" content="BY">
-      <meta itemprop="jobLocation" content="Минск, Беларусь">
-    </article>
-    {% endfor %}
-  </section>
+        <p>
+          {{ vac.description|linebreaks }}
+        </p>
+      </article>
+      {% endfor %}
+    </section>
   {% else %}
-  <section aria-labelledby="no-vacancies-heading">
-    <h2 id="no-vacancies-heading">Актуальные вакансии</h2>
-    <p>В настоящее время у нас нет открытых вакансий.</p>
-    <p>Следите за обновлениями на этой странице или отправьте своё резюме на
-      <a href="mailto:hr@hotelproject.by" itemprop="email">hr@hotelproject.by</a>
-    </p>
-  </section>
+    <p>Вакансий пока нет.</p>
   {% endif %}
+
+  <!-- Демонстрационный блок с остальными тегами -->
+  <section aria-labelledby="demo-tags-heading">
+    <h2 id="demo-tags-heading">Демонстрация HTML-тегов</h2>
+
+    <nav>
+  <ul>
+    <li><a href="#booking-form">Бронирование</a></li>
+    <li><a href="#download-info" download>Скачать прайс-лист</a></li>
+    <li><a href="https://hotelproject.by/about" target="_blank">О нас (внешняя ссылка)</a></li>
+  </ul>
+</nav>
+
+<!-- Секция скачивания документа -->
+<section id="download-info">
+  <h2>Скачать информацию о гостинице</h2>
+  <p>Скачайте наш прайс-лист в PDF:</p>
+  <a href="/static/docs/hotel_pricelist.pdf" download>Скачать прайс-лист</a>
+</section>
+
+<!-- Форма бронирования -->
+<section id="booking-form">
+  <h2>Форма бронирования номера</h2>
+  <form method="post" action="/book-room" novalidate>
+    {% csrf_token %}
+
+    <label for="guest-name">Имя гостя:</label>
+    <input type="text" id="guest-name" name="guest_name" required minlength="2" maxlength="50" placeholder="Введите ваше имя">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required placeholder="example@domain.com">
+
+    <label for="check-in">Дата заезда:</label>
+    <input type="date" id="check-in" name="check_in" required>
+
+    <label for="check-out">Дата выезда:</label>
+    <input type="date" id="check-out" name="check_out" required>
+
+    <label for="room-type">Тип номера:</label>
+    <select id="room-type" name="room_type" required>
+      <option value="">Выберите тип номера</option>
+      <option value="single">Одноместный</option>
+      <option value="double">Двухместный</option>
+      <option value="suite">Люкс</option>
+    </select>
+
+    <fieldset>
+      <legend>Дополнительные услуги</legend>
+      <label><input type="checkbox" name="amenities" value="breakfast"> Завтрак</label>
+      <label><input type="checkbox" name="amenities" value="parking"> Парковка</label>
+      <label><input type="checkbox" name="amenities" value="spa"> SPA</label>
+    </fieldset>
+
+    <label for="special-requests">Особые пожелания:</label>
+    <textarea id="special-requests" name="special_requests" rows="4" placeholder="Например, поздний заезд"></textarea>
+
+    <button type="reset">Очистить</button>
+  </form>
+</section>
+
+    <!-- Таблица -->
+    <table border="10">
+      <thead>
+        <tr><th>Название</th><th>Описание</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Пример</td><td>Таблица с заголовками</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Списки -->
+    <ul>
+      <li>Ненумерованный элемент</li>
+      <li>Ненумерованный второй элемент</li>
+    </ul>
+    <ol>
+      <li>Нумерованный элемент</li>
+      <li>Второй нумерованный элемент</li>
+    </ol>
+
+    <p>
+      Добро пожаловать в <strong>Hotel Project</strong> — <em>лучший отель в Минске</em>, где каждый гость чувствует себя <u>комфортно и безопасно</u>.
+      Мы предлагаем <mark>уникальные условия проживания</mark> и <small>специальные предложения для постоянных клиентов</small>.
+      На нашем сайте вы можете увидеть <del>старые цены</del> и <ins>актуальные тарифы на номера</ins>.
+      Для удобства семьи мы предлагаем <sup>VIP-номера</sup> с отдельными <sub>детскими зонами</sub>.
+      В каждом номере есть <code>Wi-Fi</code> и <var>Smart-TV</var>, чтобы гости могли работать или отдыхать.
+      Для бронирования используйте клавиши <kbd>Enter</kbd> и <samp>форму онлайн</samp>, чтобы быстро оформить номер.
+      Все даты указаны в формате <time datetime="2025-09-16">16 сентября 2025</time> для точного планирования пребывания.
+    </p>
+
+
+    <!-- Цитата и pre -->
+    <blockquote cite="https://example.com/article">
+      <p>Это пример длинной цитаты из внешнего источника.</p>
+      <footer><cite>Автор, Источник</cite></footer>
+    </blockquote>
+
+    <p>Он сказал <q>HTML — это мощный инструмент для веб-разработки</q> во время лекции.</p>
+
+    <p>Книга: <cite>Чистый код</cite></p>
+
+    <p>Согласно <abbr title="World Health Organization">WHO</abbr>...</p>
+
+    <p><dfn>API</dfn> (Application Programming Interface) — это интерфейс взаимодействия программ.</p>
+
+    <pre>
+Пример текста с фиксированным форматированием
+Многострочный текст
+    </pre>
+
+    <!-- Изображение, видео, аудио, iframe -->
+    <figure>
+      <img src="{% static 'job_example.jpeg' %}" alt="Пример изображения" />
+      <figcaption>Подпись к изображению</figcaption>
+    </figure>
+    <video controls width="300">
+      <source src="{% static 'test.mp4' %}" type="video/mp4">
+      Ваш браузер не поддерживает видео.
+    </video>
+    <audio controls>
+      <source src="{% static 'job.mp3' %}" type="audio/mpeg">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="300" height="200" title="Пример карты"></iframe>
+
+    <!-- Простая форма -->
+    <form>
+      <fieldset>
+        <legend>Форма примера</legend>
+        <label>Имя: <input type="text" name="name"></label>
+        <label>Email: <input type="email" name="email"></label>
+        <button type="submit">Отправить</button>
+      </fieldset>
+    </form>
+
+  </section>
 </main>
 {% endblock %}
