@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* Общие стили */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F0F0F5;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #373594;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+a {
+    color: #A3A2E4;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #8786AB;
+}
+
+a.button-like {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #373594;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+a.button-like:hover {
+    background-color: #8786AB;
+}
+
+/* Шапка и навигация */
+header {
+    background-color: #FFFFFF;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 15px;
+}
+
+.nav-menu li {
+    margin: 0 15px;
+}
+
+.nav-menu li a {
+    font-weight: 500;
+    color: #8786AB;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-menu li a:hover {
+    color: #373594;
+    background-color: #CCCBF1;
+}
+
+/* Контент */
+.content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Карточки */
+.card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin: 20px 0;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+}
+
+.card p {
+    color: #8786AB;
+    margin: 5px 0;
+}
+
+.room-photo {
+        height: 200px; /* Фиксированная высота для всех фото */
+    }
+
+/* Формы */
+form {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #BEBDF1;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+button, input[type="submit"] {
+    background-color: #A3A2E4;
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #373594;
+}
+
+/* Таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #BEBDF1;
+    color: #373594;
+    font-weight: 600;
+}
+
+td {
+    border-bottom: 1px solid #E0E0E0;
+}
+
+tr:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+tr:hover {
+    background-color: #CCCBF1;
+}
+
+/* Фильтры (для каталога номеров) */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.filter-form label {
+    font-weight: 500;
+    color: #373594;
+}
+
+.filter-form input, .filter-form select {
+    margin: 0;
+}
+
+/* Подвал */
+footer {
+    background-color: #373594;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.9em;
+}
+
+  .google-btn {
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #3c4043;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  .google-btn:hover {
+    background: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-photo{
+    width:
+  }
+
+.btn-action {
+  background-color: #373594;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-action:hover {
+  background-color: #8786AB; /* Светлее при наведении */
+}
+
+.places-list {
+  list-style: none;
+  padding: 0;
+}
+
+.place-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  transition: 0.5s;
+}
+
+.place-item:hover {
+  transform: translateY(-5px);
+  border-radius: 24px;
+}
+
+.place-icon {
+  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  background-color: #373594;
+}
+.place-info h3 {
+  margin: 0 0 0.3rem;
+}
+
+.cat-picture{
+    display: flex;
+}
+
+
+.cat-picture-image {
+  max-width: 144px;
+  height: 144px;
+  border-radius: 12px;
+}
+
+.motivation-quote {
+  margin-top:1rem;
+  margin-left:1rem;
+  font-style:italic;
+}
+
+.quote-author{
+    margin-left:1rem;
+    color: #373594;
+}

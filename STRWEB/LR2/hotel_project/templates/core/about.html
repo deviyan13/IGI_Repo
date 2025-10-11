@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О компании — Hotel Project{% endblock %}
+{% block meta_description %}Узнайте больше о нашем отеле: история, реквизиты, сертификаты и многое другое.{% endblock %}
+
+{% block extra_head %}
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+<meta property="og:title" content="О компании — Hotel Project">
+<meta property="og:description" content="Узнайте больше о нашем отеле: история, реквизиты, сертификаты">
+<meta property="og:type" content="website">
+{% endblock %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/Hotel">
+  <header>
+    <h1 itemprop="name">О нашей компании</h1>
+    <p itemprop="description">Добро пожаловать в наш отель! Мы стремимся предоставить лучший сервис для наших гостей.</p>
+  </header>
+
+  <article itemprop="mainEntity" itemscope itemtype="https://schema.org/Article">
+    <h2 itemprop="headline">Основная информация</h2>
+    <figure itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+      {% if company_info.logo %}
+      <img src="{{ company_info.logo.url }}" alt="Логотип Hotel Project" width="300" height="200" loading="lazy" itemprop="contentUrl">
+      <figcaption itemprop="caption">Логотип нашего отеля</figcaption>
+      {% endif %}
+    </figure>
+    <p itemprop="articleBody">{{ company_info.content }}</p>
+  </article>
+
+  <section aria-labelledby="video-heading" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
+    <h2 id="video-heading" itemprop="name">Видео о нашем отеле</h2>
+    {% if company_info.video_url %}
+    <iframe width="560" height="315" src="{{ company_info.video_url }}"
+            title="Видео о нашем отеле"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen itemprop="embedUrl">
+    </iframe>
+    <meta itemprop="thumbnailUrl" content="{% static 'video-thumbnail.jpg' %}">
+    <meta itemprop="uploadDate" content="2023-01-01">
+    {% else %}
+    <p>Видео пока недоступно.</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="history-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/AboutPage">
+    <h2 id="history-heading" itemprop="name">История компании</h2>
+    <table class="history-table" itemprop="mainEntity" itemscope itemtype="https://schema.org/Table">
+      <caption itemprop="about">Ключевые события в истории нашего отеля</caption>
+      <thead>
+        <tr>
+          <th id="year" scope="col" itemprop="name">Год</th>
+          <th id="event" scope="col" itemprop="name">Событие</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+        <tr itemprop="mainEntity" itemscope itemtype="https://schema.org/Event">
+          <td headers="year" itemprop="startDate">{{ item.year }}</td>
+          <td headers="event" itemprop="name">{{ item.event }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2">История пока не добавлена.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="requisites-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
+    <h2 id="requisites-heading" itemprop="name">Реквизиты компании</h2>
+    <table class="requisites-table" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+      <caption>Юридические реквизиты</caption>
+      <thead>
+        <tr>
+          <th id="req-name" scope="col">Наименование</th>
+          <th id="req-value" scope="col">Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for requisite in requisites %}
+        <tr>
+          <td headers="req-name" itemprop="name">{{ requisite.name }}</td>
+          <td headers="req-value" itemprop="description">{{ requisite.value }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2">Реквизиты пока не добавлены.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="certificate-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <h2 id="certificate-heading" itemprop="name">Сертификат</h2>
+    <blockquote itemprop="text">
+      <p>{{ company_info.certificate_text }}</p>
+    </blockquote>
+  </section>
+
+  <section aria-labelledby="poem-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <h2 id="poem-heading" itemprop="name">Наш девиз</h2>
+    <pre itemprop="text">
+Гостеприимство — наш принцип,
+Комфорт — наш стандарт.
+    </pre>
+  </section>
+
+  <article itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <header>
+      <h1 itemprop="name">СЕРТИФИКАТ О ЧЛЕНСТВЕ В РТА (РЕЕСТР ТУРИСТИЧЕСКИХ АГЕНТСТВ) АССОЦИАЦИИ ТУРПОМОЩЬ</h1>
+    </header>
+
+    <section itemprop="mainEntity" itemscope itemtype="https://schema.org/Article">
+      <h2 itemprop="name">ЕДИНЫЙ РЕЕСТР ТУРАГЕНТОВ</h2>
+      <h3 itemprop="alternativeHeadline">СВИДЕТЕЛЬСТВО<br>о внесении сведений</h3>
+
+      <p><time datetime="2017-01-17" itemprop="datePublished">г. Москва<br>17 января 2017</time></p>
+
+      <address itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+        <span itemprop="name">Общество с ограниченной ответственностью «Тревел Технологии»</span><br>
+        <span itemprop="identifier">ИНН 7731340252</span><br>
+        <span itemprop="identifier">Реестровый номер: 8241</span>
+      </address>
+    </section>
+
+    <section itemprop="mainEntity" itemscope itemtype="https://schema.org/Person">
+      <p itemprop="name">Осауденко А.П.<br><span itemprop="jobTitle">Директор Ассоциации "ТУРПОМОЩЬ"</span></p>
+    </section>
+
+    <footer>
+      <address itemprop="sourceOrganization" itemscope itemtype="https://schema.org/Organization">
+        <span itemprop="name">Ассоциация "Объединение туроператоров в сфере выездного туризма "ТУРПОМОЩЬ"</span><br>
+        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="postalCode">101000</span>,
+          <span itemprop="addressLocality">г. Москва</span>,
+          <span itemprop="streetAddress">ул. Мясницкая, дом 47</span>
+        </span><br>
+        Тел. <a href="tel:+74996781203" itemprop="telephone">+7 (499) 678-12-03</a><br>
+        e-mail: <a href="mailto:office@tourponr.ru" itemprop="email">office@tourponr.ru</a>
+      </address>
+    </footer>
+  </article>
+
+  <nav aria-label="Дополнительная навигаation" itemprop="mainEntity" itemscope itemtype="https://schema.org/SiteNavigationElement">
+    <h2 itemprop="name">Дополнительная информация</h2>
+    <ul>
+      <li itemprop="name"><a href="{% url 'core:privacy' %}" itemprop="url">Политика конфиденциальности</a></li>
+      <li itemprop="name"><a href="{% url 'core:jobs' %}" itemprop="url">Вакансии</a></li>
+      <li itemprop="name"><a href="{% url 'core:reviews' %}" itemprop="url">Отзывы</a></li>
+    </ul>
+  </nav>
+</main>
+{% endblock %}

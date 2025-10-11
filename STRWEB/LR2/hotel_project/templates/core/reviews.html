@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Отзывы — Hotel Project{% endblock %}
+{% block meta_description %}Отзывы наших гостей о качестве обслуживания и проживания в отеле. Оставьте свой отзыв и поделитесь впечатлениями.{% endblock %}
+
+{% block content %}
+<main id="reviews-main" class="content-section" data-page="reviews" itemscope itemtype="https://schema.org/ItemList">
+  <header>
+    <h1 itemprop="name">Отзывы наших гостей</h1>
+    <p>Мы ценим мнение каждого гостя и постоянно работаем над улучшением нашего сервиса</p>
+  </header>
+
+  {% if user.is_authenticated %}
+  <section aria-labelledby="add-review-heading" tabindex="0">
+    <h2 id="add-review-heading">Оставить отзыв</h2>
+    <a href="{% url 'core:add_review' %}" role="button" title="Добавить новый отзыв" accesskey="a">Добавить отзыв</a>
+  </section>
+  {% else %}
+  <section aria-labelledby="login-required-heading" tabindex="0">
+    <h2 id="login-required-heading">Хотите оставить отзыв?</h2>
+    <p>Пожалуйста, <a href="{% url 'account_login' %}" title="Войти в систему">войдите</a> или <a href="{% url 'account_signup' %}" title="Зарегистрироваться">зарегистрируйтесь</a>, чтобы поделиться своими впечатлениями.</p>
+  </section>
+  {% endif %}
+
+  {% if reviews %}
+  <section aria-labelledby="reviews-list-heading" tabindex="0">
+    <h2 id="reviews-list-heading">Отзывы гостей</h2>
+
+    {% for review in reviews %}
+    <article class="review-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/Review" data-review-id="{{ review.id }}" tabindex="0">
+      <header>
+        <h3 itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span itemprop="name">{{ review.author.get_full_name|default:review.author.username }}</span>
+        </h3>
+        <p>
+          <time datetime="{{ review.created_at|date:'Y-m-d' }}" itemprop="datePublished">{{ review.created_at|date:"d.m.Y" }}</time>
+        </p>
+      </header>
+
+      <div itemprop="reviewBody">
+        <p>Оценка:
+          <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+            <meta itemprop="worstRating" content="1">
+            <meta itemprop="bestRating" content="5">
+            <span itemprop="ratingValue">{{ review.rating }}</span>
+          </span>
+
+          {% with ''|center:review.rating as range %}
+          {% for _ in range %}★
+          {% endfor %}
+          {% endwith %}
+        </p>
+        <p>{{ review.text }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+  {% else %}
+  <section aria-labelledby="no-reviews-heading" tabindex="0">
+    <h2 id="no-reviews-heading">Отзывы</h2>
+    <p>Пока нет отзывов. Будьте первым, кто поделится впечатлениями!</p>
+  </section>
+  {% endif %}
+</main>
+{% endblock %}

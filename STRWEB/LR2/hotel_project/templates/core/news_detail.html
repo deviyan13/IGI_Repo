@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} — Hotel Project{% endblock %}
+{% block meta_description %}{{ article.content|truncatewords:20 }}{% endblock %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/Article">
+  <article>
+    <header>
+      <h1 itemprop="headline">{{ article.title }}</h1>
+      <p>
+        <time datetime="{{ article.published_at|date:'Y-m-d' }}" itemprop="datePublished">
+          Опубликовано: {{ article.published_at|date:"d.m.Y" }}
+        </time>
+      </p>
+      {% if article.author %}
+      <p>
+        Автор: <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span itemprop="name">{{ article.author.get_full_name }}</span>
+        </span>
+      </p>
+      {% endif %}
+    </header>
+
+    {% if article.image %}
+    <figure itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+      <img src="{{ article.image.url }}" alt="{{ article.title }}" itemprop="url">
+      <figcaption itemprop="caption">Иллюстрация к новости: {{ article.title }}</figcaption>
+    </figure>
+    {% endif %}
+
+    <div itemprop="articleBody">
+      {{ article.content|linebreaks }}
+    </div>
+
+    <footer>
+      <nav aria-label="Навигация по новостям">
+        <ul>
+          <li><a href="{% url 'core:news' %}">← Вернуться к списку новостей</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </article>
+
+  <aside aria-labelledby="related-news-heading">
+    <h2 id="related-news-heading">Другие новости</h2>
+    <ul>
+      {% for related_article in related_articles %}
+      <li itemscope itemtype="https://schema.org/Article">
+        <a href="{% url 'core:news_detail' related_article.id %}" itemprop="headline">
+          {{ related_article.title }}
+        </a>
+        - <time datetime="{{ related_article.published_at|date:'Y-m-d' }}" itemprop="datePublished">
+          {{ related_article.published_at|date:"d.m.Y" }}
+        </time>
+      </li>
+      {% empty %}
+      <li>Других новостей пока нет</li>
+      {% endfor %}
+    </ul>
+  </aside>
+</main>
+{% endblock %}

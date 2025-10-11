@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль — Hotel Project{% endblock %}
+
+{% block content %}
+<section class="profile-section" itemscope itemtype="https://schema.org/Person">
+  <h1 itemprop="name">Профиль пользователя</h1>
+
+  <!-- вдохновляющий кот и цитата -->
+  <section class="profile-motivation">
+    {% if cat_url %}
+      <div class="cat-picture" itemscope itemtype="https://schema.org/ImageObject">
+        <img class="cat-picture-image" src="{{ cat_url }}" height="300" alt="Котик для настроения" itemprop="contentUrl">
+        {% if quote_text %}
+        <div itemprop="caption">
+          <blockquote class="motivation-quote">{{ quote_text }}</blockquote>
+          <a class="quote-author"><b>© {{ quote_author }}</b></a>
+        </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </section>
+
+  <!-- Форма редактирования профиля -->
+  <div class="profile-form">
+    <h2>Ваши данные</h2>
+    <form method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/UpdateAction">
+      {% csrf_token %}
+      {{ client_form.as_p }}
+      <button type="submit" class="btn" itemprop="target">Сохранить</button>
+    </form>
+  </div>
+
+  <!-- Список броней -->
+  <div class="profile-bookings">
+    <h2>Ваши бронирования</h2>
+    {% if bookings %}
+      <ul class="bookings-list">
+        {% for booking in bookings %}
+        <li itemprop="hasOccupation" itemscope itemtype="https://schema.org/Reservation">
+          <strong>Номер:</strong>
+          <span itemprop="reservationFor" itemscope itemtype="https://schema.org/HotelRoom">
+            <span itemprop="name">{{ booking.room.number }}</span>
+          </span><br>
+
+          <strong>Период:</strong>
+          <time datetime="{{ booking.check_in|date:'Y-m-d' }}" itemprop="checkinTime">{{ booking.check_in|date:"d.m.Y" }}</time> —
+          <time datetime="{{ booking.check_out|date:'Y-m-d' }}" itemprop="checkoutTime">{{ booking.check_out|date:"d.m.Y" }}</time><br>
+
+          <strong>Гостей:</strong> <span itemprop="partySize">{{ booking.guests_count }}</span>{% if booking.include_children %}, включая ребёнка{% endif %}<br>
+
+          <strong>Итоговая цена:</strong>
+          <span itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
+            <span itemprop="price">{{ booking.total_price }}</span> руб.
+            <meta itemprop="priceCurrency" content="RUB">
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>У вас пока нет броней.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Политика конфиденциальности — Hotel Project{% endblock %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/WebPage">
+  <header>
+    <h1 itemprop="name">Политика конфиденциальности</h1>
+    <p>Последнее обновление:
+      <time datetime="2025-09-15" itemprop="dateModified">15 сентября 2025 года</time>
+    </p>
+  </header>
+
+  <section aria-labelledby="introduction-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <h2 id="introduction-heading" itemprop="headline">Введение</h2>
+    <p itemprop="text">Настоящая Политика конфиденциальности описывает, как Hotel Project собирает, использует, хранит и защищает информацию, которую вы предоставляете при использовании нашего сайта и услуг. Мы ценим вашу конфиденциальность и стремимся обеспечить безопасность ваших персональных данных.</p>
+    <p itemprop="text">Эта политика применяется ко всем данным, собранным через наш веб-сайт hotelproject.ru. Мы рекомендуем вам регулярно ознакомляться с этой политикой, поскольку она может обновляться.</p>
+  </section>
+
+  <menu id="ctx-menu">
+    <menuitem label="Действие 1"></menuitem>
+    <menuitem label="Действие 2"></menuitem>
+  </menu>
+
+  <div id="extra-info">Доп. информация для микроданных (itemref).</div>
+
+  <section
+    id="example-global-attrs"
+    class="section highlight"
+    contenteditable="true"
+    data-created="2025-09-15"
+    data-owner="hotel-project"
+    dir="auto"
+    itemid="#hotel1"
+    itemprop="mainEntity"
+    itemscope itemtype="https://schema.org/Hotel"
+    itemref="extra-info"
+    lang="ru"
+    spellcheck="true"
+    tabindex="0"
+    title="Раздел с демонстрацией всех глобальных атрибутов"
+    translate="no"
+    >
+    <h2 itemprop="name">Пример тега с глобальными атрибутами</h2>
+    <p>
+      Это демонстрационный блок. Поле <strong>data-created</strong> = <span>{{ "2025-09-15" }}</span>.
+      <button accesskey="k">Test button</button>
+    </p>
+    <p itemprop="description">Краткое описание сущности Hotel.</p>
+  </section>
+
+  <section aria-labelledby="data-collection-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <h2 id="data-collection-heading" itemprop="headline">Сбор персональных данных</h2>
+    <p itemprop="text">Мы собираем следующие виды персональных данных:</p>
+    <ul>
+      <li>Контактная информация (имя, email, телефон)</li>
+      <li>Данные бронирования (даты заезда и выезда, номера комнат, платежная информация)</li>
+      <li>IP-адрес и данные о местоположении</li>
+    </ul>
+    <p itemprop="text">Мы можем собирать информацию, когда вы:</p>
+    <ul>
+      <li>Зарегистрируетесь на нашем сайте</li>
+      <li>Сделаете бронирование номера</li>
+      <li>Посетите наш сайт</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="data-use-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <h2 id="data-use-heading" itemprop="headline">Использование персональных данных</h2>
+    <p itemprop="text">Мы используем собранные данные для следующих целей:</p>
+    <ul>
+      <li>Обработка и выполнение бронирований</li>
+      <li>Предоставление услуг и поддержки клиентов</li>
+      <li>Улучшение качества нашего сайта и услуг</li>
+      <li>Отправка информационных рассылок (с вашего согласия)</li>
+      <li>Анализ трафика и поведения пользователей для улучшения нашего сервиса</li>
+      <li>Соблюдение юридических обязательств</li>
+    </ul>
+    <p itemprop="text">Мы никогда не продаем ваши персональные данные третьим лицам.</p>
+  </section>
+
+  <section aria-labelledby="changes-heading" itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWork">
+    <h2 id="changes-heading" itemprop="headline">Изменения в политике</h2>
+    <p itemprop="text">Мы можем обновлять эту Политику конфиденциальности время от времени. Любые изменения будут опубликованы на этой странице с указанием даты последнего обновления. Мы рекомендуем вам регулярно ознакомляться с этой политикой.</p>
+    <p itemprop="text">Если мы внесем существенные изменения, которые повлияют на ваши права, мы уведомим вас через email или через уведомление на сайте.</p>
+  </section>
+</main>
+{% endblock %}

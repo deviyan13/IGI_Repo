@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block title %}Ваши брони — Hotel Project{% endblock %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/CollectionPage">
+  <header>
+    <h1 itemprop="name">Ваши брони</h1>
+  </header>
+
+  {% if paid_bookings %}
+  <section aria-labelledby="paid-bookings-heading" itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList">
+    <h2 id="paid-bookings-heading">Оплаченные брони</h2>
+    <table class="bookings-table" aria-label="Оплаченные брони" border="1" role="table">
+      <caption itemprop="name">Оплаченные брони</caption>
+      <thead>
+        <tr>
+          <th id="paid-th-number" scope="col">Номер</th>
+          <th id="paid-th-dates" scope="col">Даты проживания</th>
+          <th id="paid-th-guests" scope="col">Количество гостей</th>
+          <th id="paid-th-nights" scope="col">Количество ночей</th>
+          <th id="paid-th-price" scope="col">Цена за ночь</th>
+          <th id="paid-th-total" scope="col">Общая стоимость</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in paid_bookings %}
+        <tr itemscope itemtype="https://schema.org/LodgingReservation" itemprop="itemListElement" >
+          <td headers="paid-th-number">
+            <strong itemprop="reservationFor" itemscope itemtype="https://schema.org/Room">
+              <span itemprop="name">№{{ booking.room.number }}</span>
+            </strong>
+            <span class="room-category" itemprop="description">({{ booking.room.category }})</span>
+            <meta itemprop="reservationNumber" content="{{ booking.id }}">
+            <meta itemprop="reservationStatus" content="https://schema.org/ReservationConfirmed">
+          </td>
+
+          <td headers="paid-th-dates">
+            <time itemprop="checkinTime" datetime="{{ booking.check_in|date:'Y-m-d' }}">{{ booking.check_in|date:"d.m.Y" }}</time>
+            -
+            <time itemprop="checkoutTime" datetime="{{ booking.check_out|date:'Y-m-d' }}">{{ booking.check_out|date:"d.m.Y" }}</time>
+          </td>
+
+          <td headers="paid-th-guests">
+            <span itemprop="numGuests">{{ booking.guests_count }}</span>
+          </td>
+
+          <td headers="paid-th-nights">
+            <span itemprop="lodgingUnitDescription">{{ booking.nights_count }}</span>
+          </td>
+
+          <td headers="paid-th-price">
+            <span itemprop="price">{{ booking.room.price_per_night }}</span>
+            <meta itemprop="priceCurrency" content="BYN"> руб.
+          </td>
+
+          <td headers="paid-th-total">
+            <span itemprop="totalPrice">{{ booking.total_price }}</span>
+            <meta itemprop="priceCurrency" content="BYN"> руб.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="total-label">Общая сумма:</td>
+          <td colspan="2" class="total-amount"><span itemprop="aggregateRating">{{ total_paid_amount }}</span> руб.</td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+  {% endif %}
+
+  {% if unpaid_bookings %}
+  <section aria-labelledby="unpaid-bookings-heading" itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList">
+    <h2 id="unpaid-bookings-heading">Неоплаченные брони</h2>
+    <table class="bookings-table" aria-label="Неоплаченные брони" role="table">
+      <caption itemprop="name">Неоплаченные брони</caption>
+      <thead>
+        <tr>
+          <th id="unpaid-th-number" scope="col">Номер</th>
+          <th id="unpaid-th-dates" scope="col">Даты проживания</th>
+          <th id="unpaid-th-guests" scope="col">Количество гостей</th>
+          <th id="unpaid-th-nights" scope="col">Количество ночей</th>
+          <th id="unpaid-th-price" scope="col">Цена за ночь</th>
+          <th id="unpaid-th-total" scope="col">Общая стоимость</th>
+          <th id="unpaid-th-actions" scope="col">Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in unpaid_bookings %}
+        <tr itemscope itemtype="https://schema.org/LodgingReservation" itemprop="itemListElement">
+          <td headers="unpaid-th-number">
+            <strong itemprop="reservationFor" itemscope itemtype="https://schema.org/Room">
+              <span itemprop="name">№{{ booking.room.number }}</span>
+            </strong>
+            <span class="room-category" itemprop="description">({{ booking.room.category }})</span>
+            <meta itemprop="reservationNumber" content="{{ booking.id }}">
+            <meta itemprop="reservationStatus" content="https://schema.org/ReservationPending">
+          </td>
+
+          <td headers="unpaid-th-dates">
+            <time itemprop="checkinTime" datetime="{{ booking.check_in|date:'Y-m-d' }}">{{ booking.check_in|date:"d.m.Y" }}</time>
+            -
+            <time itemprop="checkoutTime" datetime="{{ booking.check_out|date:'Y-m-d' }}">{{ booking.check_out|date:"d.m.Y" }}</time>
+          </td>
+
+          <td headers="unpaid-th-guests">
+            <span itemprop="numGuests">{{ booking.guests_count }}</span>
+          </td>
+
+          <td headers="unpaid-th-nights">
+            <span itemprop="lodgingUnitDescription">{{ booking.nights_count }}</span>
+          </td>
+
+          <td headers="unpaid-th-price">
+            <span itemprop="price">{{ booking.room.price_per_night }}</span>
+            <meta itemprop="priceCurrency" content="BYN"> руб.
+          </td>
+
+          <td headers="unpaid-th-total">
+            <span itemprop="totalPrice">{{ booking.total_price }}</span>
+            <meta itemprop="priceCurrency" content="BYN"> руб.
+          </td>
+
+          <td headers="unpaid-th-actions">
+            <div class="cart-actions" itemprop="potentialAction" itemscope itemtype="https://schema.org/CancelAction">
+              <form action="{% url 'core:delete_unpaid_booking' booking.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" aria-label="Удалить бронь" itemprop="target">🗑️</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="total-label">Общая сумма:</td>
+          <td colspan="2" class="total-amount"><span itemprop="aggregateRating">{{ total_unpaid_amount }}</span> руб.</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <nav aria-label="Действия с неоплаченными бронями" itemscope itemtype="https://schema.org/SiteNavigationElement">
+      <a href="{% url 'core:payment' %}" class="button primary" rel="noopener noreferrer" itemprop="url">Оплатить все</a>
+      <a href="{% url 'core:room_catalog' %}" class="button secondary" rel="noopener noreferrer" itemprop="url">Продолжить выбор</a>
+    </nav>
+  </section>
+  {% endif %}
+
+  {% if not paid_bookings and not unpaid_bookings %}
+  <section aria-labelledby="empty-cart-heading">
+    <h2 id="empty-cart-heading">Ваша корзина пуста</h2>
+    <p>Перейдите в <a href="{% url 'core:room_catalog' %}">каталог номеров</a>, чтобы выбрать подходящий вариант.</p>
+  </section>
+  {% endif %}
+</main>
+{% endblock %}
