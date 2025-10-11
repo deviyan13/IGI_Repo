@@ -41,7 +41,7 @@
   <ul>
     <li><a href="#booking-form">Бронирование</a></li>
     <li><a href="#download-info" download>Скачать прайс-лист</a></li>
-    <li><a href="https://hotelproject.by/about" target="_blank">О нас (внешняя ссылка)</a></li>
+    <li><a href="{% url 'core:home' %}" target="_blank">О нас (внешняя ссылка)</a></li>
   </ul>
 </nav>
 
@@ -49,7 +49,7 @@
 <section id="download-info">
   <h2>Скачать информацию о гостинице</h2>
   <p>Скачайте наш прайс-лист в PDF:</p>
-  <a href="/static/docs/hotel_pricelist.pdf" download>Скачать прайс-лист</a>
+  <a href="{% static 'hotel_pricelist.pdf' %}" download>Скачать прайс-лист</a>
 </section>
 
 <!-- Форма бронирования -->
@@ -72,9 +72,9 @@
 
     <label for="room-type">Тип номера:</label>
     <select id="room-type" name="room_type" required>
-      <option value="">Выберите тип номера</option>
+      <option disabled value="">Выберите тип номера</option>
       <option value="single">Одноместный</option>
-      <option value="double">Двухместный</option>
+      <option selected value="double">Двухместный</option>
       <option value="suite">Люкс</option>
     </select>
 
@@ -117,7 +117,7 @@
       Мы предлагаем <mark>уникальные условия проживания</mark> и <small>специальные предложения для постоянных клиентов</small>.
       На нашем сайте вы можете увидеть <del>старые цены</del> и <ins>актуальные тарифы на номера</ins>.
       Для удобства семьи мы предлагаем <sup>VIP-номера</sup> с отдельными <sub>детскими зонами</sub>.
-      В каждом номере есть <code>Wi-Fi</code> и <var>Smart-TV</var>, чтобы гости могли работать или отдыхать.
+      В каждом номере есть <code>Wi-Fi, IoT, колонка Алиса</code> и <var>Smart-TV</var>, чтобы гости могли работать или отдыхать.
       Для бронирования используйте клавиши <kbd>Enter</kbd> и <samp>форму онлайн</samp>, чтобы быстро оформить номер.
       Все даты указаны в формате <time datetime="2025-09-16">16 сентября 2025</time> для точного планирования пребывания.
     </p>
@@ -147,7 +147,7 @@
       <img src="{% static 'job_example.jpeg' %}" alt="Пример изображения" />
       <figcaption>Подпись к изображению</figcaption>
     </figure>
-    <video controls width="300">
+    <video controls width="300" autoplay loop>
       <source src="{% static 'test.mp4' %}" type="video/mp4">
       Ваш браузер не поддерживает видео.
     </video>
@@ -157,15 +157,19 @@
     </audio>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="300" height="200" title="Пример карты"></iframe>
 
-    <!-- Простая форма -->
-    <form>
-      <fieldset>
-        <legend>Форма примера</legend>
-        <label>Имя: <input type="text" name="name"></label>
-        <label>Email: <input type="email" name="email"></label>
-        <button type="submit">Отправить</button>
-      </fieldset>
-    </form>
+    <figure>
+      <img
+        src="{ %static 'room-default.jpg' %}"
+        srcset="
+          /static/images/room-400.jpg 400w,
+          /static/images/room-800.jpg 800w,
+          /static/images/room-1200.jpg 1200w"
+        sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt="Просторный номер в отеле с видом на город"
+        style="width:100%; height:auto;">
+      <figcaption>Пример адаптивного изображения номера</figcaption>
+    </figure>
+
 
   </section>
 </main>

@@ -9,19 +9,6 @@
 <meta property="og:title" content="О компании — Hotel Project">
 <meta property="og:description" content="Узнайте больше о нашем отеле: история, реквизиты, сертификаты">
 <meta property="og:type" content="website">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Hotel",
-  "name": "Hotel Project",
-  "description": "{{ company_info.content|truncatewords:20 }}",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "Беларусь",
-    "addressLocality": "Минск"
-  }
-}
-</script>
 {% endblock %}
 
 {% block content %}
@@ -45,7 +32,11 @@
   <section aria-labelledby="video-heading" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
     <h2 id="video-heading" itemprop="name">Видео о нашем отеле</h2>
     {% if company_info.video_url %}
-    <iframe width="560" height="315" src="{{ company_info.video_url }}" title="Видео о нашем отеле" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen itemprop="embedUrl"></iframe>
+    <iframe width="560" height="315" src="{{ company_info.video_url }}"
+            title="Видео о нашем отеле"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen itemprop="embedUrl">
+    </iframe>
     <meta itemprop="thumbnailUrl" content="{% static 'video-thumbnail.jpg' %}">
     <meta itemprop="uploadDate" content="2023-01-01">
     {% else %}

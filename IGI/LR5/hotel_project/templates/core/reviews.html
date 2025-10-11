@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Отзывы — Hotel Project{% endblock %}
 {% block meta_description %}Отзывы наших гостей о качестве обслуживания и проживания в отеле. Оставьте свой отзыв и поделитесь впечатлениями.{% endblock %}
@@ -46,8 +47,9 @@
           </span>
 
           {% with ''|center:review.rating as range %}
-          {% for _ in range %}★{% endfor %}
+          {% for _ in range %}★
           {% endfor %}
+          {% endwith %}
         </p>
         <p>{{ review.text }}</p>
       </div>

@@ -7691,3 +7691,1254 @@ Traceback (most recent call last):
   File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 540, in extend_nodelist
     raise self.error(
 django.template.exceptions.TemplateSyntaxError: {% extends 'base.html' %} must be the first tag in 'core/jobs.html'.
+[2025-09-16 15:15:15,080] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-16 19:56:08,936] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 12:44:44,628] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 12:53:53,574] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 12:54:25,046] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 12:54:49,075] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 13:10:45,780] INFO    core.views:447 Успешно получили ответ  api
+[2025-09-17 13:10:46,417] INFO    core.views:447 Успешно получили ответ  api
+[2025-09-17 13:44:27,071] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:02:08,814] INFO    core.views:447 Успешно получили ответ  api
+[2025-09-17 14:02:15,952] ERROR   django.request:248 Internal Server Error: /contacts/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 150, in contacts
+    return render(request, 'core/contacts.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 976, in do_if
+    nodelist = parser.parse(("endif",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 32: 'static', expected 'endif'. Did you forget to register or load this tag?
+[2025-09-17 14:03:26,910] ERROR   django.request:248 Internal Server Error: /contacts/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 150, in contacts
+    return render(request, 'core/contacts.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 976, in do_if
+    nodelist = parser.parse(("endif",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 32: 'static', expected 'endif'. Did you forget to register or load this tag?
+[2025-09-17 14:03:27,452] ERROR   django.request:248 Internal Server Error: /contacts/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 150, in contacts
+    return render(request, 'core/contacts.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 976, in do_if
+    nodelist = parser.parse(("endif",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 32: 'static', expected 'endif'. Did you forget to register or load this tag?
+[2025-09-17 14:04:29,168] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:08:11,352] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 50: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:08:40,781] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:08:41,322] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:08:41,563] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:09:56,845] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:09:57,859] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:09:58,136] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:09:58,229] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:09:58,405] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:09:58,493] ERROR   django.request:248 Internal Server Error: /reviews/
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/hotel_project/core/views.py", line 189, in reviews_list
+    return render(request, 'core/reviews.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/deviyan/353505_ANUFRYIEU_02/IGI/LR5/.venv/lib/python3.12/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 51: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+[2025-09-17 14:29:14,972] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:30:13,284] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:30:14,601] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:30:19,140] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:38:26,518] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:54:15,543] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:55:43,055] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:57:42,977] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:57:54,086] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:57:56,020] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:58:08,127] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:58:09,365] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 14:58:09,590] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 15:01:05,444] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 15:01:30,423] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 15:01:47,012] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 15:01:55,038] ERROR   core.views:62 Foursquare API error: 429 Client Error: Too Many Requests for url: https://api.foursquare.com/v3/places/search?ll=53.911919%2C27.594950&radius=1000&limit=15&open_now=True
+[2025-09-17 15:02:01,617] INFO    core.views:447 Успешно получили ответ  api

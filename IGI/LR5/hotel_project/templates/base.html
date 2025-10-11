@@ -1,35 +1,18 @@
 {% load static %}
 <html lang="ru">
 <head>
+
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>{% block title %}Hotel Project{% endblock %}</title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>{% block title %}Hotel Project{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Лучший отель в городе. Забронируйте номер онлайн по выгодной цене.{% endblock %}">
     <meta name="keywords" content="отель, бронирование, гостиница, номера, Минск, отдых">
     <meta name="author" content="Dzianis Anufryieu">
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    <meta property="og:image" content="{% static 'images/og-image.jpg' %}">
-
-    <!-- JSON-LD Schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Hotel",
-      "name": "{{ company_info.name|default:'Hotel Project'|escapejs }}",
-      "description": "{{ company_info.content|truncatewords:30|escapejs }}",
-      "telephone": "{{ company_info.phone|default:'+375123456789'|escapejs }}",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "{{ company_info.address.street|default:'ул. Примерная, д. 123'|escapejs }}",
-        "addressLocality": "{{ company_info.address.city|default:'Минск'|escapejs }}",
-        "addressCountry": "BY"
-      }
-    }
-    </script>
 </head>
 
 <script>

@@ -9,7 +9,22 @@
     <meta itemprop="address" content="г. Минск, ул. Примерная, д. 123">
     <meta itemprop="telephone" content="+375123456789">
 
-    <img src="{% static 'hotel_logo.jpg'%}" alt="Логотип гостиницы" width="300" height="300" itemprop="logo">
+<!--    <img src="{% static 'hotel_logo.jpg'%}" alt="Логотип гостиницы" width="300" height="300" itemprop="logo">-->
+
+    <figure>
+      <img
+        src=" {% static 'hotel_logo.jpg' %}"
+        srcset="
+          {% static 'hotel_logo-400w.jpg' %} 400w,
+          {% static 'hotel_logo-800w.jpg' %} 800w"
+        sizes="(max-width: 600px) 100vw, (max-width: 800px) 50vw, 33vw"
+        alt="Логотип гостиницы"
+        style="width:100%; height:auto;"
+        itemprop="logo">
+      <figcaption>Пример адаптивного изображения номера - логотип гостиницы</figcaption>
+    </figure>
+
+
 
     <section aria-labelledby="main-banner-heading" itemprop="description">
         <h1 id="main-banner-heading" class="visually-hidden">Специальные предложения</h1>

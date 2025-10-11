@@ -16,7 +16,7 @@
     {% if faqs %}
     <dl>
       {% for faq in faqs %}
-      <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
         <summary id="faq-{{ faq.id }}">
           <h3 itemprop="name">{{ faq.question }}</h3>
           <p>
