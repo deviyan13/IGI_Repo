@@ -1,67 +1,86 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Контакты — Hotel Project{% endblock %}
 {% block meta_description %}Контактная информация сотрудников нашего отеля. Свяжитесь с нами по телефону, email или посетите наш отель.{% endblock %}
 
 {% block content %}
-<main>
+<main itemscope itemtype="https://schema.org/WebPage">
   <header>
-    <h1>Контакты сотрудников</h1>
-    <p>Наша команда всегда готова помочь вам с бронированием и ответить на все вопросы</p>
+    <h1 itemprop="headline">Контакты сотрудников</h1>
+    <p itemprop="description">Наша команда всегда готова помочь вам с бронированием и ответить на все вопросы</p>
   </header>
 
-  {% if contacts %}
-  <section aria-labelledby="contacts-heading">
-    <h2 id="contacts-heading" class="visually-hidden">Список контактов</h2>
+  {# Основный объект страницы — организация / отель #}
+  <section itemscope itemtype="https://schema.org/Hotel" itemprop="mainEntity" aria-labelledby="hotel-contacts-heading">
+    <h2 id="hotel-contacts-heading" class="visually-hidden" itemprop="name">Hotel Project — Контакты</h2>
 
-    {% for person in contacts %}
-    <article>
-      <header>
-        <h3>{{ person.name }}</h3>
-        <p>{{ person.position }}</p>
-      </header>
+    {% if contacts %}
+    <section aria-labelledby="contacts-heading" itemprop="employee" itemscope itemtype="https://schema.org/Organization">
+      <h2 id="contacts-heading" class="visually-hidden">Список контактов</h2>
 
-      <figure>
-        <img src="{{ person.photo.url }}" alt="Фотография {{ person.name }}" width="200" height="200">
-        <figcaption> {{ person.name }}</figcaption>
-      </figure>
+      {% for person in contacts %}
+      <article itemscope itemtype="https://schema.org/Person" aria-labelledby="person-{{ forloop.counter }}-name">
+        <header>
+          <h3 id="person-{{ forloop.counter }}-name" itemprop="name">{{ person.name }}</h3>
+          <p itemprop="jobTitle">{{ person.position }}</p>
+        </header>
 
-      <address>
-        <p>Телефон: <a href="tel:{{ person.phone }}">{{ person.phone }}</a></p>
-        <p>Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+        <figure>
+          {% if person.photo %}
+          <img src="{{ person.photo.url }}" alt="Фотография {{ person.name }}" width="200" height="200" itemprop="image" loading="lazy">
+          {% else %}
+          <img src="{% static 'default-avatar.png' %}" alt="Фотография {{ person.name }}" width="200" height="200" itemprop="image" loading="lazy">
+          {% endif %}
+          <figcaption>{{ person.name }}</figcaption>
+        </figure>
+
+        <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          {% if person.phone %}
+          <p>Телефон: <a href="tel:{{ person.phone }}" itemprop="telephone">{{ person.phone }}</a></p>
+          {% endif %}
+          {% if person.email %}
+          <p>Email: <a href="mailto:{{ person.email }}" itemprop="email">{{ person.email }}</a></p>
+          {% endif %}
+        </address>
+      </article>
+      {% endfor %}
+    </section>
+    {% else %}
+    <section aria-labelledby="no-contacts-heading">
+      <h2 id="no-contacts-heading">Информация о сотрудниках</h2>
+      <p>Пока нет информации о сотрудниках.</p>
+    </section>
+    {% endif %}
+
+    {# Блок с контактами самого отеля (ContactPoint + адрес + карта) #}
+    <section aria-labelledby="hotel-info-heading" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
+      <h2 id="hotel-info-heading">Информация об отеле</h2>
+
+      <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <p itemprop="name">Hotel Project</p>
+        <p>Адрес: <span itemprop="streetAddress">г. Минск, ул. Примерная, д. 123</span></p>
+        <p>Телефон: <a href="tel:+375123456789" itemprop="telephone">+375 (12) 345-67-89</a></p>
+        <p>Email: <a href="mailto:info@hotelproject.by" itemprop="email">info@hotelproject.by</a></p>
       </address>
-    </article>
-    {% endfor %}
-  </section>
-  {% else %}
-  <section aria-labelledby="no-contacts-heading">
-    <h2 id="no-contacts-heading">Информация о сотрудниках</h2>
-    <p>Пока нет информации о сотрудниках.</p>
-  </section>
-  {% endif %}
 
-  <section aria-labelledby="hotel-info-heading">
-    <h2 id="hotel-info-heading">Информация об отеле</h2>
+      <meta itemprop="contactType" content="customer service" />
+      {# рабочие часы можно добавить при наличии: openingHours, etc. #}
+    </section>
 
-    <address>
-      <p>Hotel Project</p>
-      <p>Адрес: г. Минск, ул. Примерная, д. 123</p>
-      <p>Телефон: <a href="tel:+375123456789">+375 (12) 345-67-89</a></p>
-      <p>Email: <a href="mailto:info@hotelproject.by">info@hotelproject.by</a></p>
-    </address>
-
-    <figure>
+    <figure itemprop="hasMap" aria-labelledby="map-caption">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1178.347888394038!2d27.561716316223!3d53.902455980997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDU0JzA4LjkiTiAyN8KwMzMnNDIuMiJF!5e0!3m2!1sru!2sby!4v1642345678901!5m2!1sru!2sby"
         width="600"
         height="450"
-        allowfullscreen=""
+        allowfullscreen
         loading="lazy"
-        title="Карта с расположением отеля Hotel Project">
+        title="Карта с расположением отеля Hotel Project"
+        itemprop="url">
       </iframe>
-      <figcaption>Расположение нашего отеля на карте</figcaption>
+      <figcaption id="map-caption">Расположение нашего отеля на карте</figcaption>
     </figure>
   </section>
-
 </main>
 {% endblock %}

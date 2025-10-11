@@ -1,0 +1,33 @@
+<!-- templates/account/signup.html -->
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block title %}Регистрация — Hotel Project{% endblock %}
+
+{% block content %}
+  <section class="auth-section">
+    <h1>Регистрация</h1>
+    <form method="post" class="auth-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn">Зарегистрироваться</button>
+    </form>
+
+    {% if socialaccount_providers %}
+      <div class="social-auth">
+        <p>Или зарегистрируйтесь через:</p>
+        <ul>
+          {% for provider in socialaccount_providers %}
+            <li>
+              <a class="btn-social btn-{{ provider.id }}" href="{% provider_login_url provider.id process='signup' %}">
+                {{ provider.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <p class="auth-toggle">Уже есть аккаунт? <a href="{% url 'account_login' %}">Войти</a></p>
+  </section>
+{% endblock %}
