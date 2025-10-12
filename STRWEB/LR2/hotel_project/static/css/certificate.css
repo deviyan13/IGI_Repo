@@ -1,0 +1,122 @@
+:root{
+  --gold:#b8860b; --brown:#8b4513; --text:#222; --muted:#666;
+  --serif:"Times New Roman", Georgia, serif;
+}
+
+/* --- основной контейнер сертификата --- */
+.certificate-article{
+  position:relative;
+  max-width:750px;
+  margin:2rem auto;
+  padding:3.5rem 4rem;
+  font-family:var(--serif);
+  text-align:center;
+  color:var(--text);
+  overflow:hidden;
+  z-index:1;
+
+  /* фон: градиент + полупрозрачный ватермарк */
+  background:
+    -webkit-linear-gradient(135deg, rgba(255,255,255,.95), rgba(248,249,253,.95)),
+    url('../hotel_logo.jpg') center/400px auto no-repeat;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.95), rgba(248,249,253,.95)),
+    url('../hotel_logo.jpg') center/400px auto no-repeat;
+
+
+  /* графическая рамка */
+  border:15px solid transparent;
+  -webkit-border-image: url('../certificate-border.jpg') 30 round;
+  border-image: url('../certificate-border.jpg') 30 round;
+
+  outline:3px double var(--gold);
+  outline-offset:-12px;
+
+  /* тени */
+  -webkit-box-shadow: 0 0 0 3px var(--brown), inset 0 0 60px rgba(184,134,11,.05), 0 15px 50px rgba(0,0,0,.15);
+  box-shadow: 0 0 0 3px var(--brown), inset 0 0 60px rgba(184,134,11,.05), 0 15px 50px rgba(0,0,0,.15);
+}
+
+/* декоративные слои: силуэт и внутренняя рамка */
+.certificate-article::before,
+.certificate-article::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+}
+.certificate-article::before{
+  left:50%; top:50%;
+  width:400px; height:400px;
+  -webkit-transform:translate(-50%,-50%);
+  -ms-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+  background:url('../hotel_logo.jpg') center/contain no-repeat;
+  opacity:.12;
+  z-index:0;
+}
+.certificate-article::after{
+  top:25px; left:25px; right:25px; bottom:25px;
+  border:2px solid rgba(184,134,11,.28);
+  border-radius:5px;
+  z-index:1;
+}
+
+/* все прямые дети над декоративными слоями */
+.certificate-article > *{ position:relative; z-index:2 }
+
+/* --- типографика/заголовки --- */
+.certificate-article header h1{
+  font-size:.75rem; font-weight:400; letter-spacing:.1em;
+  color:var(--muted); text-transform:uppercase; margin-bottom:1.2rem;
+  line-height:1.4;
+}
+.certificate-article h2{ font-size:1.25rem; font-weight:600; color:var(--brown); letter-spacing:.06em; text-transform:uppercase; margin:.6rem 0; }
+.certificate-article h3{
+  font-size:2rem; font-weight:700; color:var(--gold);
+  letter-spacing:.03em; text-transform:uppercase; margin:.2rem 0 .6rem;
+  line-height:1.05; text-shadow:2px 2px rgba(0,0,0,.06);
+}
+.certificate-article h3 .subtitle{ display:block; font-size:1rem; font-weight:400; color:var(--brown); font-style:italic; margin-top:.35rem }
+
+/* --- мета/адрес/текст сертификата --- */
+.certificate-article .date-location{ font-size:.95rem; margin:1rem 0; line-height:1.6; color:var(--text) }
+.certificate-article address{
+  display:block; margin:1.2rem auto; font-style:normal; font-size:1rem; line-height:1.7; color:#000; max-width:600px; text-align:center;
+}
+.certificate-article .org-name{ font-weight:700; font-size:1.05rem }
+.certificate-article .registry-number{ display:inline-block; margin-top:.35rem; font-weight:600; color:var(--brown); text-decoration:underline }
+.certificate-article .certificate-text{ margin:1.25rem auto 1.8rem; max-width:550px; font-size:.98rem; line-height:1.7 }
+.certificate-article .certificate-text strong{ display:block; margin-top:.6rem; color:var(--gold); font-weight:700 }
+
+/* подпись + декоративная печать */
+.certificate-article [itemtype$="Person"]{
+  margin-top:1.8rem; display:flex; align-items:flex-start; justify-content:space-between;
+  gap:1rem; max-width:600px; margin-left:auto; margin-right:auto; padding:0 1rem;
+}
+.certificate-article .signature-block{ text-align:left; font-size:.95rem; line-height:1.6 }
+.certificate-article .signature-block [itemprop="name"]{ font-weight:600 }
+
+/* печать (псевдоэлемент) */
+.certificate-article [itemtype$="Person"]::before{
+  content:""; position:absolute; right:3rem; bottom:2rem; width:100px; height:100px;
+  background:url('../certificate_seal.png') center/contain no-repeat; opacity:.6;
+  -webkit-transform:rotate(-5deg); -ms-transform:rotate(-5deg); transform:rotate(-5deg); z-index:2;
+}
+
+/* футер */
+.certificate-article .certificate-footer{
+  margin-top:1.6rem; padding-top:1rem; border-top:2px solid rgba(184,134,11,.28); position:relative;
+}
+.certificate-article .certificate-footer::before{
+  content:"◆"; position:absolute; top:-.5rem; left:50%;
+  -webkit-transform:translateX(-50%); -ms-transform:translateX(-50%); transform:translateX(-50%);
+  color:var(--gold); background:inherit; padding:0 .6rem; z-index:3;
+}
+
+/* адаптив */
+@media (max-width:720px){
+  .certificate-article{ padding:2rem; margin:1rem }
+  .certificate-article h3{ font-size:1.5rem }
+  .certificate-article::before{ width:240px; height:240px; opacity:.09 }
+  .certificate-article [itemtype$="Person"]{ flex-direction:column; align-items:flex-start }
+}

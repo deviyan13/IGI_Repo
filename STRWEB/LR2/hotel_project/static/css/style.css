@@ -1,9 +1,23 @@
+/* Шрифты */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root{
+  --font-primary: 'Montserrat', 'Roboto', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-alt: 'Roboto', 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+body { font-family: var(--font-primary); }
+h1,h2,h3 { font-family: var(--font-alt); }
+
+
 
 /* Общие стили */
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #F0F0F5;
+    background-image: linear-gradient(180deg, #F0F0F5, #eaf0f5);
+    background-attachment: fixed;
+    background-size: cover;
     color: #333333;
     margin: 0;
     padding: 0;
@@ -39,7 +53,10 @@ a.button-like:hover {
 }
 
 /* Шапка и навигация */
-header {
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: #FFFFFF;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -132,18 +149,18 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
     box-sizing: border-box;
 }
 
-button, input[type="submit"] {
+button{
     background-color: #A3A2E4;
     color: #FFFFFF;
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: wait;
     font-weight: 500;
     transition: background-color 0.3s;
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover, input[type="reset"]:hover {
     background-color: #373594;
 }
 
@@ -232,10 +249,6 @@ footer {
     height: 20px;
   }
 
-  .contact-photo{
-    width:
-  }
-
 .btn-action {
   background-color: #373594;
   color: #fff;
@@ -291,6 +304,7 @@ footer {
 }
 
 .motivation-quote {
+  line-height: 1em;
   margin-top:1rem;
   margin-left:1rem;
   font-style:italic;
@@ -299,4 +313,538 @@ footer {
 .quote-author{
     margin-left:1rem;
     color: #373594;
+}
+
+/* === Grid для каталога номеров
+   Выполняет: element selector, descendant/child combinators, CSS Grid, media queries (адаптивность)
+   Где применяется: шаблон главной / секция .rooms-grid (div.rooms-grid) */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* responsive: 2 columns, 1 column */
+@media (max-width: 1000px) {
+  .rooms-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .rooms-grid { grid-template-columns: 1fr; }
+}
+
+.latest-news-article {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  max-width: 400px; /* ограничиваем ширину */
+  margin: 1rem auto;
+}
+
+.latest-news-article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.latest-news-article .news-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(55, 53, 148, 0.7); /* полупрозрачный фон */
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  max-width: 90%;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+.latest-news-article .news-info h3{
+  color: #FFFFFF;
+}
+
+
+
+/* === Партнёры (круглые блоки)
+   Выполняет: селектор класса, селектор атрибута (itemprop), комбинирование селекторов, псевдокласс :hover
+   Где: секция partners (ul > li), шаблон главной/partners */
+section[itemprop="brand"] ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+}
+
+section[itemprop="brand"] li {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(55,53,148,0.12);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+section[itemprop="brand"] li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(55,53,148,0.18);
+}
+
+section[itemprop="brand"] li > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+section[itemprop="brand"] li > a > img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  margin-bottom: 0.25rem;
+}
+
+section[itemprop="brand"] .partner-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+
+
+
+/* === Состояния форм и атрибутные селекторы
+   Выполняет: :required, :disabled, :invalid, :checked, атрибутные селекторы, a[download], a[href^=], a[href$=]
+   Где: формы отзывов, бронирования, ссылки на скачивание сертификатов */
+input:required, textarea:required, select:required {
+  outline: 3px solid rgba(163,162,228,0.18);
+  box-shadow: 0 0 0 3px rgba(163,162,228,0.06) inset;
+}
+
+input:disabled, textarea:disabled, select:disabled {
+  background: #f2f2f6;
+  color: #9a9aa8;
+  cursor: not-allowed;
+}
+
+input:invalid, textarea:invalid {
+  border-color: #e05b5b;
+  box-shadow: 0 0 0 3px rgba(224,91,91,0.06) inset;
+}
+
+/* пример стилизации метки для чекбокса/radio, когда выбран */
+input[type="checkbox"]:checked + label,
+input[type="radio"]:checked + label {
+  font-weight: 600;
+  color: #373594;
+}
+
+/* ссылки для скачивания и mailto/pdf detectors */
+a[download] { text-decoration: underline; padding-right: .35rem; }
+a[href^="mailto:"]::before { content: "✉️ "; }
+a[href$=".pdf"]::after { content: " (PDF)"; font-size: .9em; color: #666; }
+
+
+/* === Псевдоэлементы и выделение
+   Выполняет: ::first-letter (первая буква), ::before/::after (контекст в цитатах), ::selection
+   Где: article p, blockquote, повсеместно для читаемости */
+article div p:first-child::first-letter {
+  font-size: 2.4rem;
+  font-weight: 700;
+  float: left;
+  line-height: 1;
+  margin-right: .35rem;
+  color: #373594;
+}
+
+blockquote::before { content: "«"; font-size: 2rem; color: #A3A2E4; margin-right: .2rem; }
+blockquote::after  { content: "»"; font-size: 2rem; color: #A3A2E4; margin-left: .2rem; }
+
+::selection {
+  background: #CCCBF1;
+  color: #111;
+}
+
+
+/* === Список с юникод-маркерами
+   Выполняет: псевдоэлемент ::marker, стилизация списка
+   Где: любой ul.plain-uni (например, partners list, faq links) */
+ul.plain-uni { list-style: none; padding-left: 0; }
+ul.plain-uni li::marker { content: "😀"; color: #373594; font-size: 1.2em; }
+
+
+/* === Обрезка текста (ellipsis)
+   Выполняет: text-overflow / -webkit-line-clamp — полезно для кратких превью новостей
+   Где: .news-brief, .article-summary (в шаблоне news и главной) */
+.news-brief, .article-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* показать 3 строки */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* === Многостолбцовый макет для длинных статей
+   Выполняет: column-count, hyphens
+   Где: статьи, long reads — применить класс .article-multi на контейнер статьи */
+.article-multi {
+  column-count: 2;
+  column-gap: 2rem;
+  hyphens: auto;
+}
+@media (max-width: 900px) { .article-multi { column-count: 1; } }
+
+
+/* === Таблицы: caption и пустые ячейки, nth-child (striped)
+   Выполняет: caption styling, td:empty, nth-child(even) (частично уже был — уточнил)
+   Где: bookings-table, history-table, requisites-table */
+table caption {
+  caption-side: top;
+  font-weight: 700;
+  color: #373594;
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+}
+td:empty { background: #fafafa; color: #999; text-align: center; }
+
+.bookings-table td, .bookings-table th { vertical-align: middle; }
+
+/* striping — если не было */
+.bookings-table tbody tr:nth-child(even) { background: #fbfbfe; }
+.bookings-table tbody tr:hover { background: #f3f3ff; }
+
+
+/* === Прелоадер и анимации
+   Выполняет: @keyframes, элементарная CSS-анимация (preloader)
+   Где: добавь в base.html <div class="preloader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div> */
+.preloader {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: .45rem;
+  align-items: center;
+  z-index: 9999;
+}
+.preloader .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #373594;
+  opacity: 0.25;
+  transform: translateY(0);
+  animation: preloader-bounce 1s infinite ease-in-out;
+}
+.preloader .dot:nth-child(2) { animation-delay: 0.12s; }
+.preloader .dot:nth-child(3) { animation-delay: 0.24s; }
+@keyframes preloader-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: .25; }
+  40% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* дополнительная декоративная анимация для шапки (header-dots) */
+.header-dots { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+.header-dots .dot {
+  position: absolute;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(55,53,148,0.9);
+  animation: header-move 4s linear infinite;
+  opacity: 0.6;
+}
+@keyframes header-move {
+  0%   { transform: translateX(-20%) translateY(0) scale(.6); opacity: .3; }
+  50%  { transform: translateX(50%) translateY(-40px) scale(1.2); opacity: 1; }
+  100% { transform: translateX(120%) translateY(0) scale(.6); opacity: .3; }
+}
+
+/* === Focus visible (доступность)
+   Выполняет: стиль для :focus — важно для проверки доступности */
+:focus { outline: 3px solid rgba(163,162,228,0.24); outline-offset: 2px; }
+
+/* ============ ПОПОЛНЕНИЕ: исправления и недостающие правила ============ */
+
+/* исправление незаполненного правила (контактные фото) */
+.contact-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* -----------------------------
+   Состояния ссылок: :link, :visited, :hover, :active
+   (покрывает требование: динамическое состояние для ссылок)
+   ----------------------------- */
+a:link {
+  color: #2b2b90;
+  text-decoration: none;
+}
+a:visited {
+  color: #6b67a8;
+  opacity: 0.95;
+}
+a:hover {
+  color: #13124b;
+  text-decoration: underline;
+}
+a:active {
+  transform: translateY(1px);
+}
+
+/* -----------------------------
+   Focus visible (доступность): :focus-visible
+   (покрывает требование: фокус и доступность)
+   ----------------------------- */
+:focus {
+  outline: 3px solid rgba(163,162,228,0.24);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+:focus-visible {
+  outline: 3px solid rgba(57,199,132,0.65);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* -----------------------------
+   Позиционные псевдоклассы: :first-child, :last-child, :nth-child()
+   (покрывает требование: стили в зависимости от положения элементов)
+   ----------------------------- */
+/* примеры для навигации */
+nav ul li:first-child > a { padding-left: .6rem; border-left: 3px solid #373594; }
+nav ul li:last-child > a  { padding-right: .6rem; border-right: 3px solid #373594; }
+
+/* таблицы: выделение заголовка и последней строки */
+.history-table thead tr:first-child th,
+.requisites-table thead tr:first-child th {
+  background: #f5f5ff;
+}
+.bookings-table tbody tr:last-child {
+  font-weight: 600;
+}
+
+/* -----------------------------
+   Формы: :valid, :in-range, :out-of-range, :enabled
+   (покрывает требование: выделить доступные, обязательные, поля вне диапазона)
+   ----------------------------- */
+/* валидные поля */
+input:valid, textarea:valid, select:valid {
+  box-shadow: 0 0 0 3px rgba(57,199,132,0.07) inset;
+  border-color: #3aa55a;
+}
+
+/* диапазон для числовых полей */
+input[type="number"]:in-range {
+  border-color: #3aa55a;
+}
+input[type="number"]:out-of-range {
+  border-color: #e05b5b;
+  box-shadow: 0 0 0 3px rgba(224,91,91,0.06) inset;
+}
+
+/* включённые элементы */
+input:enabled, textarea:enabled, select:enabled {
+  background: #fff;
+}
+
+/* disabled уже был, оставляем его поведение */
+
+/* -----------------------------
+   :checked для чекбоксов/радио — адаптировано под обе структуры:
+   1) <input id="x"><label for="x">,  2) <label><input>Запись</label>
+   (покрывает требование: стилизовать включённые флажки/переключатели)
+   ----------------------------- */
+/* когда label следует за input (часто используется) */
+input[type="checkbox"]:checked + label,
+input[type="radio"]:checked + label {
+  font-weight: 600;
+  color: #373594;
+}
+
+/* когда input внутри label */
+label input[type="checkbox"]:checked,
+label input[type="radio"]:checked {
+  box-shadow: 0 0 0 3px rgba(163,162,228,0.2);
+}
+
+/* если нужно выделять сам label, можно использовать :has (поддержка браузеров ограничена) */
+   label:has(input:checked) { font-weight: 600; }
+
+/* -----------------------------
+   Язык-зависимые кавычки для цитат (q / blockquote q)
+   (покрывает требование: отображение кавычек в зависимости от языка)
+   ----------------------------- */
+/* базовый fallback */
+q, blockquote q {
+  quotes: "«" "»" "„" "“";
+}
+
+/* русские кавычки */
+q:lang(ru), blockquote q:lang(ru) {
+  quotes: "«" "»";
+}
+
+/* английские кавычки */
+q:lang(en), blockquote q:lang(en) {
+  quotes: "“" "”";
+}
+
+/* вставляем кавычки через content: open-quote / close-quote */
+q::before { content: open-quote; }
+q::after  { content: close-quote; }
+
+
+
+
+/* ---------- Демонстрационный блок типографики ----------
+   Покрывает:
+   - отступы и поля (padding/margin)
+   - text-transform для заголовков
+   - "красная строка" (text-indent)
+   - межстрочный интервал (line-height)
+   - капитель / font-variant-caps (small-caps)
+   - интервалы между словами и буквами (word-/letter-spacing)
+   - переносы и разрывы слов (hyphens/word-break/overflow-wrap)
+   - шрифты (font-family), выравнивание текста (text-align)
+   - позиционирование блоков (flex/grid)
+--------------------------------------------------------- */
+
+.typography-demo {
+  /* отступы вокруг блока и фон для наглядности */
+  padding: 1.5rem 1.75rem;
+  margin: 1.5rem auto;
+  max-width: 980px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(35,32,80,0.06);
+  font-family: var(--font-primary, 'Montserrat', system-ui, sans-serif);
+  color: #222;
+}
+
+/* Позиционирование внутренних колонок (два столбца с grid) */
+.typography-demo .td-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width:900px) {
+  .typography-demo .td-grid { grid-template-columns: 1fr; }
+}
+
+/* Заголовок: text-transform и межбуквенный интервал */
+.typography-demo h2 {
+  margin: 0 0 .6rem 0;
+  font-size: 1.45rem;
+  text-transform: uppercase;       /* демонстрация text-transform */
+  letter-spacing: .08em;           /* интервал между символами */
+}
+
+/* Малая подпись — капитель (small-caps) */
+.typography-demo .td-caption {
+  font-variant-caps: small-caps;   /* капитель */
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .06em;
+  color: #4b4892;
+  margin-bottom: .8rem;
+}
+
+/* Абзац — текст с красной строкой, межстрочным интервалом и переносами */
+.typography-demo .td-article p {
+  margin: 0 0 1rem 0;
+  text-indent: 2.2rem;             /* "красная строка" */
+  line-height: 1.75;               /* межстрочный интервал */
+  word-spacing: .12em;             /* интервал между словами */
+  letter-spacing: .01em;           /* легкий межбуквенный интервал */
+  hyphens: auto;                   /* автоматический перенос */
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  overflow-wrap: anywhere;         /* разрыв длинных слов */
+  text-align: justify;             /* выравнивание */
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Выделенный фрагмент — показывает ::before и ::after */
+.typography-demo .td-note {
+  display: inline-block;
+  padding: .25rem .5rem;
+  border-left: 3px solid #D1CFF6;
+  background: #FCFCFF;
+  margin: .5rem 0;
+  position: relative;
+}
+.typography-demo .td-note::before {
+  content: "Примечание:";
+  font-weight: 700;
+  margin-right: .4rem;
+  color: #373594;
+}
+.typography-demo .td-note::after {
+  content: " •";
+  color: #B6B4E8;
+}
+
+/* Блок со статистикой — пример позиционирования (flex) */
+.typography-demo .td-stats {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+.typography-demo .td-stat {
+  background: #fff;
+  padding: .6rem .8rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(35,32,80,0.04);
+  min-width: 90px;
+  text-align: center;
+}
+.typography-demo .td-stat .num {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #2e2b88;
+}
+
+/* Вспомогательные классы для демонстрации ошибок/диапазонов */
+.typography-demo input[type="number"] { width: 100%; padding: .45rem; border-radius:6px; }
+
+/* Для наглядности: стиль при выделении текста (::selection) */
+.typography-demo ::selection {
+  background: #D7D6F8;
+  color: #0b0b2a;
+}
+
+.kapitely { font-variant-caps: small-caps; font-weight:600; }
+
+
+.company-logo img {
+  transition: transform 0.6s ease;
+}
+
+.company-logo img:hover {
+  transform: rotate(10deg) scale(1.05); /* пример: лёгкое вращение и увеличение */
 }
