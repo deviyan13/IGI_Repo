@@ -1,0 +1,284 @@
+/* === АНИМАЦИОННАЯ СЦЕНА "ДОРОГА К ДОМУ" === */
+.animation-scene {
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(180deg, #87CEEB 60%, #2E8B57 40%);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 40px auto;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: block;
+}
+
+/* Дом */
+.house {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.3);
+    animation: house-grow 8s infinite ease-in-out;
+}
+
+.house-body {
+    width: 80px;
+    height: 60px;
+    background: #8B4513;
+    position: relative;
+}
+
+.house-roof {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 40px solid #A52A2A;
+    position: absolute;
+    top: -40px;
+    left: -10px;
+}
+
+.house-window {
+    width: 20px;
+    height: 20px;
+    background: #FFD700;
+    border: 2px solid #333;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+
+.house-door {
+    width: 15px;
+    height: 25px;
+    background: #654321;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+}
+
+.hotel-name {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #373594;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    animation: name-appear 8s infinite ease-in-out;
+}
+
+/* Человек */
+.person {
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+    animation: person-walk 8s infinite ease-in-out;
+}
+
+.person-body {
+    width: 8px;
+    height: 20px;
+    background: #373594;
+    position: relative;
+}
+
+.person-head {
+    width: 12px;
+    height: 12px;
+    background: #FFD700;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    left: -2px;
+}
+
+.person-arm {
+    width: 12px;
+    height: 4px;
+    background: #373594;
+    position: absolute;
+    top: 5px;
+    animation: arm-swing 1s infinite ease-in-out;
+}
+
+.person-leg {
+    width: 4px;
+    height: 15px;
+    background: #2F4F4F;
+    position: absolute;
+    bottom: -15px;
+    animation: leg-walk 0.5s infinite ease-in-out;
+}
+
+.person-leg.left { left: 1px; animation-delay: 0.25s; }
+.person-leg.right { right: 1px; }
+
+/* Облака */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    animation: cloud-drift 15s infinite linear;
+}
+
+.cloud-1 {
+    width: 40px;
+    height: 20px;
+    top: 30px;
+    left: -50px;
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.cloud-2 {
+    width: 60px;
+    height: 25px;
+    top: 50px;
+    left: -80px;
+    animation-duration: 18s;
+    animation-delay: 2s;
+}
+
+.cloud-3 {
+    width: 35px;
+    height: 18px;
+    top: 70px;
+    left: -40px;
+    animation-duration: 15s;
+    animation-delay: 1s;
+}
+
+/* Деревья */
+.tree {
+    position: absolute;
+    bottom: 60px;
+    animation: tree-pass 8s infinite linear;
+}
+
+.tree-trunk {
+    width: 5px;
+    height: 20px;
+    background: #8B4513;
+    position: relative;
+}
+
+.tree-top {
+    width: 25px;
+    height: 25px;
+    background: #228B22;
+    border-radius: 50%;
+    position: absolute;
+    top: -15px;
+    left: -10px;
+}
+
+.tree-1 { left: 10px; margin-bottom: -20px }
+.tree-2 { left: 40px; margin-bottom: 20px }
+.tree-3 { left: 200px; margin-bottom: 10px}
+
+/* Анимации */
+@keyframes house-grow {
+    0% {
+        transform: translateX(-50%) scale(0.3);
+        bottom: 60px;
+    }
+    50% {
+        transform: translateX(-50%) scale(0.8);
+        bottom: 70px;
+    }
+    100% {
+        transform: translateX(-50%) scale(1.2);
+        bottom: 80px;
+    }
+}
+
+@keyframes person-walk {
+    0% {
+        left: 20px;
+        transform: scale(1);
+    }
+    50% {
+        left: 120px;
+        transform: scale(0.9);
+    }
+    100% {
+        left: 130px;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes name-appear {
+    0%, 40% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    50%, 90% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+@keyframes cloud-drift {
+    0% {
+        transform: translateX(-100px) scale(0.8);
+    }
+    100% {
+        transform: translateX(400px) scale(1.2);
+    }
+}
+
+@keyframes tree-pass {
+    0% {
+        transform: translateX(20px) scale(0.6);
+    }
+    50% {
+        transform: translateX(20px) scale(1.5);
+    }
+    100% {
+        transform: translateX(10px) scale(1.9);
+    }
+}
+
+@keyframes arm-swing {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+@keyframes leg-walk {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+}
+
+/* Адаптивность анимации */
+@media (max-width: 768px) {
+    .animation-scene {
+        width: 250px;
+        height: 150px;
+        margin: 20px auto;
+    }
+
+    .house-body {
+        width: 60px;
+        height: 45px;
+    }
+
+    .house-roof {
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 30px solid #A52A2A;
+        top: -30px;
+        left: -10px;
+    }
+
+    .hotel-name {
+        font-size: 12px;
+        top: -45px;
+    }
+}

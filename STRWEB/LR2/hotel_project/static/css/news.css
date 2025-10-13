@@ -69,3 +69,17 @@
   .news-media{ height:130px; }
   .news-excerpt{ -webkit-line-clamp:2; max-height: calc(1.35em * 2); }
 }
+
+.article-footer { margin-top: 1.25rem; }
+.btn-back{
+  display:inline-block;
+  padding:8px 12px;
+  background:#f3f3ff;
+  color:#373594;
+  border-radius:8px;
+  text-decoration:none;
+  border:1px solid rgba(55,53,148,0.06);
+  font-weight:600;
+  font-size:0.95rem;
+}
+.btn-back:hover{ background:#e8e7fb; }

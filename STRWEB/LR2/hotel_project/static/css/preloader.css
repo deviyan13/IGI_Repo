@@ -1,0 +1,28 @@
+
+/* === Прелоадер и анимации
+   Выполняет: @keyframes, элементарная CSS-анимация (preloader)
+   Где: добавь в base.html <div class="preloader"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div> */
+.preloader {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: .45rem;
+  align-items: center;
+  z-index: 9999;
+}
+.preloader .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #373594;
+  opacity: 0.25;
+  transform: translateY(0);
+  animation: preloader-bounce 1s infinite ease-in-out;
+}
+.preloader .dot:nth-child(2) { animation-delay: 0.12s; }
+.preloader .dot:nth-child(3) { animation-delay: 0.24s; }
+@keyframes preloader-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: .25; }
+  40% { transform: translateY(-8px); opacity: 1; }
+}

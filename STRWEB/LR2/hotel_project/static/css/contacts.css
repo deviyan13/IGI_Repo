@@ -1,0 +1,125 @@
+/* === Контакты — карточки сотрудников (Flexbox) === */
+
+.staff-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;   /* центрируем группу карточек */
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+/* карточка */
+.staff-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(35,32,80,0.06);
+  padding: 14px;
+  box-sizing: border-box;
+
+  /* ширина: 3 колонки на большом экране, гибкая */
+  flex: 1 1 calc(33.333% - 1rem);
+  min-width: 500px;          /* не ужимать до слишком малого */
+  max-width: 550px;          /* не делать слишком широкими */
+}
+
+/* фото */
+.staff-photo {
+  flex: 0 0 120px;           /* фиксированная часть для фото */
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f3f3f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.staff-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* важное свойство: кадрирование без искажений */
+  display: block;
+}
+
+/* информация рядом с фото */
+.staff-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* чтобы описание и контакты корректно распределялись */
+  gap: 0.6rem;
+  flex: 1 1 auto;
+  min-width: 0;              /* позволяет тексту переноситься */
+}
+
+/* заголовок */
+.staff-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2e2b88;
+  line-height: 1.2;
+}
+
+.staff-position {
+  margin: 0.25rem 0 0;
+  color: #666;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+/* блок контактов */
+.staff-contacts p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.staff-contacts a {
+  color: #373594;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.staff-contacts a:hover {
+  text-decoration: underline;
+}
+
+/* описание сотрудника (внизу карточки) */
+.staff-desc {
+  margin: 0.6rem 0 0;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+/* адаптив: 2 колонки на планшете, 1 на мобильных */
+@media (max-width: 1000px) {
+  .staff-card {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .staff-card {
+    flex-direction: row; /* остаётся ряд, но сделаем фото меньше */
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .staff-photo {
+    flex: 0 0 96px;
+    width: 96px;
+    height: 96px;
+    border-radius: 10px;
+  }
+
+  .staff-header h3 { font-size: 1rem; }
+  .staff-position { font-size: 0.9rem; }
+}

@@ -1,0 +1,98 @@
+/* === Базовая коробка для предсказуемости размеров === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* === Контейнер вакансий (clearfix) === */
+.vacancy-list {
+  margin: 0 -0.5rem;   /* компенсируем внутренние отступы в элементах */
+  /* clearfix */
+}
+.vacancy-list::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* === Плавающие карточки вакансий (2 колонки) === */
+.vacancy-item {
+  float: left;
+  width: calc(50% - 1rem);   /* две колонки с промежутком */
+  margin: 0 1rem 1.25rem 0;  /* правый отступ между колонками, нижний отступ */
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(35,32,80,0.04);
+  min-height: 140px;         /* визуальная консистентность */
+  overflow: hidden;          /* защита от вылезающего содержимого */
+}
+
+/* Если нужно, первый элемент в строке можно дополнительно очистить */
+.vacancy-item:nth-child(2n+1) {
+  clear: left;
+}
+
+/* Заголовок и дата */
+.vacancy-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+.vacancy-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  color: #2e2b88;
+  font-weight: 600;
+  /* чтобы длинный заголовок не ломал верстку */
+  min-width: 0;
+}
+.vacancy-date {
+  font-size: 0.88rem;
+  color: #8786AB;
+  white-space: nowrap;
+}
+
+/* Тело вакансии */
+.vacancy-body {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0.25rem;
+}
+
+/* Очистка (резерв) — гарантирует корректный поток после float */
+.vacancy-clear {
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+/* === Адаптив: на узких экранах — одна колонка, плавающие убираем === */
+@media (max-width: 760px) {
+  .vacancy-item {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .vacancy-item:nth-child(2n+1) {
+    clear: none;
+  }
+
+  .vacancy-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .vacancy-date {
+    white-space: normal;
+    font-size: 0.9rem;
+  }
+}

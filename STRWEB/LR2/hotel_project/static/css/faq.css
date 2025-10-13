@@ -1,0 +1,77 @@
+/* FAQ — читаемый стиль, разделение вопроса и даты */
+.faq-list details, .terms-list details {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  box-shadow: 0 6px 18px rgba(35, 32, 80, 0.04);
+  overflow: hidden;
+}
+
+/* summary — делаем строку с двумя колонками: вопрос (flex:1) и дата (фикс) */
+.faq-list summary, .terms-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;            /* расстояние между вопросом и датой */
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+/* заголовок вопроса — занимает всё доступное место */
+.faq-list summary h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e2b88;
+  line-height: 1.2;
+  flex: 1 1 auto;       /* растягиваемся, чтобы сдвинуть дату вправо */
+  min-width: 0;         /* важно для корректного переноса текста */
+  word-break: break-word;
+}
+
+/* дата — фиксированная по ширине, видна справа */
+.faq-list .faq-date {
+  margin-left: 1rem;    /* дополнительный отступ слева от заголовка */
+  color: #8786AB;
+  font-size: 0.85rem;
+  white-space: nowrap;  /* не переносить дату */
+  flex: 0 0 auto;       /* не растягиваться */
+}
+
+/* контент ответа — аккуратно раскрывается */
+.faq-list details > div {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .32s ease, opacity .25s ease, padding-top .25s ease;
+  opacity: 0;
+  padding-top: 0;
+}
+
+/* состояние открытого пункта */
+.faq-list details[open] > div {
+  max-height: 800px;    /* достаточно для большинства ответов */
+  opacity: 1;
+  padding-top: 10px;
+}
+
+/* ответ — типографика */
+.faq-list p {
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* адаптив: на узких экранах поставим дату под вопрос */
+@media (max-width: 720px) {
+  .faq-list summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .faq-list .faq-date {
+    margin-left: 0;
+  }
+}
